@@ -50,7 +50,7 @@ $ yarn start or npm run start
  
 ## 팀 정보 (Team Information)
 - 이승준 (9penguin9@naver.com), Github Id: 0nandon
--  (susung1999@gmail.com), Github Id: suji999
+- 홍수성 (susung1999@gmail.com), Github Id: suji999
 
 ## 저작권 및 사용권 정보 (Copyleft / End User License)
  * [MIT](https://github.com/osam2020-WEB/Sample-ProjectName-TeamName/blob/master/license.md)
