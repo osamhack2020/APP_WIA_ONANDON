@@ -112,6 +112,7 @@ public class ClubPageIntroduce extends Fragment {
                                 public void onClick(View view) {
                                     Intent intent = new Intent(getContext(), QuestionPopUp.class);
                                     intent.putExtra("documentUid", documentUid);
+                                    intent.putExtra("budae", budae);
                                     startActivity(intent);
                                 }
                             });
