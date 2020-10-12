@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="15dp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/toolbar_division"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#ced4da"
+            android:orientation="horizontal"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginTop="10dp"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/comment_user"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="15dp"
+                android:text="공군 교육사 이승준"
+                android:textColor="@color/theme" />
+
+            <ImageView
+                android:id="@+id/delete_comment"
+                android:layout_width="30dp"
+                android:layout_height="25dp"
+                android:layout_alignParentEnd="true"
+                android:layout_gravity="center_vertical"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="15dp"
+                android:clickable="true"
+                android:visibility="invisible"
+                app:srcCompat="@android:drawable/ic_menu_close_clear_cancel" />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/comment_explain"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginTop="5dp"
+            android:text="공군 교육사 이승준" />
+
+        <TextView
+            android:id="@+id/comment_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:text="10/11"
+            android:textColor="#a0a0a0" />
+    </LinearLayout>
+</layout>

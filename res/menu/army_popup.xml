@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/army"
+        android:title="육군" />
+    <item
+        android:id="@+id/airforce"
+        android:title="공군" />
+    <item
+        android:id="@+id/navy"
+        android:title="해군" />
+    <item
+        android:id="@+id/marine"
+        android:title="해병대" />
+</menu>
