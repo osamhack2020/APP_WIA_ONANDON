@@ -196,6 +196,10 @@ public class UpdateClubPage extends AppCompatActivity {
 
                     storePost(clubDTO, documentUid);
                     Toast.makeText(UpdateClubPage.this, "수정 성공", Toast.LENGTH_SHORT).show();
+                    
+                    Intent intent = new Intent(this, ClubActivity.class);
+                    intent.putExtra("set", 1);
+                    startActivity(intent);
                     finish();
                 }
             }
@@ -279,6 +283,10 @@ public class UpdateClubPage extends AppCompatActivity {
 
         storePost(clubDTO, documentUid);
         Toast.makeText(UpdateClubPage.this, "수정 성공", Toast.LENGTH_SHORT).show();
+        
+        Intent intent = new Intent(this, ClubActivity.class);
+        intent.putExtra("set", 1);
+        startActivity(intent);
         finish();
 
     }
