@@ -36,6 +36,8 @@ public class ClubPageIntroduce extends Fragment {
     TextView period;
     TextView represent;
     TextView number;
+    
+    TextView update;
 
     ImageView photo;
     ImageView addQuestion;
@@ -56,6 +58,7 @@ public class ClubPageIntroduce extends Fragment {
         period = (TextView)view.findViewById(R.id.period);
         represent = (TextView)view.findViewById(R.id.represent);
         number = (TextView)view.findViewById(R.id.number);
+        update = (TextView)view.findViewById(R.id.update);
 
         photo = (ImageView)view.findViewById(R.id.photo);
         addQuestion = (ImageView)view.findViewById(R.id.add_question);
@@ -113,6 +116,23 @@ public class ClubPageIntroduce extends Fragment {
                                     Intent intent = new Intent(getContext(), QuestionPopUp.class);
                                     intent.putExtra("documentUid", documentUid);
                                     intent.putExtra("budae", budae);
+                                    startActivity(intent);
+                                }
+                            });
+                        }
+                        
+                        if(FirebaseAuth.getInstance().getCurrentUser().getUid().equals(clubDTO.manager)){
+                            update.setVisibility(View.VISIBLE);
+                            update.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    Intent intent = new Intent(getContext(), UpdateClubPage.class);
+                                    intent.putExtra("documentUid", documentUid);
+                                    intent.putExtra("budae", budae);
+
+                                    if(clubDTO.isPhoto == 1) {
+                                        intent.putExtra("imageUri", clubDTO.imageUri);
+                                    }
                                     startActivity(intent);
                                 }
                             });
