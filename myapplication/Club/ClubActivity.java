@@ -90,6 +90,11 @@ public class ClubActivity extends AppCompatActivity {
 
             }
         });
+        
+        Intent intent = getIntent();
+        if(intent != null){
+            pager.setCurrentItem(intent.getIntExtra("set", 0));
+        }
     }
 
     class PagerAdapter extends FragmentStatePagerAdapter {
