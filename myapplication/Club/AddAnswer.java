@@ -64,6 +64,11 @@ public class AddAnswer extends Activity {
                 if(answerExplain.getText().toString().isEmpty()){
                     Toast.makeText(AddAnswer.this, "답변을 작성해 주세요.", Toast.LENGTH_SHORT).show();
                 }
+                else if(update == 1){
+                    firestore.collection(documentUid+"_question").document(questionUid).update("answer", answerExplain.getText().toString());
+                    Toast.makeText(AddAnswer.this, "수정 되었습니다.", Toast.LENGTH_SHORT).show();
+                    finish();
+                }
                 else {
                     final DocumentReference docRef = firestore.collection(documentUid + "_question").document(questionUid);
                     firestore.runTransaction(new Transaction.Function<Void>() {
