@@ -36,6 +36,8 @@ public class AddAnswer extends Activity {
     TextView complete;
     TextView answerExplain;
     ImageView cancel;
+    
+    int update;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +59,13 @@ public class AddAnswer extends Activity {
         Intent intent = getIntent();
         documentUid = intent.getStringExtra("documentUid");
         questionUid = intent.getStringExtra("questionUid");
+        update = intent.getIntExtra("update", 0);
+        
+        
+        if(update == 1){
+            String answer = intent.getStringExtra("answer");
+            answerExplain.setText(answer);
+        }
 
         complete.setOnClickListener(new View.OnClickListener() {
             @Override
