@@ -162,6 +162,21 @@ public class Question extends Fragment {
                                 binding.questionUser.setText(userDTO.army + " " + userDTO.budae + " " + userDTO.rank + " " + userDTO.name);
                             }
                         });
+                
+                if(user.getUid().equals(manager) && contentDTOs.get(position).isAnswer == 1){
+                    binding.update.setVisibility(View.VISIBLE);
+                    binding.update.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            Intent intent = new Intent(getContext(), AddAnswer.class);
+                            intent.putExtra("documentUid", documentUid);
+                            intent.putExtra("questionUid", contentUidList.get(intentPosition));
+                            intent.putExtra("update", 1);
+                            intent.putExtra("answer", contentDTOs.get(position).answer);
+                            startActivity(intent);
+                        }
+                    });
+                }
 
                 final String delete = contentUidList.get(intentPosition);
                 if(user.getUid().equals(contentDTOs.get(position).uid) || user.getUid().equals(manager)){
