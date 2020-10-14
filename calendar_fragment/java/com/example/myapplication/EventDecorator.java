@@ -5,17 +5,18 @@ import com.prolificinteractive.materialcalendarview.DayViewDecorator;
 import com.prolificinteractive.materialcalendarview.DayViewFacade;
 import com.prolificinteractive.materialcalendarview.spans.DotSpan;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 
 public class EventDecorator implements DayViewDecorator {
 
     private final int color;
-    private final HashSet<CalendarDay> dates;
+    public HashSet<CalendarDay> dates;
 
-    public EventDecorator(int color, Collection<CalendarDay> dates) {
+    public EventDecorator(int color, HashSet<CalendarDay> dates) {
         this.color = color;
-        this.dates = new HashSet<>(dates);
+        this.dates = dates;
     }
 
     @Override
