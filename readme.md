@@ -1,4 +1,4 @@
-아래의 **샘플 양식은 필수**입니다.
+﻿아래의 **샘플 양식은 필수**입니다.
 설명이 부족하거나 추가하고싶은 부분이 있으면 개발자님이 추가해서 작성해주세요!
 동영상, 이미지, 텍스트 전부 자유입니다.
 
@@ -50,7 +50,7 @@ $ yarn start or npm run start
  
 ## 팀 정보 (Team Information)
 - 이승준 (9penguin9@naver.com), Github Id: 0nandon
-- 홍수성 (susung1999@gmail.com), Github Id: suji999
+- 홍수성 (joseph1999@naver.com), Github Id: PnDong
 
 ## 저작권 및 사용권 정보 (Copyleft / End User License)
  * [MIT](https://github.com/osam2020-WEB/Sample-ProjectName-TeamName/blob/master/license.md)
