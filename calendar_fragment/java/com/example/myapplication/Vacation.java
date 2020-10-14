@@ -2,16 +2,16 @@ package com.example.myapplication;
 
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 
 public class Vacation {
 
     private String type;
     private String name;
     private int period;
-    private ArrayList<CalendarDay> dates = new ArrayList<>();
+    private HashSet<CalendarDay> dates = new HashSet<>();
 
-    public ArrayList<CalendarDay> getDates() {
+    public HashSet<CalendarDay> getDates() {
         return dates;
     }
 
