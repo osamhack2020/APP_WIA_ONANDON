@@ -69,7 +69,6 @@ public class MainActivity extends AppCompatActivity {
 
         mCalendarView.setSelectionMode(MaterialCalendarView.SELECTION_MODE_RANGE);
         mCalendarView.setSelectionColor(Color.parseColor("#B2D0FF"));
-        mCalendarView.setOnCreateContextMenuListener(this);
         mCalendarView.setOnDateLongClickListener(new OnDateLongClickListener() {
             @Override
             public void onDateLongClick(@NonNull final MaterialCalendarView widget, @NonNull final CalendarDay date) {
