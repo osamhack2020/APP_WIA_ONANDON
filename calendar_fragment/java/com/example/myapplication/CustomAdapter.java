@@ -113,9 +113,12 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
 
                     case 1002:
 
+                        Vacation tmp = mList.get(getAdapterPosition());
+                        tmp.getDates().clear();
                         mList.remove(getAdapterPosition());
                         notifyItemRemoved(getAdapterPosition());
                         notifyItemRangeChanged(getAdapterPosition(), mList.size());
+                        mCalendar.invalidateDecorators();
 
                         break;
 
