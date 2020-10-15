@@ -1,4 +1,4 @@
-﻿package com.example.myapplication;
+package com.example.myapplication;
 
 import android.content.DialogInterface;
 import android.graphics.Color;
@@ -69,6 +69,61 @@ public class MainActivity extends AppCompatActivity {
 
         mCalendarView.setSelectionMode(MaterialCalendarView.SELECTION_MODE_RANGE);
         mCalendarView.setSelectionColor(Color.parseColor("#B2D0FF"));
+        mCalendarView.setOnCreateContextMenuListener(this);
+        mCalendarView.setOnDateLongClickListener(new OnDateLongClickListener() {
+            @Override
+            public void onDateLongClick(@NonNull final MaterialCalendarView widget, @NonNull final CalendarDay date) {
+                final ArrayList<Vacation> selectedVacation = new ArrayList<>();
+                for(int i=0; i<mArrayList.size(); i++) {
+                    if(mArrayList.get(i).getDates().contains(date)) {
+                        selectedVacation.add(mArrayList.get(i));
+                    }
+                }
+                AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(MainActivity.this);
+                final LinearLayout layout = new LinearLayout(MainActivity.this);
+                layout.setOrientation(LinearLayout.VERTICAL);
+                ArrayList<Button> buttons = new ArrayList<>();
+                for(int i=0; i<selectedVacation.size(); i++) {
+                    Button btn = new Button(MainActivity.this);
+                    btn.setText(selectedVacation.get(i).getName());
+                    btn.setBackgroundColor(Color.TRANSPARENT);
+                    final int finalI = i;
+                    btn.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(final View v) {
+                            AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                            builder.setMessage("삭제하시겠습니까?");
+                            builder.setNegativeButton("아니오",
+                                    new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int which) {
+                                        }
+                                    });
+                            builder.setPositiveButton("예",
+                                    new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            layout.removeView(v);
+                                            selectedVacation.get(finalI).getDates().remove(date);
+                                            selectedVacation.get(finalI).setPeriod(selectedVacation.get(finalI).getPeriod() + 1);
+                                            mCalendarView.invalidateDecorators();
+                                            mAdapter.notifyDataSetChanged();
+                                        }
+                                    });
+                            builder.show();
+
+                        }
+                    });
+                    layout.addView(btn);
+                    buttons.add(btn);
+                }
+                Button addButton = new Button(MainActivity.this);
+                addButton.setText("일정 추가");
+                layout.addView(addButton);
+                dialogBuilder.setView(layout);
+                AlertDialog dialog = dialogBuilder.create();
+                dialog.show();
+            }
+        });
+
         mAdapter = new CustomAdapter(this, mArrayList, mCalendarView);
         mRecyclerView.setAdapter(mAdapter);
 
