@@ -68,6 +68,7 @@ public class MainActivity extends AppCompatActivity {
         //Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_LONG);
 
         mCalendarView.setSelectionMode(MaterialCalendarView.SELECTION_MODE_RANGE);
+        //mCalendarView.setSelectionMode(MaterialCalendarView.SELECTION_MODE_MULTIPLE);
         mCalendarView.setSelectionColor(Color.parseColor("#B2D0FF"));
         mCalendarView.setOnDateLongClickListener(new OnDateLongClickListener() {
             @Override
