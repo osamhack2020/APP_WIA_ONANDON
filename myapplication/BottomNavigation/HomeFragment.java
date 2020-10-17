@@ -9,11 +9,13 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.ViewPager;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -22,6 +24,11 @@ import com.example.myapplication.Club.ClubActivity;
 import com.example.myapplication.MyGoalPost.MyGoalActivity;
 import com.example.myapplication.R;
 import com.example.myapplication.model.MyGoalContentDTO;
+import com.example.myapplication.model.PostDTO;
+import com.example.myapplication.model.UserDTO;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
@@ -34,11 +41,14 @@ import java.util.ArrayList;
 public class HomeFragment extends Fragment {
 
     FirebaseFirestore firestore;
+    FirebaseAuth auth;
 
     ViewPager pager;
     LinearLayout myGoalTitle;
     RelativeLayout clubLayout;
     TextView textview;
+    TextView preview;
+    ImageView addBudae;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -54,7 +64,11 @@ public class HomeFragment extends Fragment {
         myGoalTitle = (LinearLayout)view.findViewById(R.id.myGoal_title);
         textview = (TextView)view.findViewById(R.id.budaePost);
         clubLayout = (RelativeLayout)view.findViewById(R.id.club_layout);
+        preview = (TextView)view.findViewById(R.id.preview);
+        addBudae = (ImageView)view.findViewById(R.id.add_budae);
+        
         firestore = FirebaseFirestore.getInstance();
+        auth = FirebaseAuth.getInstance();
 
         textview.setPaintFlags(textview.getPaintFlags() | Paint.FAKE_BOLD_TEXT_FLAG);
 
@@ -64,7 +78,21 @@ public class HomeFragment extends Fragment {
         clubLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), ClubActivity.class);
+                firestore.collection("UserInfo").document(auth.getCurrentUser().getUid()).get()
+                        .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                            @Override
+                            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                                UserDTO userDTO = documentSnapshot.toObject(UserDTO.class);
+                                movinClubPage(userDTO.budae);
+                            }
+                        });
+            }
+        });
+        
+        addBudae.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), MakeBoard.class);
                 startActivity(intent);
             }
         });
@@ -128,6 +156,38 @@ public class HomeFragment extends Fragment {
             }
 
         });
+        
+        firestore.collection("UserInfo").document(auth.getCurrentUser().getUid()).get()
+                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        UserDTO userDTO = documentSnapshot.toObject(UserDTO.class);
+
+                        firestore.collection(userDTO.budae+"동아리게시판").orderBy("timestamp", Query.Direction.DESCENDING)
+                                .limit(1).addSnapshotListener(new EventListener<QuerySnapshot>() {
+                            @Override
+                            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                                if(value.size() == 0){
+                                    preview.setText("게시물이 없습니다.");
+                                }
+                                for(QueryDocumentSnapshot doc : value) {
+                                    PostDTO postDTO = doc.toObject(PostDTO.class);
+                                    preview.setText(postDTO.explain);
+                                }
+                            }
+                        });
+
+                        BudaePost budaePost = new BudaePost();
+                        Bundle bundle = new Bundle(1);
+                        bundle.putString("budae", userDTO.budae);
+                        budaePost.setArguments(bundle);
+
+                        FragmentManager manager = getChildFragmentManager();
+                        FragmentTransaction tran = manager.beginTransaction();
+                        tran.replace(R.id.budae_content, budaePost);
+                        tran.commit();
+                    }
+                });
 
         return view;
     }
@@ -140,6 +200,12 @@ public class HomeFragment extends Fragment {
             Intent intent = new Intent(getActivity(), MyGoalActivity.class);
             startActivity(intent);
         }
+    }
+    
+    public void movinClubPage(String budae){
+        Intent intent = new Intent(getActivity(), ClubActivity.class);
+        intent.putExtra("budae", budae);
+        startActivity(intent);
     }
 
     @Override
