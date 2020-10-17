@@ -63,6 +63,8 @@ public class MainActivity extends AppCompatActivity {
             mCalendarView.addDecorator(vac.getDecorator());
         }
 
+        mEvents = new ArrayList<>();
+
         mCalendarView.state().edit()
                 .setFirstDayOfWeek(DayOfWeek.WEDNESDAY)
                 .setMinimumDate(CalendarDay.from(2000, 1, 1))
@@ -128,7 +130,6 @@ public class MainActivity extends AppCompatActivity {
                         }
                     });
                     layout.addView(btn);
-                    buttons.add(btn);
                 }
                 Button addButton = new Button(MainActivity.this);
                 addButton.setText("일정 추가");
@@ -152,10 +153,44 @@ public class MainActivity extends AppCompatActivity {
                             @Override
                             public void onClick(View v) {
                                 String strName = editTextName.getText().toString();
-                                if(!strName.equals("")) {
-                                    List<CalendarDay> dayList = mCalendarView.getSelectedDates();
+                                List<CalendarDay> dayList = mCalendarView.getSelectedDates();
+                                if(!strName.equals("") && dayList.size() > 0) {
                                     GeneralEvent ge = new GeneralEvent(strName, dayList);
                                     mEvents.add(ge);
+                                    mCalendarView.addDecorator(ge.getDecorator());
+                                    dialog.dismiss();
+                                    Button btn = new Button(MainActivity.this);
+                                    btn.setText(strName);
+                                    btn.setBackgroundColor(Color.TRANSPARENT);
+                                    btn.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(final View v) {
+                                            AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                                            builder.setMessage("삭제하시겠습니까?");
+                                            builder.setNegativeButton("아니오",
+                                                    new DialogInterface.OnClickListener() {
+                                                        public void onClick(DialogInterface dialog, int which) {
+                                                        }
+                                                    });
+                                            builder.setPositiveButton("예",
+                                                    new DialogInterface.OnClickListener() {
+                                                        public void onClick(DialogInterface dialog, int which) {
+                                                            layout.removeView(v);
+                                                            List<CalendarDay> dayList = mCalendarView.getSelectedDates();
+                                                            for(int i=0; i<dayList.size(); i++) {
+                                                                for(int j=0; j<mEvents.size(); j++) {
+                                                                }
+                                                            }
+                                                            mCalendarView.invalidateDecorators();
+                                                            mCalendarView.clearSelection();
+                                                            mAdapter.notifyDataSetChanged();
+                                                        }
+                                                    });
+                                            builder.show();
+
+                                        }
+                                    });
+                                    layout.addView(btn, 0);
                                 }
                             }
                         });
@@ -164,8 +199,8 @@ public class MainActivity extends AppCompatActivity {
                 });
                 layout.addView(addButton);
                 dialogBuilder.setView(layout);
-                AlertDialog dialog = dialogBuilder.create();
-                dialog.show();
+                AlertDialog listDialog = dialogBuilder.create();
+                listDialog.show();
             }
         });
 

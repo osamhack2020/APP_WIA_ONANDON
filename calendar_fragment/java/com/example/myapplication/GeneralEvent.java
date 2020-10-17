@@ -1,12 +1,10 @@
 package com.example.myapplication;
 
-import android.graphics.Color;
-
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.Random;
+import java.util.List;
 
 public class GeneralEvent {
 
@@ -30,7 +28,7 @@ public class GeneralEvent {
         return decorator;
     }
 
-    public GeneralEvent(String name, Collection<CalendarDay> dates) {
+    public GeneralEvent(String name, List<CalendarDay> dates) {
         this.name = name;
         this.dates = new HashSet<>(dates);
 
