@@ -86,6 +86,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(MainActivity.this);
                 final LinearLayout layout = new LinearLayout(MainActivity.this);
+                layout.getLayoutParams().width = 200;
                 layout.setOrientation(LinearLayout.VERTICAL);
                 ArrayList<Button> buttons = new ArrayList<>();
                 for(int i=0; i<selectedVacation.size(); i++) {
