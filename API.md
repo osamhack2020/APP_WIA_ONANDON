@@ -36,8 +36,27 @@ public class BoardDTO {
 } 
 ```
 위 BoardDTO.java 코드에서 name 변수에는 게시판의 이름이, explain 변수에는 게시판에 대한 설명이 저장됩니다. timestamp 변수에는 게시판을 생성한 시간이 저장되며
-manager 변수에는 게시판의 관리자 Uid가 저장됩니다. 처음 게시판을 생성하는 경우, 게시판을 생성한 사용자의 Uid가 자동으로 관리자로 등록됩니다.
-따라서, 처음 게시판을 생성할 때는 manager 변수에 게시판을 만든 사용자의 Uid가 저장됩니다.
+manager 변수에는 게시판의 관리자 Uid가 저장됩니다. 처음 게시판을 생성하는 경우, 게시판을 생성한 사용자의 Uid가 자동으로 관리자로 등록됩니다. 따라서, 이와 같은 경우
+manager 변수에 게시판을 만든 사용자의 Uid가 저장됩니다.
+
+#### ClubDTO.java
+
+```java
+// 동아리 페이지에 대한 정보를 저장하는 객체
+public class ClubDTO {
+    public String name=""; // 동아리 이름
+    public String explain=""; // 동아리 설명
+    public String period=""; // 주기적으로 만나는 시간
+    public String represent=""; // 동아리 대표자
+    public String number=""; // 동아리 연락처
+    public String manager=""; // 동아리 페이지 관리자 Uid
+    public String imageUri=""; // 동아리 설명에 업로드 된 사진 링크
+    public Map<String, String> kind = new HashMap<>(); // 해시 태그
+    public int questionCount=0; // 동아리 페이지에 게시된 질문 수
+    public long timestamp=0; // 페이지 생성 시기
+    public int isPhoto=0; // 사진 업로드 유무
+}
+```
 
 
 ### firebase를 활용한 DB와 서버 구축
