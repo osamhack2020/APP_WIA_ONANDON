@@ -183,6 +183,15 @@ public class CommentDTO {
 ```
 CommentDTO 객체에는 게시물에 달린 댓글 정보가 저장됩니다. comment 변수에는 댓글 내용이, uid 변수에는 댓글을 단 사용자의 Id가 저장됩니다.
 
+#### TagDTO.java
+```java
+public class TagDTO {
+    public ArrayList<String> tag = new ArrayList<>();
+}
+```
+TagDTO 객체에는 게시물에 달린 모든 해시태그 정보가 저장됩니다. WIA는 게시물에 달린 해시태그를 활용하여,
+원하는 게시물을 검색할 수 있는 기능을 제공하고 있는 데, tag 변수에 저장된 해시 태그 배열은 이러한 검색 과정에서 활용됩니다.
+
 ### firebase를 활용한 DB와 서버 구축
 
 
