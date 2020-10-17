@@ -38,7 +38,6 @@ public class ClubPostList extends Fragment {
     private FirebaseFirestore firestore;
 
     String name;
-    String documentUid;
     String manager;
     String budae;
 
@@ -54,7 +53,6 @@ public class ClubPostList extends Fragment {
         View view = inflater.inflate(R.layout.fragment_club_post_list, container, false);
 
         name = getArguments().getString("name");
-        documentUid = getArguments().getString("documentUid");
         manager = getArguments().getString("manager");
         budae = getArguments().getString("budae");
 
@@ -74,7 +72,8 @@ public class ClubPostList extends Fragment {
             contentDTOs = new ArrayList<>();
             contentUidList = new ArrayList<>();
 
-            firestore.collection(documentUid+"게시판").orderBy("timestamp", Query.Direction.DESCENDING)
+            firestore.collection(budae+"동아리게시판").whereEqualTo("name", name)
+                    .orderBy("timestamp", Query.Direction.DESCENDING)
                     .addSnapshotListener(new EventListener<QuerySnapshot>() {
                         @Override
                         public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
@@ -151,7 +150,6 @@ public class ClubPostList extends Fragment {
                     Intent intent = new Intent(getActivity(), ClubPostItemMore.class);
                     intent.putExtra("name", name);
                     intent.putExtra("manager", manager);
-                    intent.putExtra("documentUid", documentUid);
                     intent.putExtra("postUid", contentUidList.get(position));
                     intent.putExtra("budae", budae);
                     startActivity(intent);

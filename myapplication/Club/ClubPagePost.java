@@ -54,7 +54,7 @@ public class ClubPagePost extends Fragment {
                     @Override
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
 
-                        ClubDTO clubDTO = documentSnapshot.toObject(ClubDTO.class);
+                        final ClubDTO clubDTO = documentSnapshot.toObject(ClubDTO.class);
                         if(auth.getCurrentUser().getUid().equals(clubDTO.manager)){
                             addPostText.setVisibility(View.VISIBLE);
                             addPost.setVisibility(View.VISIBLE);
@@ -64,6 +64,7 @@ public class ClubPagePost extends Fragment {
                                 public void onClick(View view) {
                                     Intent intent = new Intent(getActivity(), NewClubPost.class);
                                     intent.putExtra("budae", budae);
+                                    intent.putExtra("name", clubDTO.name);
                                     intent.putExtra("documentUid", documentUid);
                                     startActivity(intent);
                                 }
@@ -71,9 +72,8 @@ public class ClubPagePost extends Fragment {
                         }
 
                         ClubPostList clubPostList = new ClubPostList();
-                        Bundle bundle = new Bundle(4);
+                        Bundle bundle = new Bundle(3);
                         bundle.putString("name", clubDTO.name);
-                        bundle.putString("documentUid", documentUid);
                         bundle.putString("manager", clubDTO.manager);
                         bundle.putString("budae", budae);
                         clubPostList.setArguments(bundle);

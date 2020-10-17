@@ -36,7 +36,8 @@ public class ClubPageIntroduce extends Fragment {
     TextView period;
     TextView represent;
     TextView number;
-    
+
+    //!!!!!!!!!!!!!!!!!
     TextView update;
 
     ImageView photo;
@@ -71,12 +72,13 @@ public class ClubPageIntroduce extends Fragment {
                 .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                     @Override
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
-                        ClubDTO clubDTO = documentSnapshot.toObject(ClubDTO.class);
+                        final ClubDTO clubDTO = documentSnapshot.toObject(ClubDTO.class);
 
                         photo.setVisibility(View.GONE);
                         kindFirst.setVisibility(View.GONE);
                         kindSecond.setVisibility(View.GONE);
                         kindThird.setVisibility(View.GONE);
+                        update.setVisibility(View.GONE);
 
                         explain.setText(clubDTO.explain);
                         period.setText(clubDTO.period);
@@ -120,7 +122,7 @@ public class ClubPageIntroduce extends Fragment {
                                 }
                             });
                         }
-                        
+
                         if(FirebaseAuth.getInstance().getCurrentUser().getUid().equals(clubDTO.manager)){
                             update.setVisibility(View.VISIBLE);
                             update.setOnClickListener(new View.OnClickListener() {

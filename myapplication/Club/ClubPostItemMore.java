@@ -17,6 +17,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.Transaction;
@@ -47,7 +48,6 @@ public class ClubPostItemMore extends AppCompatActivity {
 
     String name;
     String manager;
-    String documentUid;
     String postUid;
     String budae;
 
@@ -69,7 +69,6 @@ public class ClubPostItemMore extends AppCompatActivity {
         Intent intent = getIntent();
         name = intent.getStringExtra("name");
         manager = intent.getStringExtra("manager");
-        documentUid = intent.getStringExtra("documentUid");
         postUid = intent.getStringExtra("postUid");
         budae = intent.getStringExtra("budae");
 
@@ -82,8 +81,7 @@ public class ClubPostItemMore extends AppCompatActivity {
         });
 
         ScrollClubPostItem fragment = new ScrollClubPostItem();
-        Bundle bundle = new Bundle(5);
-        bundle.putString("documentUid", documentUid);
+        Bundle bundle = new Bundle(4);
         bundle.putString("postUid", postUid);
         bundle.putString("name",name);
         bundle.putString("manager", manager);
@@ -119,21 +117,7 @@ public class ClubPostItemMore extends AppCompatActivity {
                         });
 
                 // 댓글이 게시되면 게시물의 댓글 수를 1 증가시킨 후, 서버 정보를 업데이트 시킨다.
-                final DocumentReference docRef = firestore.collection(documentUid+"게시판").document(postUid);
-                final DocumentReference docRef2 = firestore.collection(budae+"동아리게시판").document(postUid);
-                firestore.runTransaction(new Transaction.Function<Void>() {
-                    @Nullable
-                    @Override
-                    public Void apply(@NonNull Transaction transaction) throws FirebaseFirestoreException {
-                        DocumentSnapshot snapshot = transaction.get(docRef);
-                        PostDTO postDTO = snapshot.toObject(PostDTO.class);
-                        postDTO.commentCount = postDTO.commentCount+1;
-
-                        transaction.set(docRef, postDTO);
-                        transaction.set(docRef2, postDTO);
-                        return null;
-                    }
-                });
+                firestore.collection(budae+"동아리게시판").document(postUid).update("commentCount",  FieldValue.increment(1));
             }
         });
     }

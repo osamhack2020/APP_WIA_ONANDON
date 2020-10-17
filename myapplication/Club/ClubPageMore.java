@@ -59,9 +59,10 @@ public class ClubPageMore extends AppCompatActivity {
         clubPageIntroduce.setArguments(bundle);
         frag_list.add(clubPageIntroduce);
 
-        Practice sub = new Practice();
-        sub.string = "1 번 째 프래그 먼트";
-        frag_list.add(sub);
+        //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        ClubPagePost clubPagePost = new ClubPagePost();
+        clubPagePost.setArguments(bundle);
+        frag_list.add(clubPagePost);
 
         pager = (ViewPager)findViewById(R.id.pager);
 

@@ -32,12 +32,10 @@ public class AddAnswer extends Activity {
 
     String documentUid;
     String questionUid;
+    int update;
 
     TextView complete;
     TextView answerExplain;
-    ImageView cancel;
-    
-    int update;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +44,6 @@ public class AddAnswer extends Activity {
 
         complete = (TextView)findViewById(R.id.complete);
         answerExplain = (TextView)findViewById(R.id.answer_explain);
-        cancel = (ImageView)findViewById(R.id.cancel);
         firestore = FirebaseFirestore.getInstance();
         auth = FirebaseAuth.getInstance();
 
@@ -60,8 +57,7 @@ public class AddAnswer extends Activity {
         documentUid = intent.getStringExtra("documentUid");
         questionUid = intent.getStringExtra("questionUid");
         update = intent.getIntExtra("update", 0);
-        
-        
+
         if(update == 1){
             String answer = intent.getStringExtra("answer");
             answerExplain.setText(answer);

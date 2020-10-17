@@ -106,6 +106,8 @@ public class ClubPage extends Fragment {
             binding.kindFirst.setVisibility(View.GONE);
             binding.kindSecond.setVisibility(View.GONE);
             binding.kindThird.setVisibility(View.GONE);
+            binding.isPhoto.setVisibility(View.GONE);
+            binding.manager.setVisibility(View.GONE);
 
             if(contentDTOs.get(position).kind.containsKey("first")){
                 binding.kindFirst.setText(contentDTOs.get(position).kind.get("first"));
@@ -120,6 +122,13 @@ public class ClubPage extends Fragment {
                 binding.kindThird.setVisibility(View.VISIBLE);
             }
             binding.questionCount.setText(contentDTOs.get(position).questionCount+"");
+
+            if(contentDTOs.get(position).isPhoto == 1){
+                binding.isPhoto.setVisibility(View.VISIBLE);
+            }
+            if(user.getUid().equals(contentDTOs.get(position).manager)){
+                binding.manager.setVisibility(View.VISIBLE);
+            }
 
             binding.clubItemLayout.setOnClickListener(new View.OnClickListener() {
                 @Override

@@ -1,5 +1,6 @@
 package com.example.myapplication.Club;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -98,7 +99,7 @@ public class ClubTotalPost extends Fragment {
         }
 
         @Override
-        public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+        public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, final int position) {
             final ClubPostListItemBinding binding = ((CustomViewHolder) holder).getBinding();
 
             binding.explain.setText(contentDTOs.get(position).explain);
@@ -143,8 +144,20 @@ public class ClubTotalPost extends Fragment {
                     .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                         @Override
                         public void onSuccess(DocumentSnapshot documentSnapshot) {
-                            ClubDTO clubDTO = documentSnapshot.toObject(ClubDTO.class);
+                            final ClubDTO clubDTO = documentSnapshot.toObject(ClubDTO.class);
                             binding.clubName.setText(clubDTO.name);
+
+                            binding.itemPost.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    Intent intent = new Intent(getActivity(), ClubPostItemMore.class);
+                                    intent.putExtra("name", clubDTO.name);
+                                    intent.putExtra("manager", clubDTO.manager);
+                                    intent.putExtra("postUid", contentUidList.get(position));
+                                    intent.putExtra("budae", budae);
+                                    startActivity(intent);
+                                }
+                            });
                         }
                     });
         }

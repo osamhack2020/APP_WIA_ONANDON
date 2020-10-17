@@ -110,7 +110,7 @@ public class Question extends Fragment {
         }
 
         @Override
-        public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+        public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, final int position) {
             final QuestionBinding binding = ((CustomViewHolder) holder).getBinding();
             final int intentPosition = position;
 
@@ -118,6 +118,7 @@ public class Question extends Fragment {
             binding.addAnswerText.setVisibility(View.GONE);
             binding.answer.setVisibility(View.GONE);
             binding.answerTitle.setVisibility(View.GONE);
+            binding.update.setVisibility(View.GONE);
 
             if(user.getUid().equals(manager) && contentDTOs.size() == 0){
                 binding.questionUser.setText("질문 글이 없습니다.");
@@ -162,7 +163,7 @@ public class Question extends Fragment {
                                 binding.questionUser.setText(userDTO.army + " " + userDTO.budae + " " + userDTO.rank + " " + userDTO.name);
                             }
                         });
-                
+
                 if(user.getUid().equals(manager) && contentDTOs.get(position).isAnswer == 1){
                     binding.update.setVisibility(View.VISIBLE);
                     binding.update.setOnClickListener(new View.OnClickListener() {
@@ -192,7 +193,7 @@ public class Question extends Fragment {
                             }
                             if(System.currentTimeMillis() <= deletePressedTime + 2000) {
                                 firestore.collection(documentUid+"_question").document(delete).delete();
-                                Toast.makeText(getActivity(), "댓글을 삭제했습니다.", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getActivity(), "질문을 삭제했습니다.", Toast.LENGTH_SHORT).show();
                                 deletePressedTime = 0;
 
                                 final DocumentReference docRef = firestore.collection(budae+"동아리").document(documentUid);

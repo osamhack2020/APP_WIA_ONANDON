@@ -48,6 +48,7 @@ public class NewClubPost extends AppCompatActivity {
 
     String budae;
     String documentUid;
+    String name;
 
     EditText postTitle;
     EditText postExplain;
@@ -85,6 +86,7 @@ public class NewClubPost extends AppCompatActivity {
         Intent intent = getIntent();
         budae = intent.getStringExtra("budae");
         documentUid = intent.getStringExtra("documentUid");
+        name = intent.getStringExtra("name");
 
         addPhoto.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -126,6 +128,7 @@ public class NewClubPost extends AppCompatActivity {
                             Uri uri = task.getResult();
 
                             PostDTO postDTO = new PostDTO();
+                            postDTO.name = name;
                             postDTO.explain = postExplain.getText().toString();
                             postDTO.title = postTitle.getText().toString();
                             postDTO.isPhoto = 1;
@@ -160,7 +163,7 @@ public class NewClubPost extends AppCompatActivity {
                     if (!kindThird.getText().toString().isEmpty()) {
                         postDTO.kind.put("third", kindThird.getText().toString());
                     }
-                    postDTO.uid = documentUid;
+                    postDTO.uid = auth.getCurrentUser().getUid();
                     postDTO.timestamp = System.currentTimeMillis();
 
                     storePost(postDTO);
@@ -169,7 +172,6 @@ public class NewClubPost extends AppCompatActivity {
                 }
             }
         });
-
 
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -200,9 +202,6 @@ public class NewClubPost extends AppCompatActivity {
     }
 
     public void storePost(PostDTO postDTO){
-        long timestamp = System.currentTimeMillis();
-        String timestampString = timestamp + "_documentUid";
-        firestore.collection(budae+"동아리게시판").document(timestampString).set(postDTO);
-        firestore.collection(documentUid+"게시판").document(timestampString).set(postDTO);
+        firestore.collection(budae+"동아리게시판").document().set(postDTO);
     }
 }

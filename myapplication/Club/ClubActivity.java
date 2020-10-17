@@ -8,6 +8,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
 
@@ -16,6 +17,7 @@ import com.example.myapplication.model.UserDTO;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.UserInfo;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -27,11 +29,14 @@ public class ClubActivity extends AppCompatActivity {
     FirebaseFirestore firestore;
     FirebaseAuth auth;
 
-    ArrayList<Fragment> frag_list = new ArrayList<Fragment>();
+    // ArrayList<Fragment> frag_list = new ArrayList<Fragment>();
     TextView toolbarTitle;
     Toolbar toolbar;
     TabLayout tabLayout;
     ViewPager pager;
+
+    Intent intent;
+    String budae;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,12 +46,16 @@ public class ClubActivity extends AppCompatActivity {
         firestore = FirebaseFirestore.getInstance();
         auth = FirebaseAuth.getInstance();
 
+        intent = getIntent();
+        budae = intent.getStringExtra("budae");
+
         toolbar = (Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         Objects.requireNonNull(getSupportActionBar()).setDisplayShowTitleEnabled(false);
         toolbar.setTitle("");
 
         toolbarTitle = (TextView)findViewById(R.id.toolbar_title);
+
         firestore.collection("UserInfo").document(auth.getCurrentUser().getUid()).get()
                 .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                     @Override
@@ -59,13 +68,6 @@ public class ClubActivity extends AppCompatActivity {
         tabLayout = (TabLayout)findViewById(R.id.tablayout);
         tabLayout.addTab(tabLayout.newTab().setText("게시물"));
         tabLayout.addTab(tabLayout.newTab().setText("동아리 페이지"));
-
-        Practice sub = new Practice();
-        sub.string = "1 번 째 프래그 먼트";
-        frag_list.add(sub);
-
-        ClubPageFrame club = new ClubPageFrame();
-        frag_list.add(club);
 
         pager = (ViewPager)findViewById(R.id.pager);
 
@@ -90,10 +92,10 @@ public class ClubActivity extends AppCompatActivity {
 
             }
         });
-        
-        Intent intent = getIntent();
-        if(intent != null){
-            pager.setCurrentItem(intent.getIntExtra("set", 0));
+
+        int set = intent.getIntExtra("set", 0);
+        if(set == 1){
+            pager.setCurrentItem(set);
         }
     }
 
@@ -108,7 +110,19 @@ public class ClubActivity extends AppCompatActivity {
         @NonNull
         @Override
         public Fragment getItem(int position) {
-            return frag_list.get(position);
+            switch(position){
+                case 0 :
+                    Bundle bundle = new Bundle(1);
+                    bundle.putString("budae", budae);
+                    ClubTotalPost total = new ClubTotalPost();
+                    total.setArguments(bundle);
+                    return total;
+                case 1 :
+                    ClubPageFrame club = new ClubPageFrame();
+                    return club;
+            }
+            return null;
+            // return frag_list.get(position);
         }
 
         @Override

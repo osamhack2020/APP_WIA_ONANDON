@@ -81,13 +81,12 @@ public class ScrollClubPostItem extends Fragment {
         favorite = (ImageView)view.findViewById(R.id.heart);
         photo = (ImageView)view.findViewById(R.id.photo);
 
-        documentUid = getArguments().getString("documentUid");
         postUid = getArguments().getString("postUid");
         name = getArguments().getString("name");
         manager = getArguments().getString("manager");
         budae = getArguments().getString("budae");
 
-        firestore.collection(documentUid + "게시판").document(postUid).get()
+        firestore.collection(budae + "동아리게시판").document(postUid).get()
                 .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                     @Override
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
@@ -151,8 +150,7 @@ public class ScrollClubPostItem extends Fragment {
                     click= 0;
                 }
 
-                final DocumentReference docRef = firestore.collection(documentUid+"게시판").document(postUid);
-                final DocumentReference docRef2 = firestore.collection(budae+"동아리게시판").document(postUid);
+                final DocumentReference docRef = firestore.collection(budae+"동아리게시판").document(postUid);
                 firestore.runTransaction(new Transaction.Function<Void>() {
                     @Nullable
                     @Override
@@ -174,7 +172,6 @@ public class ScrollClubPostItem extends Fragment {
                             postDTO.favorites.put(uidF, true);
                         }
                         transaction.set(docRef, postDTO);
-                        transaction.set(docRef2, postDTO);
                         return null;
                     }
                 });
@@ -186,8 +183,7 @@ public class ScrollClubPostItem extends Fragment {
         Bundle bundle = new Bundle(4);
         bundle.putString("document", postUid);
         bundle.putString("manager", manager);
-        bundle.putString("collection", documentUid+"게시판");
-        bundle.putString("budae", budae);
+        bundle.putString("collection", budae+"동아리게시판");
         comment.setArguments(bundle);
 
         FragmentManager manager = getChildFragmentManager();
