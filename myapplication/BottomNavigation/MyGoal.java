@@ -119,6 +119,32 @@ public class MyGoal extends Fragment {
                             if (myGoalContentDTO.isPhoto == 1) {
                                 isPhoto.setVisibility(View.VISIBLE);
                             }
+                            kindFirst.setVisibility(View.GONE);
+                            kindSecond.setVisibility(View.GONE);
+                            more.setVisibility(View.GONE);
+
+                            int cnt = 0;
+                            if(myGoalContentDTO.kind.containsKey("first")){
+                                kindFirst.setText(myGoalContentDTO.kind.get("first"));
+                                kindFirst.setVisibility(View.VISIBLE);
+                                if(myGoalContentDTO.kind.get("first").length() >= 4){
+                                    cnt++;
+                                }
+                            }
+                            if(myGoalContentDTO.kind.containsKey("second")){
+                                kindSecond.setText(myGoalContentDTO.kind.get("second"));
+                                kindSecond.setVisibility(View.VISIBLE);
+                                if(myGoalContentDTO.kind.get("second").length() >= 4){
+                                    cnt++;
+                                }
+                            }
+                            if(myGoalContentDTO.kind.containsKey("third")){
+                                more.setVisibility(View.VISIBLE);
+                            }
+                            if(cnt == 2 && myGoalContentDTO.isPhoto == 1){
+                                kindSecond.setVisibility(View.GONE);
+                                more.setVisibility(View.VISIBLE);
+                            }
                         }
                     }
                 });
