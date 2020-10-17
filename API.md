@@ -22,6 +22,8 @@ Question.java  | 동아리 페이지의 질문 글 정보가 담기는 객체
 TagDTO.java  | 각 글의 해시태그 정보가 담기는 객체
 UserDTO.java  | 사용자 정보가 담기는 객체
 
+.
+
 
 #### BoardDTO.java
 
@@ -33,6 +35,9 @@ public class BoardDTO {
     public long timestamp=0;
 } 
 ```
+위 BoardDTO.java 코드에서 name 변수에는 게시판의 이름이, explain 변수에는 게시판에 대한 설명이 저장됩니다. timestamp 변수에는 게시판을 생성한 시간이 저장되며
+manager 변수에는 게시판의 관리자 Uid가 저장됩니다. 처음 게시판을 생성하는 경우, 게시판을 생성한 사용자의 Uid가 자동으로 관리자로 등록됩니다.
+따라서, 처음 게시판을 생성할 때는 manager 변수에 게시판을 만든 사용자의 Uid가 저장됩니다.
 
 
 ### firebase를 활용한 DB와 서버 구축
