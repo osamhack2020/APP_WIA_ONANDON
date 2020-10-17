@@ -143,7 +143,7 @@ public class MyGoalContentDTO {
 }
 ```
 MyGoalContentDTO 객체에는 나의 도전 게시판에 게시되는 게시물의 정보가 저장됩니다.
-favorites 변수에는 게시물에 좋아요를 누른 사용자들의 Uid가 저장되며, 또한, 이렇게 눌린 좋아요의 수는
+favorites 변수에는 게시물에 좋아요를 누른 사용자들의 Uid가 저장되며, 이렇게 눌린 좋아요의 수는
 favoriteCount 변수에 저장됩니다. 
 
 도전 게시판에 게시물을 작성하는 경우, 자신의 도전 목표일을 기재하도록 되어 있는 데,
