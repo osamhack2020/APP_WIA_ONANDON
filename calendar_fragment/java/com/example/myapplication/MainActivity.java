@@ -117,6 +117,7 @@ public class MainActivity extends AppCompatActivity {
                                             //selectedVacation.get(finalI).getDates().remove(date);
                                             //selectedVacation.get(finalI).setPeriod(selectedVacation.get(finalI).getPeriod() + 1);
                                             mCalendarView.invalidateDecorators();
+                                            mCalendarView.clearSelection();
                                             mAdapter.notifyDataSetChanged();
                                         }
                                     });
