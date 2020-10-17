@@ -13,11 +13,12 @@ WIA는 다음과 같은 총 10개의 객체 데이터 모델을 사용하고 있
 ------------ | ------------- 
 BoardDTO.java  | 사용자가 게시판을 추가할 때, 게시판 정보가 담기는 객체
 ClubDTO.java  | 동아리 페이지를 생성할 때, 페이지 정보가 담기는 객체
-CommentDTO.java  | 댓글 정보를 담기는 객체
+CommentDTO.java  | 댓글 정보가 담기는 객체
 MyGoalContentDTO.java  | '나의 도전 이야기'게시판의 게시물 정보가 담기는 객체
-MyToken.java  | 사용자 토큰지 저장되는 객체
-PostDTO.java  | 일반게시판의 게시물 정보가 담기는 객체
+MyToken.java  | 사용자 토큰이 저장되는 객체
+PostDTO.java  | 일반 게시판의 게시물 정보가 담기는 객체
 PushDTO.java  | 푸시 알림 정보가 담기는 객체
 Question.java  | 동아리 페이지의 질문 글 정보가 담기는 객체
 TagDTO.java  | 각 글의 해시태그 정보가 담기는 객체
 UserDTO.java  | 사용자 정보가 담기는 객체
+
