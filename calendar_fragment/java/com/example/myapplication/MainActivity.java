@@ -18,6 +18,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -46,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_calendar);
 
-        //ImageButton mAddButton = (ImageButton) findViewById(R.id.button_add_vacation);
+        ImageButton mAddButton = (ImageButton) findViewById(R.id.button_friend);
 
         mCalendarView = (MaterialCalendarView) findViewById(R.id.calendarView);
 
