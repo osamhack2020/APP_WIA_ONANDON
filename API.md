@@ -172,6 +172,17 @@ PostDTO 객체에는 사용자들이 생성한 일반 게시판에 게시되는 
 업로드 하였는지, 혹은 실명으로 업로드 하였는지에 대한 정보를 담고 있습니다. annonymous 변수에 1이 저장되어 있다는 것은
 해당 게시물이 익명으로 업로드 되었다는 것을 의미합니다.
 
+#### CommentDTO.java
+```java
+// 댓글 정보를 저장하는 객체
+public class CommentDTO {
+    public String uid=""; // 댓글을 업로드 한 사용자 Uid
+    public String comment=""; // 댓글 내용
+    public long timeStamp = 0; // 댓글 올린 시기
+}
+```
+CommentDTO 객체에는 게시물에 달린 댓글 정보가 저장됩니다. comment 변수에는 댓글 내용이, uid 변수에는 댓글을 단 사용자의 Id가 저장됩니다.
+
 ### firebase를 활용한 DB와 서버 구축
 
 
