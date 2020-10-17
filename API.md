@@ -118,7 +118,9 @@ public class QuestionDTO {
     public long timestamp = 0; // 질문 글 업로드 된 시기
 }
 ```
-
+QuestionDTO 객체에는 동아리 페이지에 게시되는 질문 글 정보가 저장됩니다. 동아리 페이지에 질문 글이 올라오면
+관리자가 질문에 답변을 달 수 있는 데, 답변이 달리는 경우 isAnswer 변수에 1이 저장되어, 답변이 달렸음을 표시합니다.
+반대로 isAnswer 변수에 0이 저장되어 있으면, 답변이 달리지 않았다는 의미입니다. 달린 답변의 내용은 answer 변수에 저장됩니다.
 
 ### firebase를 활용한 DB와 서버 구축
 
