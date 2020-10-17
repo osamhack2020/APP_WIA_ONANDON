@@ -48,6 +48,9 @@ public class MyGoalActivity extends AppCompatActivity {
         for(int i = 0; i<3; i++){
             if(i == 0){
                 MyGoalPostIng sub1 = new MyGoalPostIng();
+                Bundle bundle = new Bundle(1);
+                bundle.putInt("isSearch", 0);
+                sub1.setArguments(bundle);
                 frag_list.add(sub1);
             }
             else {

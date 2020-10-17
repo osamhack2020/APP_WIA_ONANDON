@@ -22,6 +22,8 @@ import android.widget.Toast;
 import com.example.myapplication.MakeAccount;
 import com.example.myapplication.R;
 import com.example.myapplication.model.MyGoalContentDTO;
+import com.example.myapplication.model.PostDTO;
+import com.example.myapplication.model.TagDTO;
 import com.example.myapplication.model.UserDTO;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -29,7 +31,11 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.Transaction;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -57,6 +63,10 @@ public class NewPost extends AppCompatActivity {
     TextView MyGoalPostExplain;
     EditText goalDueDateEdit;
 
+    EditText kindFirst;
+    EditText kindSecond;
+    EditText kindThird;
+
     ImageView addPhoto;
     ImageView photoPreview;
 
@@ -73,6 +83,10 @@ public class NewPost extends AppCompatActivity {
         MyGoalPostExplain = (TextView)findViewById(R.id.my_goal_post_explain);
         addPhoto = (ImageView)findViewById(R.id.add_photo);
         photoPreview = (ImageView)findViewById(R.id.photo_preview);
+
+        kindFirst = (EditText)findViewById(R.id.kind_first);
+        kindSecond = (EditText)findViewById(R.id.kind_second);
+        kindThird = (EditText)findViewById(R.id.kind_third);
 
         auth = FirebaseAuth.getInstance();
         firestore = FirebaseFirestore.getInstance();
@@ -124,6 +138,7 @@ public class NewPost extends AppCompatActivity {
                             Uri uri = task.getResult();
 
                             MyGoalContentDTO post = new MyGoalContentDTO();
+                            post.content="MyGoal";
                             post.explain = MyGoalPostExplain.getText().toString();
                             post.title = MyGoalPostTitle.getText().toString();
                             post.uid = auth.getCurrentUser().getUid();
@@ -134,6 +149,16 @@ public class NewPost extends AppCompatActivity {
                             post.isPhoto = 1;
                             post.imageUri = uri.toString();
 
+                            if (!kindFirst.getText().toString().isEmpty()) {
+                                post.kind.put("first", kindFirst.getText().toString());
+                            }
+                            if (!kindSecond.getText().toString().isEmpty()) {
+                                post.kind.put("second", kindSecond.getText().toString());
+                            }
+                            if (!kindThird.getText().toString().isEmpty()) {
+                                post.kind.put("third", kindThird.getText().toString());
+                            }
+
                             storePost(post);
                             Toast.makeText(NewPost.this, "업로드 성공", Toast.LENGTH_SHORT).show();
                             finish();
@@ -142,6 +167,7 @@ public class NewPost extends AppCompatActivity {
                 }
                 else {
                     MyGoalContentDTO post = new MyGoalContentDTO();
+                    post.content="MyGoal";
                     post.explain = MyGoalPostExplain.getText().toString();
                     post.title = MyGoalPostTitle.getText().toString();
                     post.uid = auth.getCurrentUser().getUid();
@@ -149,6 +175,16 @@ public class NewPost extends AppCompatActivity {
                     post.year = yearInput;
                     post.month = monthInput;
                     post.day = dayInput;
+
+                    if (!kindFirst.getText().toString().isEmpty()) {
+                        post.kind.put("first", kindFirst.getText().toString());
+                    }
+                    if (!kindSecond.getText().toString().isEmpty()) {
+                        post.kind.put("second", kindSecond.getText().toString());
+                    }
+                    if (!kindThird.getText().toString().isEmpty()) {
+                        post.kind.put("third", kindThird.getText().toString());
+                    }
 
                     storePost(post);
                     Toast.makeText(NewPost.this, "업로드 성공", Toast.LENGTH_SHORT).show();
@@ -196,7 +232,7 @@ public class NewPost extends AppCompatActivity {
         }
     };
 
-    public void storePost(MyGoalContentDTO myGoalContentDTO){
+    public void storePost(final MyGoalContentDTO myGoalContentDTO){
         firestore.collection("MyGoal").document().set(myGoalContentDTO)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
@@ -210,5 +246,36 @@ public class NewPost extends AppCompatActivity {
                         Log.d("store", "사용자 데이터 저장에 실패했습니다.");
                     }
                 });
+
+        final DocumentReference docRef = firestore.collection("tag").document("tag");
+        firestore.runTransaction(new Transaction.Function<Void>() {
+            @Nullable
+            @Override
+            public Void apply(@NonNull Transaction transaction) throws FirebaseFirestoreException {
+                DocumentSnapshot snapshot = transaction.get(docRef);
+                TagDTO tagDTO = snapshot.toObject(TagDTO.class);
+
+                if(myGoalContentDTO.kind.containsKey("first")){
+                    String first = myGoalContentDTO.kind.get("first");
+                    if(!tagDTO.tag.contains(first)){
+                        tagDTO.tag.add(first);
+                    }
+                }
+                if(myGoalContentDTO.kind.containsKey("second")){
+                    String second = myGoalContentDTO.kind.get("second");
+                    if(!tagDTO.tag.contains(second)){
+                        tagDTO.tag.add(second);
+                    }
+                }
+                if(myGoalContentDTO.kind.containsKey("third")){
+                    String third = myGoalContentDTO.kind.get("third");
+                    if(!tagDTO.tag.contains(third)){
+                        tagDTO.tag.add(third);
+                    }
+                }
+                transaction.set(docRef, tagDTO);
+                return null;
+            }
+        });
     }
 }

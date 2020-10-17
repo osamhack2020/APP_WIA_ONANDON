@@ -47,6 +47,10 @@ public class ScrollMygoalMore extends Fragment {
     TextView userInfo;
     TextView favoriteCount;
 
+    TextView kindFirst;
+    TextView kindSecond;
+    TextView kindThird;
+
     ImageView favorite;
     ImageView photo;
 
@@ -70,6 +74,10 @@ public class ScrollMygoalMore extends Fragment {
         favoriteCount = (TextView)view.findViewById(R.id.favorite_count);
         favorite = (ImageView)view.findViewById(R.id.heart);
         photo = (ImageView)view.findViewById(R.id.photo);
+
+        kindFirst = (TextView)view.findViewById(R.id.kind_first);
+        kindSecond = (TextView)view.findViewById(R.id.kind_second);
+        kindThird = (TextView)view.findViewById(R.id.kind_third);
 
         fcmPush = new FcmPush();
 
@@ -102,7 +110,7 @@ public class ScrollMygoalMore extends Fragment {
                         long dday = ddayCal.getTimeInMillis()/TIME_DIVIDE;
 
                         dueDateMore.setText("D-" + (dday-today));
-                        favoriteCount.setText(myGoalContentDTO.favoriteCount + " 개");
+                        favoriteCount.setText(myGoalContentDTO.favoriteCount + "");
                         count = myGoalContentDTO.favoriteCount;
 
                         String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
@@ -116,6 +124,23 @@ public class ScrollMygoalMore extends Fragment {
                             photo.setVisibility(View.VISIBLE);
                             Glide.with(getContext()).load(myGoalContentDTO.imageUri)
                                     .into(photo);
+                        }
+
+                        kindFirst.setVisibility(View.GONE);
+                        kindSecond.setVisibility(View.GONE);
+                        kindThird.setVisibility(View.GONE);
+
+                        if(myGoalContentDTO.kind.containsKey("first")){
+                            kindFirst.setText(myGoalContentDTO.kind.get("first"));
+                            kindFirst.setVisibility(View.VISIBLE);
+                        }
+                        if(myGoalContentDTO.kind.containsKey("second")){
+                            kindSecond.setText(myGoalContentDTO.kind.get("second"));
+                            kindSecond.setVisibility(View.VISIBLE);
+                        }
+                        if(myGoalContentDTO.kind.containsKey("third")){
+                            kindThird.setText(myGoalContentDTO.kind.get("third"));
+                            kindThird.setVisibility(View.VISIBLE);
                         }
                     }
                 });
@@ -137,12 +162,12 @@ public class ScrollMygoalMore extends Fragment {
             public void onClick(View view) {
                 if(click == 0){
                     favorite.setImageResource(R.drawable.heart);
-                    favoriteCount.setText((++count) + " 개");
+                    favoriteCount.setText((++count) + "");
                     click = 1;
                 }
                 else{
                     favorite.setImageResource(R.drawable.empty_heart);
-                    favoriteCount.setText((--count) + " 개");
+                    favoriteCount.setText((--count) + "");
                     click= 0;
                 }
 
@@ -174,7 +199,7 @@ public class ScrollMygoalMore extends Fragment {
                                         public void onSuccess(DocumentSnapshot documentSnapshot) {
                                             UserDTO userDTO = documentSnapshot.toObject(UserDTO.class);
                                             String message = userDTO.army+" "+userDTO.budae+" "+userDTO.rank+" "+userDTO.name;
-                                            fcmPush.sendMessage(uid, "알림 메세지 입니다.", message+"님이 좋아요를 눌렀습니다.");
+                                            fcmPush.sendMessage(uid, "좋아요 알림 메세지 입니다.", message+"님이 좋아요를 눌렀습니다.");
                                         }
                                     });
                         }
@@ -188,8 +213,9 @@ public class ScrollMygoalMore extends Fragment {
 
         // 댓글 fragement를 게시물 아래에 연다.
         Comment comment = new Comment();
-        Bundle bundle = new Bundle(1);
+        Bundle bundle = new Bundle(2);
         bundle.putString("document", documentUid);
+        bundle.putString("collection", "MyGoal");
         comment.setArguments(bundle);
 
         FragmentManager manager = getChildFragmentManager();

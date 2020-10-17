@@ -1,10 +1,12 @@
 package com.example.myapplication.MyGoalPost;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -40,6 +42,11 @@ public class MyGoalPostIng extends Fragment {
     private FirebaseUser user;
     private FirebaseFirestore firestore;
 
+
+    int isSearch;
+    String search;
+
+
     public MyGoalPostIng(){
         user = FirebaseAuth.getInstance().getCurrentUser();
         firestore = FirebaseFirestore.getInstance();
@@ -52,6 +59,8 @@ public class MyGoalPostIng extends Fragment {
 
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_my_goal_post_ing, container, false);
+
+        isSearch = getArguments().getInt("isSearch", 0);
 
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.mygoal_post_ing_recyclerview);
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
@@ -80,8 +89,18 @@ public class MyGoalPostIng extends Fragment {
                     if(value == null) return;
                     for(QueryDocumentSnapshot doc : value){
                         MyGoalContentDTO item = doc.toObject(MyGoalContentDTO.class);
-                        contentDTOs.add(item);
-                        contentUidList.add(doc.getId());
+
+                        if(isSearch == 1){
+                            search = getArguments().getString("search");
+                            if(item.kind.containsValue(search)){
+                                contentDTOs.add(item);
+                                contentUidList.add(doc.getId());
+                            }
+                        }
+                        else {
+                            contentDTOs.add(item);
+                            contentUidList.add(doc.getId());
+                        }
                     }
 
                     notifyDataSetChanged();
@@ -103,6 +122,11 @@ public class MyGoalPostIng extends Fragment {
             final MyGoalIngItemBinding binding = ((CustomViewHolder)holder).getBinding();
             final String intentDocument = contentUidList.get(position);
             final String intentUid = contentDTOs.get(position).uid;
+
+            binding.kindFirst.setVisibility(View.GONE);
+            binding.kindSecond.setVisibility(View.GONE);
+            binding.kindThird.setVisibility(View.GONE);
+            binding.more.setVisibility(View.GONE);
 
             binding.explain.setText(contentDTOs.get(position).explain);
             binding.title.setText(contentDTOs.get(position).title);
@@ -142,6 +166,33 @@ public class MyGoalPostIng extends Fragment {
 
             if(contentDTOs.get(position).isPhoto == 1){
                 binding.isPhoto.setVisibility(View.VISIBLE);
+            }
+
+            int cnt = 0;
+            if(contentDTOs.get(position).kind.containsKey("first")){
+                binding.kindFirst.setText(contentDTOs.get(position).kind.get("first"));
+                binding.kindFirst.setVisibility(View.VISIBLE);
+                if(contentDTOs.get(position).kind.get("first").length() >= 4){
+                    cnt++;
+                }
+            }
+            if(contentDTOs.get(position).kind.containsKey("second")){
+                binding.kindSecond.setText(contentDTOs.get(position).kind.get("second"));
+                binding.kindSecond.setVisibility(View.VISIBLE);
+                if(contentDTOs.get(position).kind.get("second").length() >= 4){
+                    cnt++;
+                }
+            }
+            if(contentDTOs.get(position).kind.containsKey("third")){
+                binding.kindThird.setText(contentDTOs.get(position).kind.get("third"));
+                binding.kindThird.setVisibility(View.VISIBLE);
+                if(contentDTOs.get(position).kind.get("third").length() >= 4){
+                    cnt++;
+                }
+            }
+            if(cnt == 3 && contentDTOs.get(position).isPhoto == 1){
+                binding.more.setVisibility(View.VISIBLE);
+                binding.kindThird.setVisibility(View.GONE);
             }
 
             binding.commentCountShow.setText(contentDTOs.get(position).commentCount+"");
