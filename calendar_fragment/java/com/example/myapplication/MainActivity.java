@@ -32,16 +32,17 @@ import org.threeten.bp.DayOfWeek;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
     private ArrayList<Vacation> mArrayList;
+    private ArrayList<GeneralEvent> mEvents;
     private CustomAdapter mAdapter;
     private MaterialCalendarView mCalendarView;
     private Vacation[] userVacationData = {new Vacation("연가", "연가", 24), new Vacation("위로", "신병위로", 4), new Vacation("위로", "수료식", 1)};
-    private int count = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -132,6 +133,35 @@ public class MainActivity extends AppCompatActivity {
                 Button addButton = new Button(MainActivity.this);
                 addButton.setText("일정 추가");
                 addButton.setBackgroundColor(Color.TRANSPARENT);
+                addButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+
+                        View view = LayoutInflater.from(MainActivity.this)
+                                .inflate(R.layout.edit_event, null, false);
+                        builder.setView(view);
+
+                        final Button buttonSubmit = (Button) view.findViewById(R.id.button_dialog_submit);
+                        final EditText editTextName = (EditText) view.findViewById(R.id.edittext_dialog_name);
+
+                        buttonSubmit.setText("추가");
+
+                        final AlertDialog dialog = builder.create();
+                        buttonSubmit.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                String strName = editTextName.getText().toString();
+                                if(!strName.equals("")) {
+                                    List<CalendarDay> dayList = mCalendarView.getSelectedDates();
+                                    GeneralEvent ge = new GeneralEvent(strName, dayList);
+                                    mEvents.add(ge);
+                                }
+                            }
+                        });
+                        dialog.show();
+                    }
+                });
                 layout.addView(addButton);
                 dialogBuilder.setView(layout);
                 AlertDialog dialog = dialogBuilder.create();

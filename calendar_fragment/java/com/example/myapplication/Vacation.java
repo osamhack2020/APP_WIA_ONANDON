@@ -52,7 +52,6 @@ public class Vacation {
         this.name = name;
         this.period = period;
 
-        Random rnd = new Random();
         //int color = Color.argb(255, rnd.nextInt(100) + 156, rnd.nextInt(100) + 156, rnd.nextInt(100) + 156);
         int color = ((int)(Math.random()*16777215)) | (0xFF << 24);
         decorator = new EventDecorator(color, dates);
