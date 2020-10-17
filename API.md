@@ -41,6 +41,29 @@ UserDTO 클래스에는 사용자의 정보가 저장됩니다. uid 변수에는
 고유 Id가 저장되며, name 변수에는 사용자의 이름이, army 변수에는 사용자의 소속 군이 저장됩니다.
 이외에도 사용자의 자대, 계급, 특기 등이 저장됩니다.
 
+#### MyToken.java
+```java
+public class MyToken {
+    public String pushtoken=""; // 사용자 토큰
+}
+```
+MyToken 객체는 오직 하나의 변수로만 이루어져 있습니다. pushtoken 변수에는 사용자의 토큰이
+저장되며, 이 토큰은 사용자가 좋아요, 댓글 알림 같은 푸시 알림을 받을 때 활용됩니다.
+
+#### PushDTO.java
+```java
+// 푸시 알림을 구성하는 객체
+public class PushDTO {
+    public String to="";
+    public Notification notification = new Notification();
+
+    public class Notification{
+        public String body=""; // 푸시 알림 내용
+        public String title=""; // 푸시 알림 제목
+    }
+}
+```
+
 #### BoardDTO.java
 
 ```java
