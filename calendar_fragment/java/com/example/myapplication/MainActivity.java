@@ -78,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
                 final ArrayList<Vacation> selectedVacation = new ArrayList<>();
                 for(int i=0; i<mArrayList.size(); i++) {
                     for(int j=0; j<dayList.size(); j++) {
-                        if (mArrayList.get(i).getDates().contains(dayList.get(j))) {
+                        if (!mArrayList.get(i).getDates().contains(dayList.get(j))) {
                             selectedVacation.add(mArrayList.get(i));
                         }
                     }
@@ -106,9 +106,15 @@ public class MainActivity extends AppCompatActivity {
                                     new DialogInterface.OnClickListener() {
                                         public void onClick(DialogInterface dialog, int which) {
                                             layout.removeView(v);
-                                            //for(int i=0; i<.size(); i++)
-                                            selectedVacation.get(finalI).getDates().remove(date);
-                                            selectedVacation.get(finalI).setPeriod(selectedVacation.get(finalI).getPeriod() + 1);
+                                            List<CalendarDay> dayList = mCalendarView.getSelectedDates();
+                                            for(int i=0; i<dayList.size(); i++) {
+                                                if(selectedVacation.get(finalI).getDates().contains(dayList.get(i))) {
+                                                    selectedVacation.get(finalI).getDates().remove(dayList.get(i));
+                                                    selectedVacation.get(finalI).setPeriod(selectedVacation.get(finalI).getPeriod() + 1);
+                                                }
+                                            }
+                                            //selectedVacation.get(finalI).getDates().remove(date);
+                                            //selectedVacation.get(finalI).setPeriod(selectedVacation.get(finalI).getPeriod() + 1);
                                             mCalendarView.invalidateDecorators();
                                             mAdapter.notifyDataSetChanged();
                                         }
