@@ -11,16 +11,16 @@ WIA는 다음과 같은 총 10개의 객체 데이터 모델을 사용하고 있
 
 객체 파일 | 설명 
 ------------ | ------------- 
+UserDTO.java  | 사용자 정보가 담기는 객체
+MyToken.java  | 사용자 토큰이 저장되는 객체
+PushDTO.java  | 푸시 알림 정보가 담기는 객체
 BoardDTO.java  | 사용자가 게시판을 추가할 때, 게시판 정보가 담기는 객체
 ClubDTO.java  | 동아리 페이지를 생성할 때, 페이지 정보가 담기는 객체
-CommentDTO.java  | 댓글 정보가 담기는 객체
-MyGoalContentDTO.java  | '나의 도전 이야기'게시판의 게시물 정보가 담기는 객체
-MyToken.java  | 사용자 토큰이 저장되는 객체
-PostDTO.java  | 일반 게시판의 게시물 정보가 담기는 객체
-PushDTO.java  | 푸시 알림 정보가 담기는 객체
 Question.java  | 동아리 페이지의 질문 글 정보가 담기는 객체
+MyGoalContentDTO.java  | '나의 도전 이야기'게시판의 게시물 정보가 담기는 객체
+PostDTO.java  | 일반 게시판의 게시물 정보가 담기는 객체
+CommentDTO.java  | 댓글 정보가 담기는 객체
 TagDTO.java  | 각 글의 해시태그 정보가 담기는 객체
-UserDTO.java  | 사용자 정보가 담기는 객체
 
 .
 
@@ -58,8 +58,14 @@ public class ClubDTO {
 }
 ```
 ClubDTO 객체에는 동아리 게시판에서 열람할 수 있는 각 부대별 동아리 페이지들의 정보가 저장됩니다.
-kind 변수에는 동아리의 성향, 분야를 나타내는 해시태그 정보가 저장되며, questionCount 변수에는
-동아리 페이지에 게시된 질문 글의 수가 저장됩니다.
+kind 변수에는 동아리의 성향과 분야를 나타내는 해시태그 정보가 저장되며, questionCount 변수에는
+동아리 페이지에 게시된 질문 글의 수가 저장됩니다. number 변수에는 동아리 연락처가, represent에는
+동아리 대표자의 Uid가 저장되며, 동아리에 대한 설명은 explain 변수에, 동아리 이름은 name 변수에 저장됩니다.
+
+이렇게 저장된 동아리 정보들은 동아리 페이지의 '동아리 설명'란에 기재되어, 사용자들로 하여금 부대 내 동아리를
+쉽게 접할 수 있도록 합니다.
+
+####
 
 
 ### firebase를 활용한 DB와 서버 구축
