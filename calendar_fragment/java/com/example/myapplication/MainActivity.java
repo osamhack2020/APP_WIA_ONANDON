@@ -31,6 +31,7 @@ import org.threeten.bp.DayOfWeek;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -73,10 +74,13 @@ public class MainActivity extends AppCompatActivity {
         mCalendarView.setOnDateLongClickListener(new OnDateLongClickListener() {
             @Override
             public void onDateLongClick(@NonNull final MaterialCalendarView widget, @NonNull final CalendarDay date) {
+                List<CalendarDay> dayList = mCalendarView.getSelectedDates();
                 final ArrayList<Vacation> selectedVacation = new ArrayList<>();
                 for(int i=0; i<mArrayList.size(); i++) {
-                    if(mArrayList.get(i).getDates().contains(date)) {
-                        selectedVacation.add(mArrayList.get(i));
+                    for(int j=0; j<dayList.size(); j++) {
+                        if (mArrayList.get(i).getDates().contains(dayList.get(j))) {
+                            selectedVacation.add(mArrayList.get(i));
+                        }
                     }
                 }
                 AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(MainActivity.this);
@@ -102,6 +106,7 @@ public class MainActivity extends AppCompatActivity {
                                     new DialogInterface.OnClickListener() {
                                         public void onClick(DialogInterface dialog, int which) {
                                             layout.removeView(v);
+                                            //for(int i=0; i<.size(); i++)
                                             selectedVacation.get(finalI).getDates().remove(date);
                                             selectedVacation.get(finalI).setPeriod(selectedVacation.get(finalI).getPeriod() + 1);
                                             mCalendarView.invalidateDecorators();
