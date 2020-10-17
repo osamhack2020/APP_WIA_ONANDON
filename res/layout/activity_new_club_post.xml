@@ -73,7 +73,7 @@
             android:orientation="horizontal" />
 
         <EditText
-            android:id="@+id/my_goal_post_title"
+            android:id="@+id/post_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
@@ -83,7 +83,7 @@
             android:textSize="20sp" />
 
         <EditText
-            android:id="@+id/my_goal_post_explain"
+            android:id="@+id/post_explain"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
@@ -94,39 +94,6 @@
             android:hint="@string/my_goal_post_hint"
             android:minHeight="200dp"
             android:textSize="14sp" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="10dp">
-
-            <TextView
-                android:id="@+id/goal_due_date"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="15dp"
-                android:background="@drawable/field_theme_round_shape"
-                android:paddingStart="13dp"
-                android:paddingTop="8dp"
-                android:paddingEnd="13dp"
-                android:paddingBottom="8dp"
-                android:clickable="true"
-                android:text="목표 날짜 설정하기"
-                android:textColor="#ffffff"
-                android:textSize="12sp" />
-
-            <EditText
-                android:id="@+id/goal_due_date_edit"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:minWidth="100dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="15dp"
-                android:hint="목표 날짜"
-                android:textSize="12sp" />
-
-        </LinearLayout>
 
         <TextView
             android:layout_width="wrap_content"
@@ -193,6 +160,7 @@
                 android:paddingEnd="15dp"
                 android:background="@drawable/button_round_shape"
                 android:textSize="12sp" />
+
         </LinearLayout>
 
         <LinearLayout

@@ -42,7 +42,7 @@
                     android:id="@+id/kind_second"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
+                    android:layout_marginStart="5dp"
                     android:background="@drawable/field_theme_round_shape"
                     android:paddingStart="10dp"
                     android:paddingTop="5dp"
@@ -56,7 +56,7 @@
                     android:id="@+id/kind_third"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
+                    android:layout_marginStart="5dp"
                     android:background="@drawable/field_theme_round_shape"
                     android:paddingStart="10dp"
                     android:paddingTop="5dp"
@@ -65,6 +65,20 @@
                     android:text="로딩 중..."
                     android:textColor="#ffffff"
                     android:textSize="12sp" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
+
+                <ImageView
+                    android:id="@+id/manager"
+                    android:layout_width="16dp"
+                    android:layout_height="23dp"
+                    android:layout_gravity="end"
+                    android:layout_marginEnd="15dp"
+                    android:visibility="gone"
+                    app:srcCompat="@drawable/check" />
             </LinearLayout>
 
             <LinearLayout
@@ -112,6 +126,18 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp">
+
+                <ImageView
+                    android:id="@+id/is_photo"
+                    android:layout_width="35dp"
+                    android:layout_height="17dp"
+                    android:layout_marginStart="2dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginEnd="2dp"
+                    android:layout_marginBottom="2dp"
+                    android:layout_toStartOf="@id/question"
+                    android:visibility="invisible"
+                    app:srcCompat="@drawable/photo" />
 
                 <ImageView
                     android:id="@+id/question"

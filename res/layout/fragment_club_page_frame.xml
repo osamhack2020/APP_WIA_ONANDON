@@ -40,7 +40,6 @@
                 android:clickable="true"
                 android:layout_marginBottom="30dp"
                 app:srcCompat="@android:drawable/ic_menu_add" />
-
         </LinearLayout>
 
     </LinearLayout>

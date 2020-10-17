@@ -8,7 +8,7 @@
     <LinearLayout
         android:id="@+id/preview"
         android:layout_width="match_parent"
-        android:layout_height="160dp"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         android:clickable="true"
         android:background="@drawable/round_shape">
@@ -27,7 +27,7 @@
                     android:background="@drawable/field_round_shape"
                     android:paddingStart="10dp"
                     android:paddingTop="5dp"
-                    android:paddingEnd="5dp"
+                    android:paddingEnd="10dp"
                     android:paddingBottom="5dp"
                     android:text="로딩 중..."
                     android:textColor="#ffffff"
@@ -105,26 +105,79 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp">
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/kind_first"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="15dp"
+                    android:background="@drawable/field_tag_round_shape"
+                    android:ellipsize="end"
+                    android:maxWidth="65dp"
+                    android:maxHeight="45dp"
+                    android:paddingStart="10dp"
+                    android:paddingTop="5dp"
+                    android:paddingEnd="10dp"
+                    android:paddingBottom="5dp"
+                    android:singleLine="true"
+                    android:text="로딩 중..."
+                    android:textColor="#ffffff"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/kind_second"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="15dp"
+                    android:background="@drawable/field_tag_round_shape"
+                    android:ellipsize="end"
+                    android:maxWidth="65dp"
+                    android:maxHeight="45dp"
+                    android:singleLine="true"
+                    android:layout_toEndOf="@id/kind_first"
+                    android:layout_marginBottom="10dp"
+                    android:paddingStart="10dp"
+                    android:paddingTop="5dp"
+                    android:paddingEnd="10dp"
+                    android:paddingBottom="5dp"
+                    android:text="로딩 중..."
+                    android:textColor="#ffffff"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/more"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_toEndOf="@id/kind_second"
+                    android:text="..."
+                    android:textColor="#ced4da"
+                    android:textSize="24sp" />
 
                 <ImageView
                     android:id="@+id/is_photo"
                     android:layout_width="35dp"
                     android:layout_height="17dp"
                     android:layout_marginStart="2dp"
-                    android:layout_marginTop="2dp"
+                    android:layout_marginTop="22dp"
                     android:layout_marginEnd="2dp"
-                    android:layout_marginBottom="2dp"
+                    android:layout_marginBottom="12dp"
                     android:layout_toStartOf="@id/comment_show"
-                    android:visibility="invisible"
-                    app:srcCompat="@drawable/photo" />
+                    android:visibility="visible"
+                    app:srcCompat="@drawable/photo"
+                    tools:visibility="invisible" />
 
                 <ImageView
                     android:id="@+id/comment_show"
                     android:layout_width="35dp"
                     android:layout_height="17dp"
-                    android:layout_marginTop="2dp"
+                    android:layout_marginTop="22dp"
+                    android:layout_marginBottom="10dp"
                     android:layout_toStartOf="@id/comment_count_show"
                     app:srcCompat="@drawable/comment" />
 
@@ -133,6 +186,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="10dp"
                     android:layout_toStartOf="@id/favorite_show"
                     android:text="10"
                     android:textColor="@color/common_google_signin_btn_text_light_pressed" />
@@ -141,7 +196,8 @@
                     android:id="@+id/favorite_show"
                     android:layout_width="30dp"
                     android:layout_height="15dp"
-                    android:layout_marginTop="2dp"
+                    android:layout_marginTop="22dp"
+                    android:layout_marginBottom="10dp"
                     android:layout_toStartOf="@id/favorite_count_show"
                     app:srcCompat="@drawable/empty_heart" />
 
@@ -151,6 +207,8 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:layout_marginEnd="20dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="20dp"
                     android:text="10"
                     android:textColor="@color/common_google_signin_btn_text_light_pressed" />
             </RelativeLayout>
