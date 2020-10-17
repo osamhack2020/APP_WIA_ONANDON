@@ -142,6 +142,8 @@ public class MyGoalContentDTO {
     public Map<String, String> kind = new HashMap<>(); // 해시 태그
 }
 ```
+MyGoalContentDTO 객체에는 나의 도전 게시판에 게시되는 게시물의 정보가 저장됩니다.
+favorites 
 
 ### firebase를 활용한 DB와 서버 구축
 
