@@ -77,9 +77,7 @@ public class BoardDTO {
     public long timestamp=0;
 } 
 ```
-위 BoardDTO.java 코드에서 name 변수에는 게시판의 이름이, explain 변수에는 게시판에 대한 설명이 저장됩니다. timestamp 변수에는 게시판을 생성한 시간이 저장되며
-manager 변수에는 게시판의 관리자 Uid가 저장됩니다. 처음 게시판을 생성하는 경우, 게시판을 생성한 사용자의 Uid가 자동으로 관리자로 등록됩니다. 따라서, 이와 같은 경우
-manager 변수에 게시판을 만든 사용자의 Uid가 저장됩니다.
+BoardDTO 객체에는 사용자가 게시판을 생성하는 경우, 생성된 게시판의 정보가 저장됩니다. 위 BoardDTO.java 코드에서 name 변수에는 게시판의 이름이, explain 변수에는 게시판에 대한 설명이 저장됩니다. timestamp 변수에는 게시판을 생성한 시간이 저장되며 manager 변수에는 게시판의 관리자 Uid가 저장됩니다. 처음 게시판을 생성하는 경우, 게시판을 생성한 사용자의 Uid가 자동으로 관리자로 등록됩니다. 따라서, 이와 같은 경우 manager 변수에 게시판을 만든 사용자의 Uid가 저장됩니다.
 
 #### ClubDTO.java
 
@@ -149,6 +147,26 @@ favoriteCount 변수에 저장됩니다.
 도전 게시판에 게시물을 작성하는 경우, 자신의 도전 목표일을 기재하도록 되어 있는 데,
 이렇게 기재된 날짜는 year, month, day 변수에 저장됩니다. 이후, 이 세 변수는 안드로이드 앱 내부에서 Calendar 변수에 저장되어
 현재 날짜 부터 목표일 까지의 D-day를 계산하는데 활용됩니다.
+
+#### PostDTO.java
+```java
+// 일반 게시물의 정보를 저장할 객체
+public class PostDTO {
+    public String name="";
+    public String content=""; // 게시물이 업로드 된 게시판의 Id
+    public String explain=""; // 게시물 내용
+    public String title=""; // 게시물 제목
+    public String uid=""; // 게시물 업로드 한 사용자의 고유 Uid
+    public long timestamp=0; // 게시물 업로드 시기
+    public int favoriteCount = 0; // 게시물 좋아요 수
+    public int commentCount = 0; // 게시물 댓글 수
+    public int isPhoto=0; // 게시물의 사진 업로드 유무
+    public int annonymous=0; //익명 유무
+    public String imageUri=""; // 게시물에 업로드 된 사진 링크
+    public Map<String, Boolean> favorites = new HashMap<>(); // 좋아요를 누른 사용자 Uid가 저장 될 HashMap
+    public Map<String, String> kind = new HashMap<>(); // 해시 태그
+}
+```
 
 
 ### firebase를 활용한 DB와 서버 구축
