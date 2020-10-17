@@ -35,6 +35,7 @@ public class FcmPush {
         gson = new Gson();
     }
 
+    // 해당 사용자에게 푸시 알림을 보내는 메서드
     public void sendMessage(String destinationUid, final String title, final String message){
         FirebaseFirestore.getInstance().collection("pushtokens").document(destinationUid).get()
                 .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {

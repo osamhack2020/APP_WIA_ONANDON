@@ -53,6 +53,8 @@ public class MakeAccount extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_make_account);
 
+
+        // 선언한 뷰의 참조 변수를 생성한다.
         passwordLayout = findViewById(R.id.password_textinputlayout);
         armyLayout = findViewById(R.id.army_textinputlayout);
 

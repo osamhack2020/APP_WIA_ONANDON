@@ -26,6 +26,8 @@ public class MainActivity extends AppCompatActivity {
 
     private long backKeyPressedTime = 0;
     private Toast toast;
+
+    // 사용자가 앱을 통해 앨범에 접근할 수 있도록 권한 설정
     String permission_list [] = {Manifest.permission.READ_EXTERNAL_STORAGE};
 
     @Override
@@ -39,9 +41,13 @@ public class MainActivity extends AppCompatActivity {
         ItemSelectedListener listener = new ItemSelectedListener();
         navView.setOnNavigationItemSelectedListener(listener);
 
+        // 사용자에게 권한 허가를 받는 함수
         checkPermission();
+
+        // 푸시알림을 위해 사용자의 토큰을 서버에 저장
         registerPushToken();
 
+        // 처음 MainActivity로 이동했을 때, HomeFragment가 보이게 한다.
         HomeFragment homeFragment = new HomeFragment();
         FragmentManager manager = getSupportFragmentManager();
         FragmentTransaction tran = manager.beginTransaction();
@@ -51,6 +57,8 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed(){
+
+        // 버튼을 2초 이내, 두번 눌러야 앱이 종료
         if (System.currentTimeMillis() > backKeyPressedTime + 2000) {
             backKeyPressedTime = System.currentTimeMillis();
             toast = Toast.makeText(this, "\'뒤로\' 버튼을 한번 더 누르시면 종료됩니다.", Toast.LENGTH_SHORT);
@@ -70,6 +78,7 @@ public class MainActivity extends AppCompatActivity {
         public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
             int id = menuItem.getItemId();
 
+            // BottomNavigationView의 하단 버튼을 누를 때 마다 화면 이동을 지정
             switch(id){
                 case R.id.navigation_home :
                     HomeFragment homeFragment = new HomeFragment();
@@ -104,6 +113,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    // 사용자에게 권한 허가를 받는 함수
     public void checkPermission(){
         if(Build.VERSION.SDK_INT < Build.VERSION_CODES.M){
             return;
@@ -118,6 +128,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    // 푸시알림을 위해 사용자의 토큰을 서버에 저장
     public void registerPushToken(){
         String pushToken = FirebaseInstanceId.getInstance().getToken();
         String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
