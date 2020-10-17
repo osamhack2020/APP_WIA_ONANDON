@@ -78,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
                 final ArrayList<Vacation> selectedVacation = new ArrayList<>();
                 for(int i=0; i<mArrayList.size(); i++) {
                     for(int j=0; j<dayList.size(); j++) {
-                        if (!mArrayList.get(i).getDates().contains(dayList.get(j))) {
+                        if (mArrayList.get(i).getDates().contains(dayList.get(j)) && !selectedVacation.contains(mArrayList.get(i))) {
                             selectedVacation.add(mArrayList.get(i));
                         }
                     }
