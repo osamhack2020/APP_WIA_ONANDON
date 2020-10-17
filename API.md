@@ -57,6 +57,9 @@ public class ClubDTO {
     public int isPhoto=0; // 사진 업로드 유무
 }
 ```
+ClubDTO 객체에는 동아리 게시판에서 열람할 수 있는 각 부대별 동아리 페이지들의 정보가 저장됩니다.
+kind 변수에는 동아리의 성향, 분야를 나타내는 해시태그 정보가 저장되며, questionCount 변수에는
+동아리 페이지에 게시된 질문 글의 수가 저장됩니다.
 
 
 ### firebase를 활용한 DB와 서버 구축
