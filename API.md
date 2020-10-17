@@ -22,3 +22,16 @@ Question.java  | 동아리 페이지의 질문 글 정보가 담기는 객체
 TagDTO.java  | 각 글의 해시태그 정보가 담기는 객체
 UserDTO.java  | 사용자 정보가 담기는 객체
 
+```java
+public class BoardDTO {
+    public String manager="";
+    public String name="";
+    public String explain="";
+    public long timestamp=0;
+} 
+```
+
+
+### firebase를 활용한 DB와 서버 구축
+
+
