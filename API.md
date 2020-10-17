@@ -107,7 +107,17 @@ kind 변수에는 동아리의 성향과 분야를 나타내는 해시태그 정
 이렇게 저장된 동아리 정보들은 동아리 페이지의 '동아리 설명'란에 기재되어, 사용자들로 하여금 부대 내 동아리를
 쉽게 접할 수 있도록 합니다.
 
-####
+#### Question.java
+
+```java
+public class QuestionDTO {
+    public String uid=""; // 질문 글을 올린 사용자의 Uid
+    public String explain=""; // 질문 글 내용
+    public String answer=""; // 질문 글 답변 내용
+    public int isAnswer=0; // 답변 유무
+    public long timestamp = 0; // 질문 글 업로드 된 시기
+}
+```
 
 
 ### firebase를 활용한 DB와 서버 구축
