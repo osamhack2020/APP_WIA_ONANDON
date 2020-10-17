@@ -25,6 +25,22 @@ TagDTO.java  | 각 글의 해시태그 정보가 담기는 객체
 .
 
 
+#### UserDTO.java
+
+```java
+public class UserDTO {
+    public String uid=""; // 사용자 고유 Uid
+    public String name=""; // 사용자 이름
+    public String army=""; // 사용자의 소속 군
+    public String budae=""; // 사용자의 자대
+    public String rank=""; // 사용자의 계급
+    public String speciality=""; // 사용자의 특기
+}
+```
+UserDTO 클래스에는 사용자의 정보가 저장됩니다. uid 변수에는 firebase에서 랜덤으로 생성한 사용자의
+고유 Id가 저장되며, name 변수에는 사용자의 이름이, army 변수에는 사용자의 소속 군이 저장됩니다.
+이외에도 사용자의 자대, 계급, 특기 등이 저장됩니다.
+
 #### BoardDTO.java
 
 ```java
