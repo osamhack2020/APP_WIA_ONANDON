@@ -16,6 +16,7 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -86,7 +87,9 @@ public class MainActivity extends AppCompatActivity {
                 }
                 AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(MainActivity.this);
                 final LinearLayout layout = new LinearLayout(MainActivity.this);
-                layout.getLayoutParams().width = 200;
+                ViewGroup.LayoutParams layoutParams = layout.getLayoutParams();
+                layoutParams.width = 400;
+                layout.setLayoutParams(layoutParams);
                 layout.setOrientation(LinearLayout.VERTICAL);
                 ArrayList<Button> buttons = new ArrayList<>();
                 for(int i=0; i<selectedVacation.size(); i++) {
