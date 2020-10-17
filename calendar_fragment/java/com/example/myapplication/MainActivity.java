@@ -87,9 +87,6 @@ public class MainActivity extends AppCompatActivity {
                 }
                 AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(MainActivity.this);
                 final LinearLayout layout = new LinearLayout(MainActivity.this);
-                ViewGroup.LayoutParams layoutParams = layout.getLayoutParams();
-                layoutParams.width = 400;
-                layout.setLayoutParams(layoutParams);
                 layout.setOrientation(LinearLayout.VERTICAL);
                 ArrayList<Button> buttons = new ArrayList<>();
                 for(int i=0; i<selectedVacation.size(); i++) {
@@ -134,6 +131,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 Button addButton = new Button(MainActivity.this);
                 addButton.setText("일정 추가");
+                addButton.setBackgroundColor(Color.TRANSPARENT);
                 layout.addView(addButton);
                 dialogBuilder.setView(layout);
                 AlertDialog dialog = dialogBuilder.create();
