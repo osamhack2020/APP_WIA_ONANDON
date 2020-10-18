@@ -353,4 +353,6 @@ collection | document | field
 |└| LaWhw7YaYG8ycpysdKO9  | PostDTO.java |
 |└| M1W2iWJPJ8zt9qVaFmIL  | PostDTO.java |
 
+위 표는 위에서 예시로 들었던 고민 게시판의 DB입니다. 고민 게시판의 고유 Id **0iqfcMLngZPEN9FqWxMtlqcTr5Q2**로 지정된
+collection은 각 게시물의 고유 Id로 지정된 하위 document로 이루어져 있으며, 각 document는 게시물 정보를 담고 있는 PostDTO객체와 연결되어 있습니다.
 
