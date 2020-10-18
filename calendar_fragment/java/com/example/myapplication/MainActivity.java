@@ -79,6 +79,8 @@ public class MainActivity extends AppCompatActivity {
         mCalendarView.setOnDateLongClickListener(new OnDateLongClickListener() {
             @Override
             public void onDateLongClick(@NonNull final MaterialCalendarView widget, @NonNull final CalendarDay date) {
+                if(widget.getSelectedDates().size() ==0)
+                    return;
                 List<CalendarDay> dayList = mCalendarView.getSelectedDates();
                 final ArrayList<Vacation> selectedVacation = new ArrayList<>();
                 final ArrayList<GeneralEvent> selectedEvent = new ArrayList<>();
@@ -160,9 +162,12 @@ public class MainActivity extends AppCompatActivity {
                                             layout.removeView(v);
                                             List<CalendarDay> dayList = mCalendarView.getSelectedDates();
                                             selectedEvent.get(finalI).getDates().removeAll(dayList);
+                                            if(selectedEvent.get(finalI).getDates().size() == 0) {
+                                                mCalendarView.removeDecorator(selectedEvent.get(finalI).getDecorator());
+                                                mEvents.remove(selectedEvent.get(finalI));
+                                            }
                                             mCalendarView.invalidateDecorators();
                                             mCalendarView.clearSelection();
-                                            mAdapter.notifyDataSetChanged();
                                         }
                                     });
                             builder.show();
@@ -198,7 +203,6 @@ public class MainActivity extends AppCompatActivity {
                                     GeneralEvent ge = new GeneralEvent(strName, dayList);
                                     mEvents.add(ge);
                                     mCalendarView.addDecorator(ge.getDecorator());
-                                    mCalendarView.clearSelection();
                                     dialog.dismiss();
                                     Button btn = new Button(MainActivity.this);
                                     btn.setText(strName);
@@ -221,12 +225,16 @@ public class MainActivity extends AppCompatActivity {
                                                             for(int i=0; i<mEvents.size(); i++) {
                                                                 if(mEvents.get(i).getName().equals(eventName)) {
                                                                     mEvents.get(i).getDates().removeAll(dayList);
+                                                                    if(mEvents.get(i).getDates().size() == 0) {
+                                                                        mCalendarView.removeDecorator(mEvents.get(i).getDecorator());
+                                                                        mEvents.remove(mEvents.get(i));
+                                                                        i--;
+                                                                    }
                                                                 }
                                                             }
                                                             layout.removeView(v);
                                                             mCalendarView.invalidateDecorators();
                                                             mCalendarView.clearSelection();
-                                                            mAdapter.notifyDataSetChanged();
                                                         }
                                                     });
                                             builder.show();
@@ -247,7 +255,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        mAdapter = new CustomAdapter(this, mArrayList, mCalendarView);
+        mAdapter = new CustomAdapter(this, mArrayList, mCalendarView, mEvents);
         mRecyclerView.setAdapter(mAdapter);
 
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(mRecyclerView.getContext(),

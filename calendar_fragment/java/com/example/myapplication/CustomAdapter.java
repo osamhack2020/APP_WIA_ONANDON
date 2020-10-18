@@ -23,11 +23,15 @@ import com.prolificinteractive.materialcalendarview.CalendarDay;
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomViewHolder> {
 
     private ArrayList<Vacation> mList;
+    private ArrayList<GeneralEvent> mEvents;
     private Context mContext;
     private MaterialCalendarView mCalendar;
 
@@ -115,6 +119,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
 
                         Vacation tmp = mList.get(getAdapterPosition());
                         tmp.getDates().clear();
+                        mCalendar.removeDecorator(tmp.getDecorator());
                         mList.remove(getAdapterPosition());
                         notifyItemRemoved(getAdapterPosition());
                         notifyItemRangeChanged(getAdapterPosition(), mList.size());
@@ -138,7 +143,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
                                 }
                             }
                         }
-                        if(left > 0 && usePeriod > 0 && !dupFlag) {
+                        if(left >= 0 && usePeriod > 0 && !dupFlag) {
                             vac.setPeriod(left);
                             for(int i=0; i<usePeriod; i++) {
                                 vac.getDates().add(dayList.get(i));
@@ -148,6 +153,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
                             mCalendar.invalidateDecorators();
                             mCalendar.clearSelection();
                         }
+                        /*
                         else if(left == 0 && usePeriod > 0 && !dupFlag) {
                             vac.setPeriod(left);
                             for(int i=0; i<usePeriod; i++) {
@@ -160,6 +166,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
                             mCalendar.invalidateDecorators();
                             mCalendar.clearSelection();
                         }
+                         */
                         else {
                             if(dupFlag) {
                                 Toast.makeText(mContext, "휴가 일정이 겹칩니다", Toast.LENGTH_LONG).show();
@@ -180,10 +187,37 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
         };
     }
 
-    public CustomAdapter(Context context, ArrayList<Vacation> list, MaterialCalendarView calendar) {
+    public CustomAdapter(Context context, ArrayList<Vacation> list, MaterialCalendarView calendar, ArrayList<GeneralEvent> eList) {
         this.mList = list;
         this.mContext = context;
         this.mCalendar = calendar;
+        this.mEvents = eList;
+    }
+
+    public HashMap<CalendarDay, ArrayList<GeneralEvent>> newMultiEventInfo() {
+        HashMap<CalendarDay, ArrayList<GeneralEvent>> hm = new HashMap<>();
+        HashMap<CalendarDay, ArrayList<GeneralEvent>> tmp = (HashMap<CalendarDay, ArrayList<GeneralEvent>>) hm.clone();
+        for(int i=0; i<mList.size(); i++) {
+            Set<CalendarDay> ds = mList.get(i).getDates();
+            for (CalendarDay nextKey : ds) {
+                hm.put(nextKey, new ArrayList<GeneralEvent>());
+                hm.get(nextKey).add(mList.get(i));
+            }
+        }
+        for(int i=0; i<mEvents.size(); i++) {
+            Set<CalendarDay> ds = mEvents.get(i).getDates();
+            Set<CalendarDay> ks = hm.keySet();
+            for (CalendarDay nextKey : ds) {
+                if (ks.contains(nextKey)) {
+                    hm.get(nextKey).add(mEvents.get(i));
+                }
+                else {
+                    hm.put(nextKey, new ArrayList<GeneralEvent>());
+                    hm.get(nextKey).add(mEvents.get(i));
+                }
+            }
+        }
+        return hm;
     }
 
     @Override
