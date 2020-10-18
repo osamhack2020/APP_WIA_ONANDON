@@ -348,7 +348,7 @@ Id를 예시로 들자면, 고민 게시판의 고유 Id '**0iqfcMLngZPEN9FqWxMt
 
 collection | document | field
 ------------ | ------------- | -------------
-|**0iqfcMLngZPEN9FqWxMtlqcTr5Q2** | 6PFPTRB2OCKlGfALE58A  | PostDTO.java|
+|**0iqfcMLngZPEN9FqWxMtlqcTr5Q2** | **6PFPTRB2OCKlGfALE58A**  | PostDTO.java|
 |└| DARToyKvC54PfU6onL8U   | PostDTO.java |
 |└| LaWhw7YaYG8ycpysdKO9  | PostDTO.java |
 |└| M1W2iWJPJ8zt9qVaFmIL  | PostDTO.java |
@@ -359,4 +359,11 @@ document를 이루고 있는 Id 하나는 고민 게시판에 업로드 된 게�
 
 게시판에 게시물이 업로드 되면, 게시물의 고유 Id로 지정된 collection이 만들어지며, 이 collection에는 게시물에 달린 댓글 데이터가 저장됩니다.
 아래의 표에서 그 예시를 볼 수 있습니다.
+
+collection | document | field
+------------ | ------------- | -------------
+|**6PFPTRB2OCKlGfALE58A** | i7Bz9XtaiTDSx4oRfgIL | CommentDTO.java|
+|└| k30wDOzIYUJ7Y4w6NvNn | CommentDTO.java |
+|└| CVug2OwhROhyskEN86Ca | CommentDTO.java |
+|└| KTSXBggtMBOXRymkwQfW  | CommentDTO.java |
 
