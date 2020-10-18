@@ -316,4 +316,11 @@ collection | document | field
  └| AVKFXfvtFJOWbHzcKDFfhjEAjVF3  | MyToken.java
  └| B756uS3DFOTeQlUg245r6ziClrm1 | MyToken.java
  └| BXhI5OaMsrNkH2RdmLvB43ntUOZ2 | MyToken.java
+ 
+ 사용자들의 토큰 정보는 'PushTokens' collection에 저장됩니다. PushTokens는 UserInfo와 마찬가지로, 사용자들의
+ 고유 Id로 지정된 하위 document들로 구성되어 있으며, 각 docuemt는 사용자들의 토큰 정보를 가지고 있는 MyToken.java와
+ 연결되어 있습니다.
+ 
+ 사용자의 고유 Id가 A라면, PushTokens 이름의 컬렉션에서 A 이름의 document를 불러와 MyToken.java 객체를
+ 추출하여 사용자 토큰 정보를 얻어 올 수 있습니다.
 
