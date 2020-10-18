@@ -28,7 +28,7 @@ public class GeneralEvent {
         return decorator;
     }
 
-    public GeneralEvent(String name, List<CalendarDay> dates) {
+    public GeneralEvent(String name, Collection<CalendarDay> dates) {
         this.name = name;
         this.dates = new HashSet<>(dates);
 
