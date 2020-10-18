@@ -327,8 +327,14 @@ collection | document | field
  
  collection | document | field
 ------------ | ------------- | -------------
-|교육사게시판 | <span style="color:red">0iqfcMLngZPEN9FqWxMtlqcTr5Q2</span> | MyToken.java|
+|교육사게시판 | **0iqfcMLngZPEN9FqWxMtlqcTr5Q2** | MyToken.java|
 |└| AVKFXfvtFJOWbHzcKDFfhjEAjVF3  | MyToken.java |
 |└| B756uS3DFOTeQlUg245r6ziClrm1 | MyToken.java |
 |└| BXhI5OaMsrNkH2RdmLvB43ntUOZ2 | MyToken.java |
+
+WIA는 각 부대별로 커뮤니티를 제공하기 때문에, 부대마다 사용하고 있는 게시판의 이름이 다를 수 있습니다.
+(부대이름)게시판 collection은 (부대이름)에 게설된 게시판 정보를 담고 있습니다. 위 표에서는 공군 '교육사'를 예시로,
+교육사 커뮤니티의 게시판 정보를 담고 있는 DB의 일부를 보여주고 있습니다.
+
+교육사 커뮤니티에 게시판을 게설하게 되면, 각 게시판은 고유 Id를 지정 받으며
 
