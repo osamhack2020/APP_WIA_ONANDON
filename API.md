@@ -290,6 +290,7 @@ TagDTO 객체에는 게시물에 달린 모든 해시태그 정보가 저장됩�
 
 ---
 ### 3. firebase를 활용한 DB와 서버 구축
+이 항목은 WIA에서 활용하고 있는 DB의 구조와, 자주 사용된 firebase 함수에 대해 다루고 있습니다.
 
 #### DB 구조
 
@@ -307,4 +308,12 @@ collection | document | field
  하위 document들로 구성되어 있으며, 각 document는 사용자 정보를 가지고 있는 UserDTO 객체와 연결되어 있습니다.
  이때, 사용자 계정의 고유 Id란, 사용자가 계정을 만들 때 firebase에서 랜덤으로 지정해 준 Id를 말합니다.
  
+* 푸시 투큰 정보 DB 'PushTokens'
+
+collection | document | field
+------------ | ------------- | -------------
+ PushTokens | 0iqfcMLngZPEN9FqWxMtlqcTr5Q2  | MyToken.java
+ └| AVKFXfvtFJOWbHzcKDFfhjEAjVF3  | MyToken.java
+ └| B756uS3DFOTeQlUg245r6ziClrm1 | MyToken.java
+ └| BXhI5OaMsrNkH2RdmLvB43ntUOZ2 | MyToken.java
 
