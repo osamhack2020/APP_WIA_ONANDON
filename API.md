@@ -294,6 +294,8 @@ TagDTO 객체에는 게시물에 달린 모든 해시태그 정보가 저장됩�
 #### DB 구조
 
 * 사용자 정보 DB 'UserInfo'
+
+
 collection | document | field
 ------------ | ------------- | -------------
  UserInfo | 0iqfcMLngZPEN9FqWxMtlqcTr5Q2  | UserDTO.java
@@ -301,5 +303,7 @@ collection | document | field
  └| B756uS3DFOTeQlUg245r6ziClrm1 | UserDTO.java
  └| BXhI5OaMsrNkH2RdmLvB43ntUOZ2 | UserDTO.java
  
+ 사용자 정보는 'UserInfo' collection에 저장됩니다. UserInfo는 사용자 계정의 고유 Id로 이름이 지정된
+ 하위 document들로 구성되어 있으며, 각 document는 사용자 정보를 가지고 있는 UserDTO 객체와 연결되어 있습니다.
  
 
