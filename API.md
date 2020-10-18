@@ -13,7 +13,7 @@ WIA는 안드로이드 스튜디오를 기반으로 개발되었으며, firebase
 **Backend**
 * 자바
 * firebase
-
+---
 #### 개발 환경
 
 ```gradle
