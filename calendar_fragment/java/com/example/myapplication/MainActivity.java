@@ -81,10 +81,18 @@ public class MainActivity extends AppCompatActivity {
             public void onDateLongClick(@NonNull final MaterialCalendarView widget, @NonNull final CalendarDay date) {
                 List<CalendarDay> dayList = mCalendarView.getSelectedDates();
                 final ArrayList<Vacation> selectedVacation = new ArrayList<>();
+                final ArrayList<GeneralEvent> selectedEvent = new ArrayList<>();
                 for(int i=0; i<mArrayList.size(); i++) {
                     for(int j=0; j<dayList.size(); j++) {
                         if (mArrayList.get(i).getDates().contains(dayList.get(j)) && !selectedVacation.contains(mArrayList.get(i))) {
                             selectedVacation.add(mArrayList.get(i));
+                        }
+                    }
+                }
+                for(int i=0; i<mEvents.size(); i++) {
+                    for(int j=0; j<dayList.size(); j++) {
+                        if (mEvents.get(i).getDates().contains(dayList.get(j)) && !selectedEvent.contains(mEvents.get(i))) {
+                            selectedEvent.add(mEvents.get(i));
                         }
                     }
                 }
@@ -131,6 +139,38 @@ public class MainActivity extends AppCompatActivity {
                     });
                     layout.addView(btn);
                 }
+                for(int i=0; i<selectedEvent.size(); i++) {
+                    Button btn = new Button(MainActivity.this);
+                    btn.setText(selectedEvent.get(i).getName());
+                    btn.setBackgroundColor(Color.TRANSPARENT);
+                    final int finalI = i;
+                    btn.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(final View v) {
+                            AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                            builder.setMessage("삭제하시겠습니까?");
+                            builder.setNegativeButton("아니오",
+                                    new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int which) {
+                                        }
+                                    });
+                            builder.setPositiveButton("예",
+                                    new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            layout.removeView(v);
+                                            List<CalendarDay> dayList = mCalendarView.getSelectedDates();
+                                            selectedEvent.get(finalI).getDates().removeAll(dayList);
+                                            mCalendarView.invalidateDecorators();
+                                            mCalendarView.clearSelection();
+                                            mAdapter.notifyDataSetChanged();
+                                        }
+                                    });
+                            builder.show();
+
+                        }
+                    });
+                    layout.addView(btn);
+                }
                 Button addButton = new Button(MainActivity.this);
                 addButton.setText("일정 추가");
                 addButton.setBackgroundColor(Color.TRANSPARENT);
@@ -158,6 +198,7 @@ public class MainActivity extends AppCompatActivity {
                                     GeneralEvent ge = new GeneralEvent(strName, dayList);
                                     mEvents.add(ge);
                                     mCalendarView.addDecorator(ge.getDecorator());
+                                    mCalendarView.clearSelection();
                                     dialog.dismiss();
                                     Button btn = new Button(MainActivity.this);
                                     btn.setText(strName);
@@ -175,12 +216,14 @@ public class MainActivity extends AppCompatActivity {
                                             builder.setPositiveButton("예",
                                                     new DialogInterface.OnClickListener() {
                                                         public void onClick(DialogInterface dialog, int which) {
-                                                            layout.removeView(v);
                                                             List<CalendarDay> dayList = mCalendarView.getSelectedDates();
-                                                            for(int i=0; i<dayList.size(); i++) {
-                                                                for(int j=0; j<mEvents.size(); j++) {
+                                                            String eventName = ((Button) v).getText().toString();
+                                                            for(int i=0; i<mEvents.size(); i++) {
+                                                                if(mEvents.get(i).getName().equals(eventName)) {
+                                                                    mEvents.get(i).getDates().removeAll(dayList);
                                                                 }
                                                             }
+                                                            layout.removeView(v);
                                                             mCalendarView.invalidateDecorators();
                                                             mCalendarView.clearSelection();
                                                             mAdapter.notifyDataSetChanged();
