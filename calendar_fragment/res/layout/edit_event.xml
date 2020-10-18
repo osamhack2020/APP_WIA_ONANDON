@@ -8,39 +8,15 @@
     android:orientation="vertical">
 
     <EditText
-        android:id="@+id/edittext_dialog_type"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:hint="휴가 종류(ex. 연가, 포상, 위로)"
-        android:inputType="text"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/edittext_dialog_name"/>
-
-    <EditText
         android:id="@+id/edittext_dialog_name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        android:hint="휴가 내용"
+        android:hint="내용"
         android:inputType="text"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/edittext_dialog_type"
-        app:layout_constraintBottom_toTopOf="@id/edittext_dialog_period"/>
-
-    <EditText
-        android:id="@+id/edittext_dialog_period"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:hint="휴가 일수"
-        android:inputType="text"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/edittext_dialog_name"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@id/button_dialog_submit"/>
 
     <Button
@@ -48,9 +24,9 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        android:text="수정"
+        android:text="추가"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edittext_dialog_period" />
+        app:layout_constraintTop_toBottomOf="@+id/edittext_dialog_name" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
