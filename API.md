@@ -367,3 +367,6 @@ collection | document | field
 |└| CVug2OwhROhyskEN86Ca | CommentDTO.java |
 |└| KTSXBggtMBOXRymkwQfW  | CommentDTO.java |
 
+위 표는 고민 게시판에 업로드 되었던 게시물 중 '**6PFPTRB2OCKlGfALE58A**' 아이디의 게시물 DB 입니다. 게시물의 고유 Id '**6PFPTRB2OCKlGfALE58A**'
+로 지정된 collection은 각 댓글의 고유 Id로 지정된 하위 document로 이루어져 있으며, 각 document는 댓글 정보를 담고 있는 commentDTO객체아 연결되어 있습니다.
+
