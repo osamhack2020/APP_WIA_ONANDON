@@ -37,16 +37,19 @@ implementation 'com.google.firebase:firebase-firestore:21.7.0'
 * firebase에서 제공하는 DB인 firestore 관련 라이브러리 입니다.
 * 리얼타임 데이터베이스를 제공합니다.
 
+
 ```gradle
 implementation 'com.google.firebase:firebase-auth:19.4.0'
 ```
 * 로그인, 로그아웃을 포함한 사용자 권한 기능을 제공하는 라이브러리 입니다.
+
 
 ```gradle
 implementation 'com.google.firebase:firebase-storage:19.2.0'
 ```
 * firebase에서 제공하는 저장소와 관련된 코드입니다.
 * 업로드 되는 사진 데이터들이 이 저장소에 저장됩니다.
+
 
 ```gradle
 implementation 'com.google.firebase:firebase-messaging:20.3.0'
