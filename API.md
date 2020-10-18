@@ -15,6 +15,8 @@ android {
 }
 ```
 
+#### 사용 라이브러리
+
 ```gradle
 dependencies {
     // ...
@@ -31,6 +33,8 @@ dependencies {
 }
 ```
 위 코드는 Wia 개발에 활용된 firebase 라이브러리를 모아놓은 코드입니다.
+
+##### 상세설명
 ```gradle
 implementation 'com.google.firebase:firebase-firestore:21.7.0'
 ```
