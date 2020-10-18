@@ -327,8 +327,8 @@ collection | document | field
  
  collection | document | field
 ------------ | ------------- | -------------
-교육사게시판 | <span style="color:red">0iqfcMLngZPEN9FqWxMtlqcTr5Q2</span> | MyToken.java
- └| AVKFXfvtFJOWbHzcKDFfhjEAjVF3  | MyToken.java
- └| B756uS3DFOTeQlUg245r6ziClrm1 | MyToken.java
- └| BXhI5OaMsrNkH2RdmLvB43ntUOZ2 | MyToken.java
+|교육사게시판 | <span style="color:red">0iqfcMLngZPEN9FqWxMtlqcTr5Q2</span> | MyToken.java|
+|└| AVKFXfvtFJOWbHzcKDFfhjEAjVF3  | MyToken.java |
+|└| B756uS3DFOTeQlUg245r6ziClrm1 | MyToken.java |
+|└| BXhI5OaMsrNkH2RdmLvB43ntUOZ2 | MyToken.java |
 
