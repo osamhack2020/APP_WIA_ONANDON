@@ -320,7 +320,7 @@ collection | document | field
  고유 Id로 지정된 하위 document들로 구성되어 있으며, 각 docuemt는 사용자들의 토큰 정보를 가지고 있는 MyToken.java와
  연결되어 있습니다.
  
- 예시) 사용자의 고유 Id가 A라면, PushTokens 이름의 컬렉션에서 A 이름의 document를 불러와 MyToken.java 객체를
+ **예시)** 사용자의 고유 Id가 A라면, PushTokens 이름의 컬렉션에서 A 이름의 document를 불러와 MyToken.java 객체를
  추출하여 사용자 토큰 정보를 얻어 올 수 있습니다.
  
  * 부대 게시판 DB '(부대이름)게시판'
@@ -340,10 +340,10 @@ WIA는 각 부대별로 커뮤니티를 제공하기 때문에, 부대마다 사
 각 document는 BoardDTO 객체와 연결되어 있습니다. document를 이루고 있는 고유 Id 하나는 교육사 커뮤니티에 개설된
 게시판 하나를 의미합니다.
 
-예시) 교육사 커뮤니티에 '고민 게시판'이 게설되었다면, 고민 게시판은 firebase로부터 고유 Id를 부여받습니다. 위 표에서 bold체로 적혀 있는
-Id를 예시로 들자면, 고민 게시판의 고유 Id **0iqfcMLngZPEN9FqWxMtlqcTr5Q2**로 지정된 document가 고민 게시판의 정보를 담고 있습니다.
+**예시)** 교육사 커뮤니티에 '고민 게시판'이 게설되었다면, 고민 게시판은 firebase로부터 고유 Id를 부여받습니다. 위 표에서 bold체로 적혀 있는
+Id를 예시로 들자면, 고민 게시판의 고유 Id '**0iqfcMLngZPEN9FqWxMtlqcTr5Q2**'로 지정된 document가 고민 게시판의 정보를 담고 있습니다.
 
-게시판이 게설되면 각 게시판의 고유 Id로 지정된 collection이 만들어지며, 이 collection에는 각 게시판에 업로드 된 게시물 데이터가 업로드 됩니다.
+게시판이 게설되면 각 게시판의 고유 Id로 지정된 collection이 만들어지며, 이 collection에는 각 게시판에 업로드 된 게시물 데이터가 저장됩니다.
 아래의 표에서 그 예시를 볼 수 있습니다.
 
 collection | document | field
@@ -353,6 +353,10 @@ collection | document | field
 |└| LaWhw7YaYG8ycpysdKO9  | PostDTO.java |
 |└| M1W2iWJPJ8zt9qVaFmIL  | PostDTO.java |
 
-위 표는 위에서 예시로 들었던 고민 게시판의 DB입니다. 고민 게시판의 고유 Id **0iqfcMLngZPEN9FqWxMtlqcTr5Q2**로 지정된
+위 표는 위에서 예시로 들었던 고민 게시판의 DB입니다. 고민 게시판의 고유 Id '**0iqfcMLngZPEN9FqWxMtlqcTr5Q2**'로 지정된
 collection은 각 게시물의 고유 Id로 지정된 하위 document로 이루어져 있으며, 각 document는 게시물 정보를 담고 있는 PostDTO객체와 연결되어 있습니다.
+document를 이루고 있는 Id 하나는 고민 게시판에 업로드 된 게시물 하나를 의미합니다.
+
+게시판에 게시물이 업로드 되면, 게시물의 고유 Id로 지정된 collection이 만들어지며, 이 collection에는 게시물에 달린 댓글 데이터가 저장됩니다.
+아래의 표에서 그 예시를 볼 수 있습니다.
 
