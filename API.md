@@ -296,7 +296,6 @@ TagDTO 객체에는 게시물에 달린 모든 해시태그 정보가 저장됩�
 
 * 사용자 정보 DB 'UserInfo'
 
-
 collection | document | field
 ------------ | ------------- | -------------
  UserInfo | 0iqfcMLngZPEN9FqWxMtlqcTr5Q2  | UserDTO.java
@@ -321,6 +320,15 @@ collection | document | field
  고유 Id로 지정된 하위 document들로 구성되어 있으며, 각 docuemt는 사용자들의 토큰 정보를 가지고 있는 MyToken.java와
  연결되어 있습니다.
  
- 사용자의 고유 Id가 A라면, PushTokens 이름의 컬렉션에서 A 이름의 document를 불러와 MyToken.java 객체를
+ 예시) 사용자의 고유 Id가 A라면, PushTokens 이름의 컬렉션에서 A 이름의 document를 불러와 MyToken.java 객체를
  추출하여 사용자 토큰 정보를 얻어 올 수 있습니다.
+ 
+ * 부대 게시판 DB '(부대이름)게시판'
+ 
+ collection | document | field
+------------ | ------------- | -------------
+교육사게시판 | <span style="color:red">0iqfcMLngZPEN9FqWxMtlqcTr5Q2</span> | MyToken.java
+ └| AVKFXfvtFJOWbHzcKDFfhjEAjVF3  | MyToken.java
+ └| B756uS3DFOTeQlUg245r6ziClrm1 | MyToken.java
+ └| BXhI5OaMsrNkH2RdmLvB43ntUOZ2 | MyToken.java
 
