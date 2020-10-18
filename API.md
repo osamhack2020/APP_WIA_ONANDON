@@ -376,4 +376,7 @@ collection | document | field
 ------------ | ------------- | -------------
 |**0iqfcMLngZPEN9FqWxMtlqcTr5Q2_tag**| tag | TagDTO.java|
 
+해시태그 DB는 게시판의 게시물들에 달린 모든 해시태그를 저장하고 있는 DB이며, 사용자가 해당 게시판에서 해시태그를 활용하여 특정 게시판을 검색할 때,
+활용됩니다. 위 표는 위 항목에서 예시로 들었던 고민게시판의 해시태그 DB이며, *(고민게시판의 고유 Id)_tag*로 collection의 이름이 지정됩니다. 이 DB는 'tag'라는 이름의
+document 하나로 이루어져 있으며, tagDTO 객체에 모든 해시태그 정보가 저장됩니다.
 
