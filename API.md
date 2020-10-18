@@ -305,5 +305,6 @@ collection | document | field
  
  사용자 정보는 'UserInfo' collection에 저장됩니다. UserInfo는 사용자 계정의 고유 Id로 이름이 지정된
  하위 document들로 구성되어 있으며, 각 document는 사용자 정보를 가지고 있는 UserDTO 객체와 연결되어 있습니다.
+ 이때, 사용자 계정의 고유 Id란, 사용자가 계정을 만들 때 firebase에서 랜덤으로 지정해 준 Id를 말합니다.
  
 
