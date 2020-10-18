@@ -7,12 +7,12 @@ WIA가 제공하는 서비스에 대한 구체적인 설명은 What_is_WIA.pdf�
 WIA는 안드로이드 스튜디오를 기반으로 개발되었으며, firebase를 활용하여 서버 및 DB를 구축하였습니다.
 
 #### 사용언어
-Frontend
+**Frontend**
 * 프론트엔드
 * XML
 
 
-Backend
+**Backend**
 * 자바
 * firebase
 
