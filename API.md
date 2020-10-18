@@ -291,10 +291,15 @@ TagDTO 객체에는 게시물에 달린 모든 해시태그 정보가 저장됩�
 ---
 ### 3. firebase를 활용한 DB와 서버 구축
 
+#### DB 구조
+
+* 사용자 정보 DB 'UserInfo'
 collection | document | field
 ------------ | ------------- | -------------
  UserInfo | 0iqfcMLngZPEN9FqWxMtlqcTr5Q2  | UserDTO.java
  └| AVKFXfvtFJOWbHzcKDFfhjEAjVF3  | UserDTO.java
  └| B756uS3DFOTeQlUg245r6ziClrm1 | UserDTO.java
  └| BXhI5OaMsrNkH2RdmLvB43ntUOZ2 | UserDTO.java
+ 
+ 
 
