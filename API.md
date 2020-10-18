@@ -323,7 +323,7 @@ collection | document | field
  **예시)** 사용자의 고유 Id가 A라면, PushTokens 이름의 컬렉션에서 A 이름의 document를 불러와 MyToken.java 객체를
  추출하여 사용자 토큰 정보를 얻어 올 수 있습니다.
  
- * 부대 게시판 DB '(부대이름)게시판'
+ * 부대 게시판 DB '*(부대이름)* 게시판'
  
  collection | document | field
 ------------ | ------------- | -------------
@@ -333,7 +333,7 @@ collection | document | field
 |└| BXhI5OaMsrNkH2RdmLvB43ntUOZ2 | BoardDTO.java |
 
 WIA는 각 부대별로 커뮤니티를 제공하기 때문에, 부대마다 사용하고 있는 게시판들의 이름이 다를 수 있습니다.
-(부대이름)게시판 collection은 (부대이름)에 게설된 게시판 정보를 담고 있습니다. 위 표에서는 공군 '교육사'를 예시로,
+*(부대이름)* 게시판 collection은 *(부대이름)* 에 게설된 게시판 정보를 담고 있습니다. 위 표에서는 공군 '교육사'를 예시로,
 교육사 커뮤니티의 게시판 정보를 담고 있는 DB의 일부를 보여주고 있습니다.
 
 표에서도 볼 수 있듯이, 교육사게시판 collection은 각 게시판의 고유 Id로 지정된 하위 document들로 이루어져 있으며,
@@ -370,3 +370,10 @@ collection | document | field
 위 표는 고민 게시판에 업로드 되었던 게시물 중 '**6PFPTRB2OCKlGfALE58A**' 아이디의 게시물 DB 입니다. 게시물의 고유 Id '**6PFPTRB2OCKlGfALE58A**'
 로 지정된 collection은 각 댓글의 고유 Id로 지정된 하위 document로 이루어져 있으며, 각 document는 댓글 정보를 담고 있는 commentDTO객체와 연결되어 있습니다.
 
+* 해시태그 DB '*(게시판 고유 Id)*_tag'
+collection | document | field
+------------ | ------------- | -------------
+|**6PFPTRB2OCKlGfALE58A** | i7Bz9XtaiTDSx4oRfgIL | CommentDTO.java|
+|└| k30wDOzIYUJ7Y4w6NvNn | CommentDTO.java |
+|└| CVug2OwhROhyskEN86Ca | CommentDTO.java |
+|└| KTSXBggtMBOXRymkwQfW  | CommentDTO.java |
