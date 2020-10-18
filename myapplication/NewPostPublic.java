@@ -19,11 +19,16 @@ import android.widget.Toast;
 
 import com.example.myapplication.Club.NewClubPost;
 import com.example.myapplication.model.PostDTO;
+import com.example.myapplication.model.TagDTO;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.Transaction;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -203,7 +208,57 @@ public class NewPostPublic extends AppCompatActivity {
         }
     }
 
-    public void storePost(PostDTO postDTO){
+    public void storePost(final PostDTO postDTO){
         firestore.collection(documentUid).document().set(postDTO);
+
+        final DocumentReference docRef = firestore.collection(documentUid+"_tag").document("tag");
+        firestore.runTransaction(new Transaction.Function<Void>() {
+            @Nullable
+            @Override
+            public Void apply(@NonNull Transaction transaction) throws FirebaseFirestoreException {
+                DocumentSnapshot snapshot = transaction.get(docRef);
+
+                if(snapshot.exists()) {
+                    TagDTO tagDTO = snapshot.toObject(TagDTO.class);
+
+                    if (postDTO.kind.containsKey("first")) {
+                        String first = postDTO.kind.get("first");
+                        if (!tagDTO.tag.contains(first)) {
+                            tagDTO.tag.add(first);
+                        }
+                    }
+                    if (postDTO.kind.containsKey("second")) {
+                        String second = postDTO.kind.get("second");
+                        if (!tagDTO.tag.contains(second)) {
+                            tagDTO.tag.add(second);
+                        }
+                    }
+                    if (postDTO.kind.containsKey("third")) {
+                        String third = postDTO.kind.get("third");
+                        if (!tagDTO.tag.contains(third)) {
+                            tagDTO.tag.add(third);
+                        }
+                    }
+                    transaction.set(docRef, tagDTO);
+                }
+                else{
+                    TagDTO tagDTO = new TagDTO();
+                    if (postDTO.kind.containsKey("first")) {
+                        String first = postDTO.kind.get("first");
+                        tagDTO.tag.add(first);
+                    }
+                    if (postDTO.kind.containsKey("second")) {
+                        String second = postDTO.kind.get("second");
+                        tagDTO.tag.add(second);
+                    }
+                    if (postDTO.kind.containsKey("third")) {
+                        String third = postDTO.kind.get("third");
+                        tagDTO.tag.add(third);
+                    }
+                    transaction.set(docRef, tagDTO);
+                }
+                return null;
+            }
+        });
     }
 }

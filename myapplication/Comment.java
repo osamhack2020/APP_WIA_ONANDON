@@ -65,6 +65,10 @@ public class Comment extends Fragment {
         // 해당 게시물이 업로드 된 게시판의 고유 ID
         collection = getArguments().getString("collection");
 
+        if(manager != null && user.getUid().equals(manager)){
+            managerDelete = 1;
+        }
+
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.comment_recyclerview);
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
         recyclerView.setAdapter(new DetailRecyclerViewAdapter());
@@ -127,9 +131,8 @@ public class Comment extends Fragment {
                 binding.commentExplain.setText(commentDTOs.get(position).comment);
 
                 // 현 사용자가 게시판의 관리자인 경우, 댓글 칸에 '관리자' 표시가 뜨도록 설정.
-                if(manager != null && user.getUid().equals(manager)){
+                if(manager != null && commentDTOs.get(position).uid.equals(manager)){
                     binding.commentUser.setText("관리자");
-                    managerDelete = 1;
                 }
                 else {
                     // 일반 사용자인 경우, 사용자의 정보가 간략하게 표시된다.
@@ -188,13 +191,26 @@ public class Comment extends Fragment {
                                         }
                                     });
                                 }
-                                else if(manager != null){
+                                else{
                                     // 게시물이 업로드 된 게시판이 '동아리 게시판'일 경우
 
                                     // 관리자 정보를 넘겨주는 게시판은 '동아리 게시판' 밖에 없으므로,
                                     // manager 변수에 저장된 정보의 유무에 따라 '동아리 게시판'에 업로드 된 게시물들을 분류해 낸다.
                                     // 예) manager 변수가 null 값이면 관리자 정보가 넘어 오지 않았다는 의미이므로, '동아리 게시판'의 게시물이 아님.
-                                    firestore.collection(collection).document(documentUid).update("commentCount", FieldValue.increment(-1));
+                                    // 댓글이 게시되면 게시물의 댓글 수를 1 증가시킨 후, 서버 정보를 업데이트 시킨다.
+                                    final DocumentReference docRef = firestore.collection(collection).document(documentUid);
+                                    firestore.runTransaction(new Transaction.Function<Void>() {
+                                        @Nullable
+                                        @Override
+                                        public Void apply(@NonNull Transaction transaction) throws FirebaseFirestoreException {
+                                            DocumentSnapshot snapshot = transaction.get(docRef);
+                                            PostDTO postDTO = snapshot.toObject(PostDTO.class);
+                                            postDTO.commentCount = postDTO.commentCount-1;
+
+                                            transaction.set(docRef, postDTO);
+                                            return null;
+                                        }
+                                    });
                                 }
                             }
                         }
