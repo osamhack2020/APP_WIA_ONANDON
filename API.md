@@ -341,4 +341,16 @@ WIA는 각 부대별로 커뮤니티를 제공하기 때문에, 부대마다 사
 게시판 하나를 의미합니다.
 
 예시) 교육사 커뮤니티에 '고민 게시판'이 게설되었다면, 고민 게시판은 firebase로부터 고유 Id를 부여받습니다. 위 표에서 bold체로 적혀 있는
-Id를 예시로 들자면, 고민 게시판의 고유 Id 0iqfcMLngZPEN9FqWxMtlqcTr5Q2로 지정된 document가 고민 게시판의 정보를 담고 있습니다.
+Id를 예시로 들자면, 고민 게시판의 고유 Id **0iqfcMLngZPEN9FqWxMtlqcTr5Q2**로 지정된 document가 고민 게시판의 정보를 담고 있습니다.
+
+게시판이 게설되면 각 게시판의 고유 Id로 지정된 collection이 만들어지며, 이 collection에는 각 게시판에 업로드 된 게시물 데이터가 업로드 됩니다.
+아래의 표에서 그 예시를 볼 수 있습니다.
+
+collection | document | field
+------------ | ------------- | -------------
+|**0iqfcMLngZPEN9FqWxMtlqcTr5Q2** | 6PFPTRB2OCKlGfALE58A  | PostDTO.java|
+|└| DARToyKvC54PfU6onL8U   | PostDTO.java |
+|└| LaWhw7YaYG8ycpysdKO9  | PostDTO.java |
+|└| M1W2iWJPJ8zt9qVaFmIL  | PostDTO.java |
+
+
