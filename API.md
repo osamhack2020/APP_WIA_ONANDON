@@ -78,7 +78,25 @@ implementation 'com.google.firebase:firebase-analytics:17.5.0'
 * 사용자 데이터 분석에 관한 라이브러리 입니다.
 * firebase는 위 라이브러리를 활용하여 사용자 데이터를 분석한 뒤, 분석 결과를 firebase 계정을 통해 보여줍니다.
 
+##### 그외 라이브러리
+```gradle
+implementation 'com.squareup.okhttp3:okhttp:3.10.0'
+implementation 'com.google.code.gson:gson:2.8.6'
+```
+* HTTP 통신을 위해 선언된 라이브러리 입니다.
+* 특정 기기에 푸시 알림을 보낼 때 사용됩니다.
 
+```gradle
+implementation 'com.github.bumptech.glide:glide:4.9.0'
+```
+* glide 함수를 위한 라이브러리입니다.
+* 서버에서 사진 데이터를 가져와 사용자에게 보여주는 기능을 위해 사용됩니다.
+
+```gradle
+implementation 'androidx.recyclerview:recyclerview:1.1.0'
+```
+* 리사이클러뷰를 위한 라이브러리 입니다.
+---
 ### 2. 데이터 모델
 이 항목은 WIA가 firestore에 데이터를 저장하고 읽어오면서 사용하는 객체 데이터 모델에 대해 다루고 있습니다.
 
