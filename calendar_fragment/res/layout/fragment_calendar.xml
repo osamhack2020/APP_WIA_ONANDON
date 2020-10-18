@@ -17,22 +17,12 @@
         app:layout_constraintRight_toRightOf="parent">
 
         <ImageButton
-            android:id="@+id/button_add_vacation"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            android:background="@android:color/transparent"
-            app:srcCompat="@android:drawable/ic_menu_add" />
-
-        <ImageButton
             android:id="@+id/button_friend"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintRight_toLeftOf="@+id/button_add_vacation"
+            app:layout_constraintRight_toRightOf="parent"
             android:background="@android:color/transparent"
             app:srcCompat="@android:drawable/ic_menu_my_calendar" />
 
