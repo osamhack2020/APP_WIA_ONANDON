@@ -34,6 +34,7 @@ dependencies {
 
 implementation 'com.google.firebase:firebase-firestore:21.7.0'
 * firebase에서 제공하는 DB인 firestore 관련 라이브러리 입니다.
+* 리얼타임 데이터베이스를 제공합니다.
 
 
 ### 2. 데이터 모델
