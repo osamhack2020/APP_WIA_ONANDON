@@ -37,6 +37,29 @@ implementation 'com.google.firebase:firebase-firestore:21.7.0'
 * firebase에서 제공하는 DB인 firestore 관련 라이브러리 입니다.
 * 리얼타임 데이터베이스를 제공합니다.
 
+```gradle
+implementation 'com.google.firebase:firebase-auth:19.4.0'
+```
+* 로그인, 로그아웃을 포함한 사용자 권한 기능을 제공하는 라이브러리 입니다.
+
+```gradle
+implementation 'com.google.firebase:firebase-storage:19.2.0'
+```
+* firebase에서 제공하는 저장소와 관련된 코드입니다.
+* 업로드 되는 사진 데이터들이 이 저장소에 저장됩니다.
+
+```gradle
+implementation 'com.google.firebase:firebase-messaging:20.3.0'
+```
+* 푸시 알림 관련 라이브러리입니다.
+
+
+```gradle
+implementation 'com.google.firebase:firebase-analytics:17.5.0'
+```
+* 사용자 데이터 분석에 관한 라이브러리 입니다.
+* firebase는 위 라이브러리를 활용하여 사용자 데이터를 분석한 뒤, 분석 결과를 firebase 계정을 통해 보여줍니다.
+
 
 ### 2. 데이터 모델
 이 항목은 WIA가 firestore에 데이터를 저장하고 읽어오면서 사용하는 객체 데이터 모델에 대해 다루고 있습니다.
