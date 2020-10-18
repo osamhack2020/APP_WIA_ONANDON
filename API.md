@@ -293,8 +293,8 @@ TagDTO 객체에는 게시물에 달린 모든 해시태그 정보가 저장됩�
 
 collection | document | field
 ------------ | ------------- | -------------
- UserInfo | 사용자 정보가 담기는 객체 | UserDTO.java
- ┗| 사용자 토큰이 저장되는 객체 | UserDTO.java
- ┗| 푸시 알림 정보가 담기는 객체 | UserDTO.java
- ┗| 사용자가 게시판을 추가할 때, 게시판 정보가 담기는 객체 | UserDTO.java
+ UserInfo | 0iqfcMLngZPEN9FqWxMtlqcTr5Q2  | UserDTO.java
+ └| AVKFXfvtFJOWbHzcKDFfhjEAjVF3  | UserDTO.java
+ └| B756uS3DFOTeQlUg245r6ziClrm1 | UserDTO.java
+ └| BXhI5OaMsrNkH2RdmLvB43ntUOZ2 | UserDTO.java
 
