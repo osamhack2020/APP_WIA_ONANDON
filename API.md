@@ -15,6 +15,22 @@ android {
 }
 ```
 
+```gradle
+dependencies {
+    // ...
+    
+    // firebase 라이브러리
+    implementation 'com.google.firebase:firebase-analytics:17.5.0'
+    implementation 'com.google.firebase:firebase-core:17.5.0'
+    implementation 'com.google.firebase:firebase-auth:19.4.0'
+    implementation 'com.google.firebase:firebase-firestore:21.7.0'
+    implementation 'com.google.firebase:firebase-storage:19.2.0'
+    implementation 'com.google.firebase:firebase-messaging:20.3.0'
+    
+    // ...
+}
+```
+
 ### 2. 데이터 모델
 이 항목은 WIA가 firestore에 데이터를 저장하고 읽어오면서 사용하는 객체 데이터 모델에 대해 다루고 있습니다.
 
