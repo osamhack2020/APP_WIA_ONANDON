@@ -31,8 +31,9 @@ dependencies {
 }
 ```
 위 코드는 Wia 개발에 활용된 firebase 라이브러리를 모아놓은 코드입니다.
-
+```gradle
 implementation 'com.google.firebase:firebase-firestore:21.7.0'
+```
 * firebase에서 제공하는 DB인 firestore 관련 라이브러리 입니다.
 * 리얼타임 데이터베이스를 제공합니다.
 
