@@ -294,7 +294,7 @@ TagDTO 객체에는 게시물에 달린 모든 해시태그 정보가 저장됩�
 
 #### DB 구조
 
-* 사용자 정보 DB 'UserInfo'
+##### 사용자 정보 DB 'UserInfo'
 
 collection | document | field
 ------------ | ------------- | -------------
