@@ -100,6 +100,10 @@ implementation 'androidx.recyclerview:recyclerview:1.1.0'
 ## 2. 데이터 모델
 이 항목은 WIA가 firestore에 데이터를 저장하고 읽어오면서 사용하는 객체 데이터 모델에 대해 다루고 있습니다.
 
+<details>
+<summary>접기/펼치기 버튼</summary>
+<div markdown="1">
+
 WIA는 다음과 같은 총 10개의 객체 데이터 모델을 사용하고 있습니다.
 
 
@@ -286,7 +290,8 @@ public class TagDTO {
 TagDTO 객체에는 게시물에 달린 모든 해시태그 정보가 저장됩니다. WIA는 게시물에 달린 해시태그를 활용하여,
 원하는 게시물을 검색할 수 있는 기능을 제공하고 있는 데, tag 변수에 저장된 해시 태그 배열은 이러한 검색 과정에서 활용됩니다.
 
-.
+</div>
+</details>
 
 ---
 ## 3. firebase를 활용한 DB와 서버 구축
