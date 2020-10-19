@@ -387,3 +387,7 @@ collection | document | field
 |교육사동아리| cvUZhpXRLwKT8bRHO2CX | ClubDTO.java|
 |└| hC17nTAGgtAxKWIIbcvo | ClubDTO.java|
 
+동아리 DB는 각 부대에 게설된 동아리 정보를 저장합니다. '*(부대이름)* 동아리'라는 이름으로 지정된 collection은 각 동아리의 고유 Id로 지정된 하위 document들로 구성되어 있으며, 각 document들은 동아리 정보를 담고 있는 ClubDTO.java 객체로 이루어져 있습니다.
+
+**예시)** 위 표를 예시로 들자면, 교육사 동아리를 정보를 담고 있는 '교육사동아리' collection은 총 2개의 하위 document로 이루어져 있으며 이는 교육사에 총 2개의 동아리가 개설되었음을 의미합니다.
+
