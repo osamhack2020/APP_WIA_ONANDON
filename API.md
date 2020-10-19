@@ -424,6 +424,9 @@ WIA는 firebase에서 제공하는 여러 함수를 활용하여 DB와 서버 �
 
 
 #### 데이터 가져오기
+<details>
+<summary>접기/펼치기 버튼</summary>
+<div markdown="1">
 
 ```java
  firestore.collection(/* collection 이름 */).document(/* document 이름 */).get()
@@ -468,18 +471,8 @@ firestore.collection(/* collection 이름 */).document(/* document 이름 */)
                         }
                     });
 ```
-
-
-
-<details>
-<summary>접기/펼치기 버튼</summary>
-<div markdown="1">
-
-|제목|내용|
-|--|--|
-|1|1|
-|2|10|
-
 </div>
 </details>
+
+
 
