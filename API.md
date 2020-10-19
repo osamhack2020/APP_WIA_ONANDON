@@ -421,6 +421,17 @@ collection | document | field
 WIA는 firebase에서 제공하는 여러 함수를 활용하여 DB와 서버 기능을 제공하고 있습니다. 이 항목은 WIA의 개발에 자주 사용되었던 firebase 함수를 다루고 있습니다.
 
 
+#### 데이터 가져오기
+
+```java
+ firestore.collection(/* collection 이름 */).document(/* document 이름 */).get()
+                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        //...
+                    }
+                });
+```
 
 
 
