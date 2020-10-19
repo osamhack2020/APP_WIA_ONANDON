@@ -384,7 +384,7 @@ document 하나로 이루어져 있으며, tagDTO 객체에 모든 해시태그 
 
 collection | document | field
 ------------ | ------------- | -------------
-|교육사동아리| cvUZhpXRLwKT8bRHO2CX | ClubDTO.java|
+|교육사동아리| **cvUZhpXRLwKT8bRHO2CX** | ClubDTO.java|
 |└| hC17nTAGgtAxKWIIbcvo | ClubDTO.java|
 
 동아리 DB는 각 부대에 게설된 동아리 정보를 저장합니다. '*(부대이름)* 동아리'라는 이름으로 지정된 collection은 각 동아리의 고유 Id로 지정된 하위 document들로 구성되어 있으며, 각 document들은 동아리 정보를 담고 있는 ClubDTO.java 객체로 이루어져 있습니다. 부대 내 동아리가 게설되면, 게설된 동아리는 firebase로 부터 고유 Id를 부여받으며, 이 Id로 지정된 하위 document가 '*(부대이름)* 동아리' collection에 추가됩니다.
@@ -392,4 +392,14 @@ collection | document | field
 **예시)** 위 표를 예시로 들자면, 교육사에 게설된 동아리 정보를 담고 있는 '교육사동아리' collection은 총 2개의 하위 document로 이루어져 있으며 이는 교육사에 총 2개의 동아리가 개설되었음을 의미합니다.
 
 #### 동아리의 질문글 DB '*(동아리의 고유 Id)*_question'
+
+collection | document | field
+------------ | ------------- | -------------
+|**cvUZhpXRLwKT8bRHO2CX_question**| BZyYwYOgA99c9Ks5ZyTe  | QuestionDTO.java|
+|└| S3fTOgita8aPTNUGfntO  | QuestionDTO.java|
+|└| 6DAqzDdlhkQeWtTxsbor  | QuestionDTO.java|
+
+
+
+
 
