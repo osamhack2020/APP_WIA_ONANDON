@@ -435,4 +435,19 @@ WIA는 firebase에서 제공하는 여러 함수를 활용하여 DB와 서버 �
 
 해당 collection의 하위 document에 저장되어 있는 데이터를 가져오는 함수입니다. 가져오기가 성공하면 documentSnaphot 변수에서 데이터를 추출해 낼 수 있습니다.
 
+```java
+final DocumentReference docRef = firestore.collection("MyGoal").document(intentDocument);
+                firestore.runTransaction(new Transaction.Function<Void>() {
+                    @Nullable
+                    @Override
+                    public Void apply(@NonNull Transaction transaction) throws FirebaseFirestoreException {
+                        DocumentSnapshot snapshot = transaction.get(docRef);
+                        MyGoalContentDTO myGoalContentDTO = snapshot.toObject(MyGoalContentDTO.class);
+                        myGoalContentDTO.commentCount = myGoalContentDTO.commentCount+1;
+
+                        transaction.set(docRef, myGoalContentDTO);
+                        return null;
+                    }
+                });
+```
 
