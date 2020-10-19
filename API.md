@@ -535,6 +535,34 @@ firestore.collection(/* collection 이름 */).document(/* document 이름 */)
 </div>
 </details>
 
+#### 2. 데이터 
+
+<details>
+<summary>접기/펼치기 버튼</summary>
+<div markdown="1">
+   
+```java
+firestore.collection(/* collection 이름 */).document(/* document 이름 */).set(/* 데이터 */)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        // 데이터 저장에 성공했을 때
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        // 데이터 저장에 실패했을 때
+                    }
+                });
+                    
+```
+
+
+   
+</div>
+</details>  
+
 </div>
 </details>
 
