@@ -414,5 +414,13 @@ collection | document | field
 
 **예시)** 교육사 동아리에 게설된 축구동아리가 **cvUZhpXRLwKT8bRHO2CX**를 고유 Id로 지정받았다고 가정해 봅시다. 축구 동아리가 게설되는 순간 **cvUZhpXRLwKT8bRHO2CX_question**으로 지정된 collection이 선언되며, 이 colleciton에는 질문글 데이터가 저장됩니다. 위 표에서 축구동아리에 업로드 된 질문글의 개수가 3개임을 알 수 있습니다.
 
+---
+
+### 서버와 DB 구축
+
+WIA는 firebase에서 제공하는 여러 함수를 활용하여 DB와 서버 기능을 제공하고 있습니다. 이 항목은 WIA의 개발에 자주 사용되었던 firebase 함수를 다루고 있습니다.
+
+---
+
 
 
