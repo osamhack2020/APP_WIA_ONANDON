@@ -514,6 +514,7 @@ firestore.runTransaction(new Transaction.Function<Void>() {
 ```
 
 데이터를 가져오는 함수이지만, 첫 번째 함수와는 달리 데이터에 대한 사용자들의 중복 접근을 방지하는 함수입니다. Firebase가 제공하는 NoSQL 데이터베이스는 중복 입력에 대한 보호막이 존재하지 않아, 댓글 갯수 카운트 혹은 좋아요 수 카운트 기능을 구현할 시, 갯수가 중복으로 카운트 되는 경우가 발생합니다. 이러한 상황을 방지하기 위해 runTransaction() 함수를 사용합니다.
+DocumentSnapshot 객체 변수 snapshot에서 데이터를 추출할 수 있습니다.
 
 ```java
 firestore.collection(/* collection 이름 */).document(/* document 이름 */)
@@ -528,7 +529,8 @@ firestore.collection(/* collection 이름 */).document(/* document 이름 */)
                     });
 ```
 앞의 두 함수는 pull driven 형식의 서비스를 제공했던 반면, 바로 위의 함수 'addSnapshotListener()' 함수는 push driven 형식의 서비스를 제공합니다.
-서버에서 데이터가 변형되거나 업데이트 될 때마다 실시간으로 동기화하여, 데이터의 변화를 사용자에게 보여줍니다.
+서버에서 데이터가 변형되거나 업데이트 될 때마다 실시간으로 동기화하여, 데이터의 변화를 사용자에게 보여줍니다. QuerySnapshot 객체 변수인 value에서 
+데이터를 추출할 수 있습니다.
 
 ---
 
