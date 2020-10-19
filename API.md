@@ -6,11 +6,7 @@ WIA가 제공하는 서비스에 대한 구체적인 설명은 What_is_WIA.pdf�
 ## 1. 개발 환경 및 사용 라이브러리
 WIA는 안드로이드 스튜디오를 기반으로 개발되었으며, firebase를 활용하여 서버 및 DB를 구축하였습니다.
 
-<details>
-<summary>접기/펼치기 버튼</summary>
-<div markdown="1">
-
-### 1) 사용언어
+   ### 1) 사용언어
 
 <details>
 <summary>접기/펼치기 버튼</summary>
@@ -135,9 +131,6 @@ implementation 'androidx.recyclerview:recyclerview:1.1.0'
 </div>
 </details>
 
-
-</div>
-</details>
 
 ## 2. 데이터 모델
 이 항목은 WIA가 firestore에 데이터를 저장하고 읽어오면서 사용하는 객체 데이터 모델에 대해 다루고 있습니다.
