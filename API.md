@@ -409,7 +409,10 @@ collection | document | field
 |└| S3fTOgita8aPTNUGfntO  | QuestionDTO.java|
 |└| 6DAqzDdlhkQeWtTxsbor  | QuestionDTO.java|
 
-동아리 질문 글 DB는 각 동아리 페이지에 업로드 된 질문글 데이터를 저장하고 있는 DB입니다. '*(동아리의 고유 Id)* _question'으로 컬렉션이 지정되며, 
+동아리 질문 글 DB는 각 동아리 페이지에 업로드 된 질문글 데이터를 저장하고 있는 DB입니다. '*(동아리의 고유 Id)* _question'으로 컬렉션이 지정되며, 각 컬렉션은 질문글의
+고유 Id로 지정된 하위 document들로 구성되어 있습니다. 각 document는 질문 글 정보를 저장하고 있는 QuestionDTO 객체와 연결되어 있습니다.
+
+**예시)** 교육사 동아리에 게설된 축구동아리가 **cvUZhpXRLwKT8bRHO2CX**를 고유 Id로 지정받았다고 가정해 봅시다. 축구 동아리가 게설되는 순간 **cvUZhpXRLwKT8bRHO2CX_question**으로 지정된 collection이 선언되며, 이 colleciton에는 질문글 데이터가 저장됩니다. 위 표에서 축구동아리에 업로드 된 질문글의 개수가 3개임을 알 수 있습니다.
 
 
 
