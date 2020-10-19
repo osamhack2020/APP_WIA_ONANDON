@@ -18,10 +18,11 @@ WIA는 안드로이드 스튜디오를 기반으로 개발되었으며, firebase
 **Backend**
 * 자바
 * firebase
----
 
 </div>
 </details>
+
+---
 
 ### 2) 개발 환경
 
@@ -103,12 +104,14 @@ implementation 'com.google.firebase:firebase-analytics:17.5.0'
 </div>
 </details>
 
+---
     
 #### 그외 라이브러리
 
 <details>
 <summary>접기/펼치기 버튼</summary>
 <div markdown="1">
+   
 ```gradle
 implementation 'com.squareup.okhttp3:okhttp:3.10.0'
 implementation 'com.google.code.gson:gson:2.8.6'
@@ -126,10 +129,11 @@ implementation 'com.github.bumptech.glide:glide:4.9.0'
 implementation 'androidx.recyclerview:recyclerview:1.1.0'
 ```
 * 리사이클러뷰를 위한 라이브러리 입니다.
----
 
 </div>
 </details>
+
+---
 
 
 ## 2. 데이터 모델
