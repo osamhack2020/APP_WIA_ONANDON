@@ -535,7 +535,7 @@ firestore.collection(/* collection 이름 */).document(/* document 이름 */)
 </div>
 </details>
 
-#### 2. 데이터 
+#### 2. 데이터 쓰기 
 
 <details>
 <summary>접기/펼치기 버튼</summary>
@@ -557,9 +557,10 @@ firestore.collection(/* collection 이름 */).document(/* document 이름 */).se
                 });
                     
 ```
+서버에 데이터를 입력하는 함수이며, set()부분에 입력할 데이터 변수가 삽입됩니다.
 
-
-   
+---
+ 
 </div>
 </details>  
 
