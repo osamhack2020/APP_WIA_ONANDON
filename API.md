@@ -6,6 +6,10 @@ WIA가 제공하는 서비스에 대한 구체적인 설명은 What_is_WIA.pdf�
 ## 1. 개발 환경 및 사용 라이브러리
 WIA는 안드로이드 스튜디오를 기반으로 개발되었으며, firebase를 활용하여 서버 및 DB를 구축하였습니다.
 
+<details>
+<summary>접기/펼치기 버튼</summary>
+<div markdown="1">
+
 ### 사용언어
 **Frontend**
 * XML
@@ -28,6 +32,10 @@ android {
 ---
 ### 사용 라이브러리
 
+<details>
+<summary>접기/펼치기 버튼</summary>
+<div markdown="1">
+
 ```gradle
 dependencies {
     // ...
@@ -45,7 +53,7 @@ dependencies {
 ```
 위 코드는 Wia 개발에 활용된 firebase 라이브러리를 모아놓은 코드입니다.
 
-##### 상세설명
+#### 상세설명
 ```gradle
 implementation 'com.google.firebase:firebase-firestore:21.7.0'
 ```
@@ -78,7 +86,15 @@ implementation 'com.google.firebase:firebase-analytics:17.5.0'
 * 사용자 데이터 분석에 관한 라이브러리 입니다.
 * firebase는 위 라이브러리를 활용하여 사용자 데이터를 분석한 뒤, 분석 결과를 firebase 계정을 통해 보여줍니다.
 
+</div>
+</details>
+
+    
 #### 그외 라이브러리
+
+<details>
+<summary>접기/펼치기 버튼</summary>
+<div markdown="1">
 ```gradle
 implementation 'com.squareup.okhttp3:okhttp:3.10.0'
 implementation 'com.google.code.gson:gson:2.8.6'
@@ -97,6 +113,14 @@ implementation 'androidx.recyclerview:recyclerview:1.1.0'
 ```
 * 리사이클러뷰를 위한 라이브러리 입니다.
 ---
+
+</div>
+</details>
+
+
+</div>
+</details>
+
 ## 2. 데이터 모델
 이 항목은 WIA가 firestore에 데이터를 저장하고 읽어오면서 사용하는 객체 데이터 모델에 대해 다루고 있습니다.
 
@@ -299,7 +323,7 @@ TagDTO 객체에는 게시물에 달린 모든 해시태그 정보가 저장됩�
 
 이 항목은 WIA에서 활용하고 있는 DB의 구조와, 자주 사용된 firebase 함수에 대해 다루고 있습니다.
 
-### *DB 구조
+### * DB 구조
 
 <details>
 <summary>접기/펼치기 버튼</summary>
@@ -432,7 +456,7 @@ collection | document | field
 </div>
 </details>
 
-### *서버와 DB 구축
+### * 서버와 DB 구축
 
 <details>
 <summary>접기/펼치기 버튼</summary>
