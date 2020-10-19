@@ -10,7 +10,7 @@ WIA는 안드로이드 스튜디오를 기반으로 개발되었으며, firebase
 <summary>접기/펼치기 버튼</summary>
 <div markdown="1">
 
-### 사용언어
+### 1) 사용언어
 
 <details>
 <summary>접기/펼치기 버튼</summary>
@@ -27,7 +27,7 @@ WIA는 안드로이드 스튜디오를 기반으로 개발되었으며, firebase
 </div>
 </details>
 
-### 개발 환경
+### 2) 개발 환경
 
 <details>
 <summary>접기/펼치기 버튼</summary>
@@ -47,7 +47,7 @@ android {
 </div>
 </details>
 
-### 사용 라이브러리
+### 3) 사용 라이브러리
 
 <details>
 <summary>접기/펼치기 버튼</summary>
@@ -71,6 +71,7 @@ dependencies {
 위 코드는 Wia 개발에 활용된 firebase 라이브러리를 모아놓은 코드입니다.
 
 #### 상세설명
+
 ```gradle
 implementation 'com.google.firebase:firebase-firestore:21.7.0'
 ```
@@ -340,7 +341,7 @@ TagDTO 객체에는 게시물에 달린 모든 해시태그 정보가 저장됩�
 
 이 항목은 WIA에서 활용하고 있는 DB의 구조와, 자주 사용된 firebase 함수에 대해 다루고 있습니다.
 
-### DB 구조
+### 1) DB 구조
 
 <details>
 <summary>접기/펼치기 버튼</summary>
@@ -473,7 +474,7 @@ collection | document | field
 </div>
 </details>
 
-### 서버와 DB 구축
+### 2) 서버와 DB 구축
 
 <details>
 <summary>접기/펼치기 버튼</summary>
