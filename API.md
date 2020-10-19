@@ -307,6 +307,8 @@ collection | document | field
  하위 document들로 구성되어 있으며, 각 document는 사용자 정보를 가지고 있는 UserDTO 객체와 연결되어 있습니다.
  이때, 사용자 계정의 고유 Id란, 사용자가 계정을 만들 때 firebase에서 랜덤으로 지정해 준 Id를 말합니다.
  
+ ---
+ 
 #### 푸시 투큰 정보 DB 'PushTokens'
 
 collection | document | field
@@ -322,6 +324,8 @@ collection | document | field
  
  **예시)** 사용자의 고유 Id가 A라면, PushTokens 이름의 컬렉션에서 A 이름의 document를 불러와 MyToken.java 객체를
  추출하여 사용자 토큰 정보를 얻어 올 수 있습니다.
+ 
+  ---
  
  #### 부대 게시판 DB '*(부대이름)* 게시판'
  
@@ -370,6 +374,8 @@ collection | document | field
 위 표는 고민 게시판에 업로드 되었던 게시물 중 '**6PFPTRB2OCKlGfALE58A**' 아이디의 게시물 DB 입니다. 게시물의 고유 Id '**6PFPTRB2OCKlGfALE58A**'
 로 지정된 collection은 각 댓글의 고유 Id로 지정된 하위 document로 이루어져 있으며, 각 document는 댓글 정보를 담고 있는 commentDTO객체와 연결되어 있습니다.
 
+ ---
+
 #### 해시태그 DB '*(게시판 고유 Id)*_tag'
 
 collection | document | field
@@ -379,6 +385,8 @@ collection | document | field
 해시태그 DB는 게시판의 게시물들에 달린 모든 해시태그를 저장하고 있는 DB이며, 사용자가 해당 게시판에서 해시태그를 활용하여 특정 게시물을 검색할 때,
 활용됩니다. 위 표는 위 항목에서 예시로 들었던 고민게시판의 해시태그 DB이며, *(고민게시판의 고유 Id)_tag*로 collection의 이름이 지정됩니다. 이 DB는 'tag'라는 이름의
 document 하나로 이루어져 있으며, tagDTO 객체에 모든 해시태그 정보가 저장됩니다. 게시판이 새로 생성되면, 해당 게시판의 해시태그 DB도 함께 생성됩니다.
+
+ ---
 
 #### 동아리 DB '*(부대이름)* 동아리'
 
@@ -390,6 +398,8 @@ collection | document | field
 동아리 DB는 각 부대에 게설된 동아리 정보를 저장합니다. '*(부대이름)* 동아리'라는 이름으로 지정된 collection은 각 동아리의 고유 Id로 지정된 하위 document들로 구성되어 있으며, 각 document들은 동아리 정보를 담고 있는 ClubDTO.java 객체로 이루어져 있습니다. 부대 내 동아리가 게설되면, 게설된 동아리는 firebase로 부터 고유 Id를 부여받으며, 이 Id로 지정된 하위 document가 '*(부대이름)* 동아리' collection에 추가됩니다.
 
 **예시)** 위 표를 예시로 들자면, 교육사에 게설된 동아리 정보를 담고 있는 '교육사동아리' collection은 총 2개의 하위 document로 이루어져 있으며 이는 교육사에 총 2개의 동아리가 개설되었음을 의미합니다.
+
+ ---
 
 #### 동아리의 질문글 DB '*(동아리의 고유 Id)*_question'
 
