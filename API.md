@@ -19,10 +19,10 @@ WIA는 안드로이드 스튜디오를 기반으로 개발되었으며, firebase
 * 자바
 * firebase
 
+---
+
 </div>
 </details>
-
----
 
 ### 2) 개발 환경
 
@@ -101,10 +101,10 @@ implementation 'com.google.firebase:firebase-analytics:17.5.0'
 * 사용자 데이터 분석에 관한 라이브러리 입니다.
 * firebase는 위 라이브러리를 활용하여 사용자 데이터를 분석한 뒤, 분석 결과를 firebase 계정을 통해 보여줍니다.
 
+---
+
 </div>
 </details>
-
----
     
 #### 그외 라이브러리
 
@@ -130,10 +130,10 @@ implementation 'androidx.recyclerview:recyclerview:1.1.0'
 ```
 * 리사이클러뷰를 위한 라이브러리 입니다.
 
+---
+
 </div>
 </details>
-
----
 
 
 ## 2. 데이터 모델
