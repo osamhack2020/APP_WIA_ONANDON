@@ -382,3 +382,8 @@ document 하나로 이루어져 있으며, tagDTO 객체에 모든 해시태그 
 
 * 동아리 DB '*(부대이름)* 동아리'
 
+collection | document | field
+------------ | ------------- | -------------
+|교육사동아리| cvUZhpXRLwKT8bRHO2CX | ClubDTO.java|
+|└| hC17nTAGgtAxKWIIbcvo | ClubDTO.java|
+
