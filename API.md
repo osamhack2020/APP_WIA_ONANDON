@@ -290,11 +290,12 @@ TagDTO 객체에는 게시물에 달린 모든 해시태그 정보가 저장됩�
 
 ---
 ## 3. firebase를 활용한 DB와 서버 구축
+
+이 항목은 WIA에서 활용하고 있는 DB의 구조와, 자주 사용된 firebase 함수에 대해 다루고 있습니다.
+
 <details>
 <summary>접기/펼치기 버튼</summary>
 <div markdown="1">
-이 항목은 WIA에서 활용하고 있는 DB의 구조와, 자주 사용된 firebase 함수에 대해 다루고 있습니다.
-
 ### DB 구조
 
 firebase는 기본적으로 NoSQL 구조의 데이터베이스를 지원하며, WIA 또한 같은 형식의 데이터베이스로 서비스르 제공합니다.
