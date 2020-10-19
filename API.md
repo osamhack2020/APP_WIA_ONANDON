@@ -6,7 +6,7 @@ WIA가 제공하는 서비스에 대한 구체적인 설명은 What_is_WIA.pdf�
 ## 1. 개발 환경 및 사용 라이브러리
 WIA는 안드로이드 스튜디오를 기반으로 개발되었으며, firebase를 활용하여 서버 및 DB를 구축하였습니다.
 
-#### 사용언어
+### 사용언어
 **Frontend**
 * XML
 
@@ -14,7 +14,7 @@ WIA는 안드로이드 스튜디오를 기반으로 개발되었으며, firebase
 * 자바
 * firebase
 ---
-#### 개발 환경
+### 개발 환경
 
 ```gradle
 android {
@@ -26,7 +26,7 @@ android {
 ```
 
 ---
-#### 사용 라이브러리
+### 사용 라이브러리
 
 ```gradle
 dependencies {
@@ -78,7 +78,7 @@ implementation 'com.google.firebase:firebase-analytics:17.5.0'
 * 사용자 데이터 분석에 관한 라이브러리 입니다.
 * firebase는 위 라이브러리를 활용하여 사용자 데이터를 분석한 뒤, 분석 결과를 firebase 계정을 통해 보여줍니다.
 
-##### 그외 라이브러리
+#### 그외 라이브러리
 ```gradle
 implementation 'com.squareup.okhttp3:okhttp:3.10.0'
 implementation 'com.google.code.gson:gson:2.8.6'
