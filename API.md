@@ -290,6 +290,9 @@ TagDTO 객체에는 게시물에 달린 모든 해시태그 정보가 저장됩�
 
 ---
 ## 3. firebase를 활용한 DB와 서버 구축
+<details>
+<summary>접기/펼치기 버튼</summary>
+<div markdown="1">
 이 항목은 WIA에서 활용하고 있는 DB의 구조와, 자주 사용된 firebase 함수에 대해 다루고 있습니다.
 
 ### DB 구조
@@ -418,6 +421,9 @@ collection | document | field
 
 ---
 
+</div>
+</details>
+
 ### 서버와 DB 구축
 
 <details>
@@ -426,7 +432,7 @@ collection | document | field
 WIA는 firebase에서 제공하는 여러 함수를 활용하여 DB와 서버 기능을 제공하고 있습니다. 이 항목은 WIA의 개발에 자주 사용되었던 firebase 함수를 다루고 있습니다.
 
 
-#### 데이터 가져오기
+#### 1. 데이터 가져오기
 <details>
 <summary>접기/펼치기 버튼</summary>
 <div markdown="1">
