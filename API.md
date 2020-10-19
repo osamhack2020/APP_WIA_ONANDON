@@ -294,6 +294,8 @@ TagDTO 객체에는 게시물에 달린 모든 해시태그 정보가 저장됩�
 
 ### DB 구조
 
+firebase는 기본적으로 NoSQL 구조의 데이터베이스를 지원합니다.
+
 #### 사용자 정보 DB 'UserInfo'
 
 collection | document | field
