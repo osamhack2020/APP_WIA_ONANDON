@@ -454,5 +454,18 @@ firestore.runTransaction(new Transaction.Function<Void>() {
                 });               
 ```
 
-데이터를 가져오는 함수이지만, 첫 번째 함수와는 달리 데이터에 대한 사용자들의 중복 접근을 방지하는 함수입니다. Firebase가 제공하는 NoSQL 데이터베이스는 중복 입력에 대한 보호막이 존재하지 않아, 댓글 갯수 카운트 혹은 좋아요 수 카운트 기능을 구현할 시, 갯수가 중복으로 카운트 되는 경우가 발생합니다. 이러한 상황을 방지하기 위해 runTransaction() 함수를 활용합니다.
+데이터를 가져오는 함수이지만, 첫 번째 함수와는 달리 데이터에 대한 사용자들의 중복 접근을 방지하는 함수입니다. Firebase가 제공하는 NoSQL 데이터베이스는 중복 입력에 대한 보호막이 존재하지 않아, 댓글 갯수 카운트 혹은 좋아요 수 카운트 기능을 구현할 시, 갯수가 중복으로 카운트 되는 경우가 발생합니다. 이러한 상황을 방지하기 위해 runTransaction() 함수를 사용합니다.
+
+```java
+firestore.collection(/* collection 이름 */).document(/* document 이름 */)
+                    .addSnapshotListener(new EventListener<QuerySnapshot>() {
+                        @Override
+                        public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+
+                            // ...
+
+                            notifyDataSetChanged();
+                        }
+                    });
+```
 
