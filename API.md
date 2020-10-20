@@ -609,10 +609,24 @@ firestore.collection(/* collection 이름 */).document(/* document 이름 */).up
 
 위 함수는 사용자의 계정을 생성해 주는 함수입니다. 함수의 인수에 사용자의 이메일과 비밀번호를 매개변수로 넣어주면 함수가 firebase와 통신하며
 사용자의 계정을 생성합니다.
-   
+
+---
    
 </div>
 </details> 
+
+#### 4. 참고 문헌
+
+<details>
+<summary>접기/펼치기 버튼</summary>
+<div markdown="1">
+
+이 항목은 WIA를 개발하면서 참고하였던 firebase 개발 문서 링크를 다루고 있으며, 아래 링크들을 통해 firebase 함수의 활용을 더욱 심화적으로
+알 수 있습니다.
+
+
+</div>
+</details>
 
 </div>
 </details>
