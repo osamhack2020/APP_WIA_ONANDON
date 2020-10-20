@@ -624,6 +624,11 @@ firestore.collection(/* collection 이름 */).document(/* document 이름 */).up
 이 항목은 WIA를 개발하면서 참고하였던 firebase 개발 문서 링크를 다루고 있으며, 아래 링크들을 통해 firebase 함수의 활용을 더욱 심화적으로
 알 수 있습니다.
 
+[Cloud Firestore로 데이터 가져오기](https://firebase.google.com/docs/firestore/query-data/get-data?hl=ko#%EC%9E%90%EB%B0%94)
+
+
+---
+
 
 </div>
 </details>
