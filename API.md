@@ -626,6 +626,8 @@ firestore.collection(/* collection 이름 */).document(/* document 이름 */).up
 
 [Cloud Firestore로 데이터 가져오기](https://firebase.google.com/docs/firestore/query-data/get-data?hl=ko#%EC%9E%90%EB%B0%94)
 
+[Cloud Firestore에 데이터 쓰기](https://firebase.google.com/docs/firestore/manage-data/add-data?hl=ko)
+
 
 ---
 
