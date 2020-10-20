@@ -631,6 +631,7 @@ firestore.collection(/* collection 이름 */).document(/* document 이름 */).up
 [트랜잭션 및 일괄 쓰기](https://firebase.google.com/docs/firestore/manage-data/transactions?hl=ko#%EC%9E%90%EB%B0%94_4)  
 [Cloud Firestore에서 단순 쿼리 및 복합 쿼리 실행](https://firebase.google.com/docs/firestore/query-data/queries?hl=ko)  
 [Cloud Firestore의 색인 유형](https://firebase.google.com/docs/firestore/query-data/index-overview?hl=ko)  
+[Cloud Firestore에서 데이터 삭제](https://firebase.google.com/docs/firestore/manage-data/delete-data?hl=ko)
 
 [Android에서 Firebase 인증 시작하기](https://firebase.google.com/docs/auth/android/start)  
 [Firebase에서 사용자 관리하기](https://firebase.google.com/docs/auth/android/manage-users)  
@@ -639,9 +640,9 @@ firestore.collection(/* collection 이름 */).document(/* document 이름 */).up
 [Android에서 스토리지 참조 만들기](https://firebase.google.com/docs/storage/android/create-reference)  
 [Android에서 파일 업로드](https://firebase.google.com/docs/storage/android/upload-files)  
 [Android에서 파일 다운로드](https://firebase.google.com/docs/storage/android/download-files)  
+[Android에서 파일 삭제](https://firebase.google.com/docs/storage/android/delete-files)
 
 ---
-
 
 </div>
 </details>
