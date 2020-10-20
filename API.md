@@ -471,7 +471,7 @@ collection | document | field
 </div>
 </details>
 
-### 2) 서버와 DB 구축
+### 2) 함수
 
 <details>
 <summary>접기/펼치기 버튼</summary>
