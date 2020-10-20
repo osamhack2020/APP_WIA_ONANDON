@@ -561,10 +561,58 @@ firestore.collection(/* collection 이름 */).document(/* document 이름 */).se
 ```
 서버에 데이터를 입력하는 함수이며, set()부분에 입력할 데이터 변수가 삽입됩니다.
 
+```java
+firestore.collection(/* collection 이름 */).document(/* document 이름 */).update("/* field 이름 */", /* 입력할 데이터 */)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        // 데이터 저장에 성공했을 때
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        // 데이터 저장에 실패했을 때
+                    }
+                });                 
+```
+
+서버에 저장되어 있는 데이터 모델의 필드 값 중 일부만 수정하고 싶은 경우, 위 코드와 같이 update 함수를 사용하여 수정할 수 있습니다.
+
 ---
  
 </div>
-</details>  
+</details> 
+
+#### 3. 계정 관련 기능
+
+<details>
+<summary>접기/펼치기 버튼</summary>
+<div markdown="1">
+
+```java
+ FirebaseAuth auth = FirebaseAuth.getInstance();
+
+ auth.createUserWithEmailAndPassword(/* 사용자 이메일 */, /* 사용자 비밀번호 */)
+                .addOnCompleteListener(MakeAccount.this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if(task.isSuccessful()){
+                            // 성공 했을 때
+                        }
+                        else{
+                            // 실패 했을 때
+                        }
+                    }
+                });
+```
+
+위 함수는 사용자의 계정을 생성해 주는 함수입니다. 함수의 인수에 사용자의 이메일과 비밀번호를 매개변수로 넣어주면 함수가 firebase와 통신하며
+사용자의 계정을 생성합니다.
+   
+   
+</div>
+</details> 
 
 </div>
 </details>
