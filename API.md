@@ -625,8 +625,12 @@ firestore.collection(/* collection 이름 */).document(/* document 이름 */).up
 알 수 있습니다.
 
 [Cloud Firestore로 데이터 가져오기](https://firebase.google.com/docs/firestore/query-data/get-data?hl=ko#%EC%9E%90%EB%B0%94)
-
 [Cloud Firestore에 데이터 쓰기](https://firebase.google.com/docs/firestore/manage-data/add-data?hl=ko)
+[Firestore로 실시간 업데이트 가져오기](https://firebase.google.com/docs/firestore/query-data/listen?hl=ko)
+[트랜잭션 및 일괄 쓰기](https://firebase.google.com/docs/firestore/manage-data/transactions?hl=ko#%EC%9E%90%EB%B0%94_4)
+[Cloud Firestore에서 단순 쿼리 및 복합 쿼리 실행](https://firebase.google.com/docs/firestore/query-data/queries?hl=ko)
+[Cloud Firestore의 색인 유형](https://firebase.google.com/docs/firestore/query-data/index-overview?hl=ko)
+
 
 
 ---
