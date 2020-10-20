@@ -632,13 +632,13 @@ firestore.collection(/* collection 이름 */).document(/* document 이름 */).up
 [Cloud Firestore에서 단순 쿼리 및 복합 쿼리 실행](https://firebase.google.com/docs/firestore/query-data/queries?hl=ko)  
 [Cloud Firestore의 색인 유형](https://firebase.google.com/docs/firestore/query-data/index-overview?hl=ko)  
 
-[Android에서 Firebase 인증 시작하기](https://firebase.google.com/docs/auth/android/start)
-[Firebase에서 사용자 관리하기](https://firebase.google.com/docs/auth/android/manage-users)
+[Android에서 Firebase 인증 시작하기](https://firebase.google.com/docs/auth/android/start)  
+[Firebase에서 사용자 관리하기](https://firebase.google.com/docs/auth/android/manage-users)  
 
-[Android에서 Cloud Storage 시작하기](https://firebase.google.com/docs/storage/android/start)
-[Android에서 스토리지 참조 만들기](https://firebase.google.com/docs/storage/android/create-reference)
-[Android에서 파일 업로드](https://firebase.google.com/docs/storage/android/upload-files)
-[Android에서 파일 다운로드](https://firebase.google.com/docs/storage/android/download-files)
+[Android에서 Cloud Storage 시작하기](https://firebase.google.com/docs/storage/android/start)  
+[Android에서 스토리지 참조 만들기](https://firebase.google.com/docs/storage/android/create-reference)  
+[Android에서 파일 업로드](https://firebase.google.com/docs/storage/android/upload-files)  
+[Android에서 파일 다운로드](https://firebase.google.com/docs/storage/android/download-files)  
 
 ---
 
