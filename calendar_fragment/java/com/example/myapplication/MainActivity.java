@@ -31,11 +31,17 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
+    // 휴가 객체를 모아둔 리스트
     private ArrayList<Vacation> mVacations;
+    // 일정 리스트 (기능 추가 예정)
     private ArrayList<GeneralEvent> mEvents;
+    // 휴가 RecyclerView를 위한 CustomAdapter
     private CustomAdapter mAdapter;
+    // 휴가 캘린더를 위한 MaterialCalendarView
     private MaterialCalendarView mCalendarView;
+    // 미리 등록된 더미 데이터
     private Vacation[] userVacationData = {new Vacation("연가", "연가", 24), new Vacation("위로", "신병위로", 4), new Vacation("위로", "수료식", 1)};
+    
     private AlertDialog listDialog = null;
 
     @Override
