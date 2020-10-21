@@ -26,10 +26,10 @@ import java.util.List;
 
 public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomViewHolder> {
 
-    private ArrayList<Vacation> mList;
+    private ArrayList<Vacation> mVacations;
     private ArrayList<GeneralEvent> mEvents;
     private Context mContext;
-    private MaterialCalendarView mCalendar;
+    private MaterialCalendarView mCalendarView;
 
     public class CustomViewHolder extends RecyclerView.ViewHolder
             implements View.OnCreateContextMenuListener {
@@ -76,9 +76,9 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
                         final EditText editTextPeriod = (EditText) view.findViewById(R.id.edittext_dialog_period);
 
                         final int apos = getAdapterPosition();
-                        editTextType.setText(mList.get(apos).getType());
-                        editTextName.setText(mList.get(apos).getName());
-                        editTextPeriod.setText(Integer.toString(mList.get(apos).getPeriod()));
+                        editTextType.setText(mVacations.get(apos).getType());
+                        editTextName.setText(mVacations.get(apos).getName());
+                        editTextPeriod.setText(Integer.toString(mVacations.get(apos).getPeriod()));
 
                         final AlertDialog dialog = builder.create();
                         buttonSubmit.setOnClickListener(new View.OnClickListener() {
@@ -94,9 +94,9 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
                                 }
 
                                 if (strPeriod > 0) {
-                                    mList.get(apos).setName(strName);
-                                    mList.get(apos).setType(strType);
-                                    mList.get(apos).setPeriod(strPeriod);
+                                    mVacations.get(apos).setName(strName);
+                                    mVacations.get(apos).setType(strType);
+                                    mVacations.get(apos).setPeriod(strPeriod);
                                     notifyItemChanged(apos);
                                 }
                                 else {
@@ -113,28 +113,28 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
 
                     case 1002:
 
-                        Vacation tmp = mList.get(getAdapterPosition());
+                        Vacation tmp = mVacations.get(getAdapterPosition());
                         tmp.getDates().clear();
-                        mCalendar.removeDecorator(tmp.getDecorator());
-                        mList.remove(getAdapterPosition());
+                        mCalendarView.removeDecorator(tmp.getDecorator());
+                        mVacations.remove(getAdapterPosition());
                         notifyItemRemoved(getAdapterPosition());
-                        notifyItemRangeChanged(getAdapterPosition(), mList.size());
-                        mCalendar.invalidateDecorators();
+                        notifyItemRangeChanged(getAdapterPosition(), mVacations.size());
+                        mCalendarView.invalidateDecorators();
 
                         break;
 
                     case 1003:
 
-                        List<CalendarDay> dayList = mCalendar.getSelectedDates();
+                        List<CalendarDay> dayList = mCalendarView.getSelectedDates();
                         int ap = getAdapterPosition();
-                        Vacation vac = mList.get(ap);
+                        Vacation vac = mVacations.get(ap);
                         int originalPeriod = vac.getPeriod();
                         int usePeriod = dayList.size();
                         int left = originalPeriod - usePeriod;
                         boolean dupFlag = false;
                         for(int i=0; i<usePeriod; i++) {
-                            for(int j=0; j<mList.size(); j++) {
-                                if(mList.get(j).getDates().contains(dayList.get(i))) {
+                            for(int j=0; j<mVacations.size(); j++) {
+                                if(mVacations.get(j).getDates().contains(dayList.get(i))) {
                                     dupFlag = true;
                                 }
                             }
@@ -146,8 +146,8 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
                             }
                             notifyItemChanged(ap);
 
-                            mCalendar.invalidateDecorators();
-                            mCalendar.clearSelection();
+                            mCalendarView.invalidateDecorators();
+                            mCalendarView.clearSelection();
                         }
                         else {
                             if(dupFlag) {
@@ -170,9 +170,9 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
     }
 
     public CustomAdapter(Context context, ArrayList<Vacation> list, MaterialCalendarView calendar, ArrayList<GeneralEvent> eList) {
-        this.mList = list;
+        this.mVacations = list;
         this.mContext = context;
-        this.mCalendar = calendar;
+        this.mCalendarView = calendar;
         this.mEvents = eList;
     }
 
@@ -198,14 +198,14 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
         viewholder.name.setGravity(Gravity.CENTER);
         viewholder.period.setGravity(Gravity.CENTER);
 
-        viewholder.type.setText(mList.get(position).getType());
-        viewholder.name.setText(mList.get(position).getName());
-        viewholder.period.setText(mList.get(position).getPeriod() + "일");
+        viewholder.type.setText(mVacations.get(position).getType());
+        viewholder.name.setText(mVacations.get(position).getName());
+        viewholder.period.setText(mVacations.get(position).getPeriod() + "일");
     }
 
     @Override
     public int getItemCount() {
-        return (null != mList ? mList.size() : 0);
+        return (null != mVacations ? mVacations.size() : 0);
     }
 
 }

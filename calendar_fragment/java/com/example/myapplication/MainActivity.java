@@ -31,11 +31,12 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    private ArrayList<Vacation> mArrayList;
+    private ArrayList<Vacation> mVacations;
     private ArrayList<GeneralEvent> mEvents;
     private CustomAdapter mAdapter;
     private MaterialCalendarView mCalendarView;
     private Vacation[] userVacationData = {new Vacation("연가", "연가", 24), new Vacation("위로", "신병위로", 4), new Vacation("위로", "수료식", 1)};
+    private AlertDialog listDialog = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,9 +51,9 @@ public class MainActivity extends AppCompatActivity {
         LinearLayoutManager mLinearLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLinearLayoutManager);
 
-        mArrayList = new ArrayList<>();
+        mVacations = new ArrayList<>();
         for(Vacation vac : userVacationData) {
-            mArrayList.add(0, vac);
+            mVacations.add(0, vac);
             mCalendarView.addDecorator(vac.getDecorator());
         }
 
@@ -64,23 +65,27 @@ public class MainActivity extends AppCompatActivity {
                 .setMaximumDate(CalendarDay.from(2030, 12, 31))
                 .setCalendarDisplayMode(CalendarMode.MONTHS)
                 .commit();
-        //Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_LONG);
 
         mCalendarView.setSelectionMode(MaterialCalendarView.SELECTION_MODE_RANGE);
-        //mCalendarView.setSelectionMode(MaterialCalendarView.SELECTION_MODE_MULTIPLE);
         mCalendarView.setSelectionColor(Color.parseColor("#B2D0FF"));
         mCalendarView.setOnDateLongClickListener(new OnDateLongClickListener() {
             @Override
             public void onDateLongClick(@NonNull final MaterialCalendarView widget, @NonNull final CalendarDay date) {
-                if(widget.getSelectedDates().size() ==0)
-                    return;
-                List<CalendarDay> dayList = mCalendarView.getSelectedDates();
+                List<CalendarDay> dayList;
+                if(widget.getSelectedDates().size() == 0) {
+                    dayList = new ArrayList<>();
+                    dayList.add(date);
+                    widget.setDateSelected(date, true);
+                }
+                else {
+                    dayList = mCalendarView.getSelectedDates();
+                }
                 final ArrayList<Vacation> selectedVacation = new ArrayList<>();
                 final ArrayList<GeneralEvent> selectedEvent = new ArrayList<>();
-                for(int i=0; i<mArrayList.size(); i++) {
+                for(int i=0; i<mVacations.size(); i++) {
                     for(int j=0; j<dayList.size(); j++) {
-                        if (mArrayList.get(i).getDates().contains(dayList.get(j)) && !selectedVacation.contains(mArrayList.get(i))) {
-                            selectedVacation.add(mArrayList.get(i));
+                        if (mVacations.get(i).getDates().contains(dayList.get(j)) && !selectedVacation.contains(mVacations.get(i))) {
+                            selectedVacation.add(mVacations.get(i));
                         }
                     }
                 }
@@ -91,10 +96,11 @@ public class MainActivity extends AppCompatActivity {
                         }
                     }
                 }
+                if(selectedVacation.size() == 0)
+                    return;
                 AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(MainActivity.this);
                 final LinearLayout layout = new LinearLayout(MainActivity.this);
                 layout.setOrientation(LinearLayout.VERTICAL);
-                ArrayList<Button> buttons = new ArrayList<>();
                 for(int i=0; i<selectedVacation.size(); i++) {
                     Button btn = new Button(MainActivity.this);
                     btn.setText(selectedVacation.get(i).getName());
@@ -113,7 +119,10 @@ public class MainActivity extends AppCompatActivity {
                             builder.setPositiveButton("예",
                                     new DialogInterface.OnClickListener() {
                                         public void onClick(DialogInterface dialog, int which) {
-                                            layout.removeView(v);
+                                            if(listDialog != null) {
+                                                if(listDialog.isShowing())
+                                                    listDialog.dismiss();
+                                            }
                                             List<CalendarDay> dayList = mCalendarView.getSelectedDates();
                                             for(int i=0; i<dayList.size(); i++) {
                                                 if(selectedVacation.get(finalI).getDates().contains(dayList.get(i))) {
@@ -121,8 +130,6 @@ public class MainActivity extends AppCompatActivity {
                                                     selectedVacation.get(finalI).setPeriod(selectedVacation.get(finalI).getPeriod() + 1);
                                                 }
                                             }
-                                            //selectedVacation.get(finalI).getDates().remove(date);
-                                            //selectedVacation.get(finalI).setPeriod(selectedVacation.get(finalI).getPeriod() + 1);
                                             mCalendarView.invalidateDecorators();
                                             mCalendarView.clearSelection();
                                             mAdapter.notifyDataSetChanged();
@@ -134,6 +141,7 @@ public class MainActivity extends AppCompatActivity {
                     });
                     layout.addView(btn);
                 }
+                /*
                 for(int i=0; i<selectedEvent.size(); i++) {
                     Button btn = new Button(MainActivity.this);
                     btn.setText(selectedEvent.get(i).getName());
@@ -242,13 +250,14 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
                 layout.addView(addButton);
+                 */
                 dialogBuilder.setView(layout);
-                AlertDialog listDialog = dialogBuilder.create();
+                listDialog = dialogBuilder.create();
                 listDialog.show();
             }
         });
 
-        mAdapter = new CustomAdapter(this, mArrayList, mCalendarView, mEvents);
+        mAdapter = new CustomAdapter(this, mVacations, mCalendarView, mEvents);
         mRecyclerView.setAdapter(mAdapter);
 
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(mRecyclerView.getContext(),
@@ -291,7 +300,7 @@ public class MainActivity extends AppCompatActivity {
                         if(!strType.equals("") && !strName.equals("") && strPeriod > 0) {
                             Vacation vac = new Vacation(strType, strName, strPeriod);
                             mCalendarView.addDecorator(vac.getDecorator());
-                            mArrayList.add(0, vac);
+                            mVacations.add(0, vac);
                             mAdapter.notifyItemInserted(0);
                             //mAdapter.notifyDataSetChanged();
                         }
