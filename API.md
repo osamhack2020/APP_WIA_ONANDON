@@ -648,12 +648,14 @@ getDownloadUrl() 함수를 사용하여 추출합니다.
 
 
 ```java
-StorageReference httpsReference = storage.getReferenceFromUrl(imageUri);
+StorageReference httpsReference = storage.getReferenceFromUrl(/*이미지의 다운로드 주소*/);
 httpsReference.delete();
 ```
 
 위 코드는 저장소에 저장된 이미지 파일을 삭제하는 코드입니다. StorageReference에 이미지를 다운로드 받을 수 있는 주소 데이터를 넣어 storage 참조를 선언한후,
 delete() 함수를 사용하여 이미지 파일을 삭제합니다.
+
+---
    
 </div>
 </details>
