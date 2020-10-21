@@ -620,6 +620,27 @@ firestore.collection(/* collection 이름 */).document(/* document 이름 */).up
 위 함수는 사용자의 계정을 생성해 주는 함수입니다. 함수의 인수에 사용자의 이메일과 비밀번호를 매개변수로 넣어주면 함수가 firebase와 통신하며
 사용자의 계정을 생성합니다.
 
+```java
+ FirebaseAuth auth = FirebaseAuth.getInstance();
+ 
+ auth.signInWithEmailAndPassword(email, password)
+        .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if (task.isSuccessful()) {
+                   // 성공했을 때...
+                } else {
+                    // 실패했을 떄...
+                }
+
+                // ...
+            }
+        });
+```
+
+위 함수는 로그인 기능을 구현하는 역할을 합니다. signInWithEmailAndPassword() 함수 내 매개변수로 사용자의 이메일 아이디와 비밀번호를 입력하면
+firebase가 서버에 저장된 계정 데이터와 대조하여 사용자를 로그인 시키거나, 접근 제한을 시킵니다.
+
 ---
    
 </div>
@@ -695,6 +716,7 @@ delete() 함수를 사용하여 이미지 파일을 삭제합니다.
 
 [Android에서 Firebase 인증 시작하기](https://firebase.google.com/docs/auth/android/start)  
 [Firebase에서 사용자 관리하기](https://firebase.google.com/docs/auth/android/manage-users)  
+[Android에서 비밀번호 기반 계정으로 Firebase에 인증](https://firebase.google.com/docs/auth/android/password-auth?hl=ko)
 
 [Android에서 Cloud Storage 시작하기](https://firebase.google.com/docs/storage/android/start)  
 [Android에서 스토리지 참조 만들기](https://firebase.google.com/docs/storage/android/create-reference)  
