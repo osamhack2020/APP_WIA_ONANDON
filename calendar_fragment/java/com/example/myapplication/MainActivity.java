@@ -313,6 +313,8 @@ public class MainActivity extends AppCompatActivity {
 
                         String strType = editTextType.getText().toString();
                         String strName = editTextName.getText().toString();
+
+                        // EditText에서 숫자 추출
                         int strPeriod = 0;
                         try {
                             strPeriod = Integer.parseInt(editTextPeriod.getText().toString().replaceAll("[^0-9]", ""));

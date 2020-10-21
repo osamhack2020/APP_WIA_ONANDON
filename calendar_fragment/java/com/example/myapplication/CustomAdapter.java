@@ -45,6 +45,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
             view.setOnCreateContextMenuListener(this);
         }
 
+        // 꾹 눌렀을 때 나타나는 메뉴
         @Override
         public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
 
@@ -57,12 +58,14 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
 
         }
 
+        // 메뉴 아이템을 눌렀을 때 이벤트
         private final MenuItem.OnMenuItemClickListener onEditMenu = new MenuItem.OnMenuItemClickListener() {
 
             @Override
             public boolean onMenuItemClick(MenuItem item) {
 
                 switch (item.getItemId()) {
+                    // 수정 버튼 누를 시 이벤트
                     case 1001:
 
                         AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
@@ -111,6 +114,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
 
                         break;
 
+                    // 삭제 버튼 누를 시 이벤트
                     case 1002:
 
                         Vacation tmp = mVacations.get(getAdapterPosition());
@@ -123,6 +127,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
 
                         break;
 
+                    // 사용 버튼 누를 시 이벤트
                     case 1003:
 
                         List<CalendarDay> dayList = mCalendarView.getSelectedDates();
@@ -176,6 +181,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
         this.mEvents = eList;
     }
 
+    // 각각의 리스트 아이템에 대한 설정을 하는 부분
     @Override
     public CustomViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
 
