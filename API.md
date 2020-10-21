@@ -743,10 +743,23 @@ delete() 함수를 사용하여 이미지 파일을 삭제합니다.
 </div>
 </details>
 
+</div>
+</details>
+
 ## 4. 서비스 구조 및 코드 설명
+
+이 항목에서는 WIA의 레이아웃 구조와, 각 자바 파일의 역할, 코드에 대한 자세한 설명 등을 다루고 있습니다. 
+
+<details>
+<summary>접기/펼치기 버튼</summary>
+<div markdown="1">
+
+1) 로그인 및 회원 가입 기능
 
 </div>
 </details>
+
+
 
 
 
