@@ -615,7 +615,42 @@ firestore.collection(/* collection 이름 */).document(/* document 이름 */).up
 </div>
 </details> 
 
-#### 4. 참고 문헌
+#### 4. Storage
+
+<details>
+<summary>접기/펼치기 버튼</summary>
+<div markdown="1">
+
+```java
+final StorageReference storageRef =
+                            storage.getReferenceFromUrl(/*저장소 주소*/).child(/*폴더 이름*/).child(/*파일 이름*/);
+                    UploadTask uploadTask = storageRef.putFile(/*다운로드 주소*/);
+
+                    Task<Uri> uriTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+
+                        @Override
+                        public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                            return storageRef.getDownloadUrl(); // 이미지의 다운로드 주소 추출
+                        }
+                    }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Uri> task) {
+                            Uri uri = task.getResult();
+                            
+                            // 저장을 성공한 후...
+                        }
+                    });
+```
+
+위 함수는 storage에 사진 파일을 저장하는 역할을 합니다. StorageReference 객체에 저장소 참조를 선언한후, 저장소 주소와, 이미지 파일 이름, 저장할 폴더 이름 등을
+데이터로 넣어줍니다. 이후 putFile() 함수를 사용하여 이미지 데이터를 저장소에 저장합니다. 이후, 저장한 이미지의 다운로드 주소를 추출할려면 위 코드에서 볼 수 있는 것처럼
+getDownloadUrl() 함수를 사용하여 추출합니다.
+   
+</div>
+</details>
+
+
+#### 5. 참고 문헌
 
 <details>
 <summary>접기/펼치기 버튼</summary>
