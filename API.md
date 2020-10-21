@@ -485,6 +485,8 @@ WIA는 firebase에서 제공하는 여러 함수를 활용하여 DB와 서버 �
 <div markdown="1">
 
 ```java
+ FirebaseFirestore firestore = FirebaseFirestore.getInstance();
+
  firestore.collection(/* collection 이름 */).document(/* document 이름 */).get()
                 .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                     @Override
@@ -499,6 +501,8 @@ WIA는 firebase에서 제공하는 여러 함수를 활용하여 DB와 서버 �
 해당 collection의 하위 document에 저장되어 있는 데이터를 가져오는 함수입니다. 가져오기가 성공하면 documentSnaphot 변수에서 데이터를 추출해 낼 수 있습니다.
 
 ```java
+FirebaseFirestore firestore = FirebaseFirestore.getInstance();
+
 final DocumentReference docRef = firestore.collection(/* collection 이름 */).document(/* document 이름 */);
 firestore.runTransaction(new Transaction.Function<Void>() {
                     @Nullable
@@ -517,6 +521,8 @@ firestore.runTransaction(new Transaction.Function<Void>() {
 DocumentSnapshot 객체 변수 snapshot에서 데이터를 추출할 수 있습니다.
 
 ```java
+FirebaseFirestore firestore = FirebaseFirestore.getInstance();
+
 firestore.collection(/* collection 이름 */).document(/* document 이름 */)
                     .addSnapshotListener(new EventListener<QuerySnapshot>() {
                         @Override
@@ -544,6 +550,8 @@ firestore.collection(/* collection 이름 */).document(/* document 이름 */)
 <div markdown="1">
    
 ```java
+FirebaseFirestore firestore = FirebaseFirestore.getInstance();
+
 firestore.collection(/* collection 이름 */).document(/* document 이름 */).set(/* 데이터 */)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
@@ -562,6 +570,8 @@ firestore.collection(/* collection 이름 */).document(/* document 이름 */).se
 서버에 데이터를 입력하는 함수이며, set()부분에 입력할 데이터 변수가 삽입됩니다.
 
 ```java
+FirebaseFirestore firestore = FirebaseFirestore.getInstance();
+
 firestore.collection(/* collection 이름 */).document(/* document 이름 */).update("/* field 이름 */", /* 입력할 데이터 */)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
@@ -622,6 +632,8 @@ firestore.collection(/* collection 이름 */).document(/* document 이름 */).up
 <div markdown="1">
 
 ```java
+FirebaseStorage storage = FirebaseStorage.getInstance();
+
 final StorageReference storageRef =
                             storage.getReferenceFromUrl(/*저장소 주소*/).child(/*폴더 이름*/).child(/*파일 이름*/);
                     UploadTask uploadTask = storageRef.putFile(/*다운로드 주소*/);
@@ -648,6 +660,8 @@ getDownloadUrl() 함수를 사용하여 추출합니다.
 
 
 ```java
+FirebaseStorage storage = FirebaseStorage.getInstance();
+
 StorageReference httpsReference = storage.getReferenceFromUrl(/*이미지의 다운로드 주소*/);
 httpsReference.delete();
 ```
