@@ -161,6 +161,8 @@ public class MainActivity extends AppCompatActivity {
                     });
                     layout.addView(btn);
                 }
+
+                // 이부분은 일정 추가 기능을 위한 부분인데, 현재 사용하지 않음
                 /*
                 for(int i=0; i<selectedEvent.size(); i++) {
                     Button btn = new Button(MainActivity.this);
@@ -276,14 +278,15 @@ public class MainActivity extends AppCompatActivity {
                 listDialog.show();
             }
         });
-        
+
+        // RecyclerView 요소 관리를 위한 CustomAdapter 설정
         mAdapter = new CustomAdapter(this, mVacations, mCalendarView, mEvents);
         mRecyclerView.setAdapter(mAdapter);
-
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(mRecyclerView.getContext(),
                 mLinearLayoutManager.getOrientation());
         mRecyclerView.addItemDecoration(dividerItemDecoration);
 
+        // 휴가 추가 버튼
         Button buttonInsert = (Button)findViewById(R.id.button_insert);
         buttonInsert.setOnClickListener(new View.OnClickListener() {
 
