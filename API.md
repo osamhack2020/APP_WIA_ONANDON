@@ -468,6 +468,20 @@ collection | document | field
 
 ---
 
+#### 동아리 게시판 DB '*(부대이름)* 동아리게시판'
+
+collection | document | field
+------------ | ------------- | -------------
+|교육사동아리게시판| waymMyEanIx8oSeQUuzK   | postDTO.java|
+|└| yWO8cjGlfSI4CYKFuqAC  | postDTO.java|
+|└| ngqQJwDvgV2EifQWHnps  | postDTO.java|
+
+각 동아리 페이지에는 동아리의 활동 내용과 홍보글을 올릴 수 있는 동아리 전용 게시판이 있습니다. '*(부대이름)* 동아리게시판' 으로
+이름이 지정된 DB는 각 동아리 페이지의 전용 페이지에 업로드 되는 게시물의 데이터를 저장합니다. 이 DB는 각 게시물의 고유 ID로 지정된
+하위 document로 구성되어 있으며, 각 document는 게시물 정보를 가지고 있는 객체 데이터 postDTO와 연결되어 있습니다. 
+
+---
+
 </div>
 </details>
 
