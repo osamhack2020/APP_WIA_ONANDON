@@ -1,12 +1,8 @@
 package com.example.myapplication;
 
-import android.graphics.Color;
-
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 
-import java.util.Collection;
 import java.util.HashSet;
-import java.util.Random;
 
 public class Vacation extends GeneralEvent {
 

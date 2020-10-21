@@ -23,7 +23,6 @@ public class MultiDecorator implements DayViewDecorator {
 
     @Override
     public void decorate(DayViewFacade view) {
-        //view.addSpan(new CustomSpan(10, color, 1, 1));
         for(int i=0; i<eventList.size(); i++) {
             view.addSpan(new CustomSpan(10, eventList.get(i).getDecorator().getColor(), eventList.size(), i+1));
         }

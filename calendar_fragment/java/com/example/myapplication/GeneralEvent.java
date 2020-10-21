@@ -4,7 +4,6 @@ import com.prolificinteractive.materialcalendarview.CalendarDay;
 
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.List;
 
 public class GeneralEvent {
 
