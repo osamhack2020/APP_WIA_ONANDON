@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_calendar);
 
-        ImageButton mAddButton = (ImageButton) findViewById(R.id.button_friend);
+        //ImageButton mAddButton = (ImageButton) findViewById(R.id.button_friend);
 
         mCalendarView = (MaterialCalendarView) findViewById(R.id.calendarView);
 
