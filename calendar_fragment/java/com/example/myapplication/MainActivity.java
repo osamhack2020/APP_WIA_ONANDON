@@ -35,13 +35,13 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<Vacation> mVacations;
     // 일정 리스트 (기능 추가 예정)
     private ArrayList<GeneralEvent> mEvents;
-    // 휴가 RecyclerView를 위한 CustomAdapter
+    // 휴가 RecyclerView를 관리하기 위한 CustomAdapter
     private CustomAdapter mAdapter;
     // 휴가 캘린더를 위한 MaterialCalendarView
     private MaterialCalendarView mCalendarView;
     // 미리 등록된 더미 데이터
     private Vacation[] userVacationData = {new Vacation("연가", "연가", 24), new Vacation("위로", "신병위로", 4), new Vacation("위로", "수료식", 1)};
-    
+
     private AlertDialog listDialog = null;
 
     @Override
@@ -49,22 +49,25 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_calendar);
 
-        //ImageButton mAddButton = (ImageButton) findViewById(R.id.button_friend);
-
         mCalendarView = (MaterialCalendarView) findViewById(R.id.calendarView);
 
         RecyclerView mRecyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         LinearLayoutManager mLinearLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLinearLayoutManager);
 
+        // 휴가 리스트 초기화
         mVacations = new ArrayList<>();
+        // 더미 데이터 초기화
+        // 이 부분은 나중에 DB로 대체
         for(Vacation vac : userVacationData) {
             mVacations.add(0, vac);
             mCalendarView.addDecorator(vac.getDecorator());
         }
 
+        // 이벤트 리스트 초기화 (사용하지 않음)
         mEvents = new ArrayList<>();
 
+        // 캘린더뷰 설정
         mCalendarView.state().edit()
                 .setFirstDayOfWeek(DayOfWeek.WEDNESDAY)
                 .setMinimumDate(CalendarDay.from(2000, 1, 1))
@@ -74,6 +77,8 @@ public class MainActivity extends AppCompatActivity {
 
         mCalendarView.setSelectionMode(MaterialCalendarView.SELECTION_MODE_RANGE);
         mCalendarView.setSelectionColor(Color.parseColor("#B2D0FF"));
+
+        // 캘린더를 꾹 눌렀을때, 해당 날짜에 등록된 휴가를 AlertDialog로 보여줌
         mCalendarView.setOnDateLongClickListener(new OnDateLongClickListener() {
             @Override
             public void onDateLongClick(@NonNull final MaterialCalendarView widget, @NonNull final CalendarDay date) {
