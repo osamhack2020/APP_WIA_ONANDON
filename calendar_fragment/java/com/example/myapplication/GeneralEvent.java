@@ -10,6 +10,7 @@ public class GeneralEvent {
     private String name;
     private HashSet<CalendarDay> dates;
     private EventDecorator decorator;
+    private int color;
 
     public HashSet<CalendarDay> getDates() {
         return dates;
@@ -31,8 +32,7 @@ public class GeneralEvent {
         this.name = name;
         this.dates = new HashSet<>(dates);
 
-        //int color = Color.argb(255, rnd.nextInt(100) + 156, rnd.nextInt(100) + 156, rnd.nextInt(100) + 156);
-        int color = ((int)(Math.random()*16777215)) | (0xFF << 24);
+        color = ((int)(Math.random()*16777215)) | (0xFF << 24);
         decorator = new EventDecorator(color, this.dates);
     }
 }
