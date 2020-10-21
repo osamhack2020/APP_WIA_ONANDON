@@ -6,6 +6,8 @@ import java.util.HashSet;
 
 public class Vacation extends GeneralEvent {
 
+    // GeneralEvent에 기간과 종류를 추가한 휴가 클래스
+
     private String type;
     private int period;
 
