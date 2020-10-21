@@ -82,6 +82,7 @@ public class MainActivity extends AppCompatActivity {
         mCalendarView.setOnDateLongClickListener(new OnDateLongClickListener() {
             @Override
             public void onDateLongClick(@NonNull final MaterialCalendarView widget, @NonNull final CalendarDay date) {
+                // 선택된 날짜 정의
                 List<CalendarDay> dayList;
                 if(widget.getSelectedDates().size() == 0) {
                     dayList = new ArrayList<>();
@@ -91,8 +92,13 @@ public class MainActivity extends AppCompatActivity {
                 else {
                     dayList = mCalendarView.getSelectedDates();
                 }
+                
+                // 선택된 날짜에 존재하는 휴가 리스트
                 final ArrayList<Vacation> selectedVacation = new ArrayList<>();
+                
+                // 선택된 날짜에 존재하는 일정 리스트 (사용하지 않음)
                 final ArrayList<GeneralEvent> selectedEvent = new ArrayList<>();
+                
                 for(int i=0; i<mVacations.size(); i++) {
                     for(int j=0; j<dayList.size(); j++) {
                         if (mVacations.get(i).getDates().contains(dayList.get(j)) && !selectedVacation.contains(mVacations.get(i))) {
@@ -109,6 +115,8 @@ public class MainActivity extends AppCompatActivity {
                 }
                 if(selectedVacation.size() == 0)
                     return;
+                
+                // 해당 휴가 리스트 AlertDialog로 표시
                 AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(MainActivity.this);
                 final LinearLayout layout = new LinearLayout(MainActivity.this);
                 layout.setOrientation(LinearLayout.VERTICAL);
@@ -116,6 +124,7 @@ public class MainActivity extends AppCompatActivity {
                     Button btn = new Button(MainActivity.this);
                     btn.setText(selectedVacation.get(i).getName());
                     btn.setBackgroundColor(Color.TRANSPARENT);
+                    // 리스트 요소 누를 시 삭제 팝업창
                     final int finalI = i;
                     btn.setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -267,7 +276,7 @@ public class MainActivity extends AppCompatActivity {
                 listDialog.show();
             }
         });
-
+        
         mAdapter = new CustomAdapter(this, mVacations, mCalendarView, mEvents);
         mRecyclerView.setAdapter(mAdapter);
 
