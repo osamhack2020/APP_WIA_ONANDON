@@ -10,8 +10,6 @@ public class EventDecorator implements DayViewDecorator {
 
     private final int color;
     private HashSet<CalendarDay> dates;
-    private static DayViewFacade facade = null;
-    private static int count = 0;
 
     public EventDecorator(int color, HashSet<CalendarDay> dates) {
         this.color = color;
