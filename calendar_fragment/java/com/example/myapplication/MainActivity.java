@@ -294,6 +294,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
+                saveFile();
                 AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
 
                 View view = LayoutInflater.from(MainActivity.this)

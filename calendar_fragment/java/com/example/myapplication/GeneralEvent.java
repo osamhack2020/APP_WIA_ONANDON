@@ -42,7 +42,7 @@ public class GeneralEvent {
 
         // 일정의 날짜를 넘겨주어 EventDecorator 생성
         // 색깔이 지정되지 않았으면 임의로 지정
-        if(color != 0)
+        if(color == 0)
             this.color = ((int)(Math.random()*16777215)) | (0xFF << 24);
         else
             this.color = color;
