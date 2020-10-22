@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
     // 휴가 캘린더를 위한 MaterialCalendarView
     private MaterialCalendarView mCalendarView;
     // 미리 등록된 더미 데이터
-    private Vacation[] userVacationData = {new Vacation("연가", "연가", 24), new Vacation("위로", "신병위로", 4), new Vacation("위로", "수료식", 1)};
+    private Vacation[] userVacationData = {new Vacation("연가", "연가", 24, 0), new Vacation("위로", "신병위로", 4, 0), new Vacation("위로", "수료식", 1, 0)};
 
     private AlertDialog listDialog = null;
 
@@ -323,7 +323,7 @@ public class MainActivity extends AppCompatActivity {
                         }
 
                         if(!strType.equals("") && !strName.equals("") && strPeriod > 0) {
-                            Vacation vac = new Vacation(strType, strName, strPeriod);
+                            Vacation vac = new Vacation(strType, strName, strPeriod, 0);
                             mCalendarView.addDecorator(vac.getDecorator());
                             mVacations.add(0, vac);
                             mAdapter.notifyItemInserted(0);
@@ -342,5 +342,6 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
+
 
 }

@@ -28,13 +28,16 @@ public class GeneralEvent {
         return decorator;
     }
 
-    public GeneralEvent(String name, Collection<CalendarDay> dates) {
+    public GeneralEvent(String name, Collection<CalendarDay> dates, int color) {
         this.name = name;
         this.dates = new HashSet<>(dates);
 
         // 일정의 날짜를 넘겨주어 EventDecorator 생성
-        // 색깔은 임의로 지정
-        color = ((int)(Math.random()*16777215)) | (0xFF << 24);
+        // 색깔이 지정되지 않았으면 임의로 지정
+        if(color != 0)
+            this.color = ((int)(Math.random()*16777215)) | (0xFF << 24);
+        else
+            this.color = color;
         decorator = new EventDecorator(color, this.dates);
     }
 }

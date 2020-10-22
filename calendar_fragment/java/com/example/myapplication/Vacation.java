@@ -27,8 +27,8 @@ public class Vacation extends GeneralEvent {
         this.period = period;
     }
 
-    public Vacation(String type, String name, int period) {
-        super(name, new HashSet<CalendarDay>());
+    public Vacation(String type, String name, int period, int color) {
+        super(name, new HashSet<CalendarDay>(), color);
         this.type = type;
         this.period = period;
     }
