@@ -361,6 +361,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void saveFile() {
+        // 객체 리스트를 객체의 모델 리스트로 변환
         List<VacationModel> models = new ArrayList<>();
         for(Vacation vac : mVacations) {
             List<CalendarDayModel> dlist = new ArrayList<>();
@@ -375,9 +376,11 @@ public class MainActivity extends AppCompatActivity {
             VacationModel vm = new VacationModel(vac.getName(), vac.getType(), vac.getPeriod(), vac.getColor(), dlist);
             models.add(vm);
         }
+        // Gson 라이브러리를 이용해 Json 형식으로 변환
         Gson gson = new Gson();
         String json = gson.toJson(models);
 
+        // Json 파일 저장
         try {
             File file = new File(getApplicationContext().getFilesDir(), "Vacations.json");
             FileWriter fileWriter = new FileWriter(file);
@@ -392,6 +395,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void readFile() {
         try {
+            // Json 파일 읽어오기
             File file = new File(getApplicationContext().getFilesDir(), "Vacations.json");
             if(!file.exists())
                 return;
@@ -407,6 +411,7 @@ public class MainActivity extends AppCompatActivity {
 
             String json = stringBuilder.toString();
 
+            // 객체의 모델 리스트를 객체로 변환
             Gson gson = new Gson();
             List<VacationModel> models = gson.fromJson(json, new TypeToken<List<VacationModel>>(){}.getType());
             for (VacationModel vm : models) {
