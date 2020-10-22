@@ -19,6 +19,8 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonDeserializer;
 import com.google.gson.reflect.TypeToken;
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 import com.prolificinteractive.materialcalendarview.CalendarMode;
@@ -349,9 +351,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void saveFile() {
-        ArrayList<VacationModel> models = new ArrayList<>();
+        List<VacationModel> models = new ArrayList<>();
         for(Vacation vac : mVacations) {
-            ArrayList<CalendarDayModel> dlist = new ArrayList<>();
+            List<CalendarDayModel> dlist = new ArrayList<>();
             HashSet<CalendarDay> dates = vac.getDates();
             Iterator it = dates.iterator();
 
@@ -365,18 +367,15 @@ public class MainActivity extends AppCompatActivity {
         }
         Gson gson = new Gson();
         String json = gson.toJson(models);
-        readFile(json);
-        Toast.makeText(getApplicationContext(), mVacations.size(), Toast.LENGTH_LONG).show();
     }
 
     public void readFile(String json) {
         Gson gson = new Gson();
-        ArrayList<VacationModel> models = gson.fromJson(json, new TypeToken<ArrayList<VacationModel>>(){}.getType());
-
-        for(VacationModel vm : models) {
-            ArrayList<CalendarDayModel> dlist = vm.getDates();
+        List<VacationModel> models = gson.fromJson(json, new TypeToken<List<VacationModel>>(){}.getType());
+        for (VacationModel vm : models) {
+            List<CalendarDayModel> dlist = vm.getDates();
             ArrayList<CalendarDay> dates = new ArrayList<>();
-            for(CalendarDayModel cd : dlist) {
+            for (CalendarDayModel cd : dlist) {
                 dates.add(CalendarDay.from(cd.getYear(), cd.getMonth(), cd.getDay()));
             }
 
@@ -392,9 +391,9 @@ public class MainActivity extends AppCompatActivity {
         String type;
         int period;
         int color;
-        ArrayList<CalendarDayModel> dates;
+        List<CalendarDayModel> dates;
 
-        public VacationModel(String name, String type, int period, int color, ArrayList<CalendarDayModel> dates) {
+        public VacationModel(String name, String type, int period, int color, List<CalendarDayModel> dates) {
             this.name = name;
             this.type = type;
             this.period = period;
@@ -434,11 +433,11 @@ public class MainActivity extends AppCompatActivity {
             this.color = color;
         }
 
-        public ArrayList<CalendarDayModel> getDates() {
+        public List<CalendarDayModel> getDates() {
             return dates;
         }
 
-        public void setDates(ArrayList<CalendarDayModel> dates) {
+        public void setDates(List<CalendarDayModel> dates) {
             this.dates = dates;
         }
 
