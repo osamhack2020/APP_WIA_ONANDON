@@ -229,18 +229,18 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
 
 
     public void saveFile() {
-        List<CustomAdapter.VacationModel> models = new ArrayList<>();
+        List<VacationModel> models = new ArrayList<>();
         for(Vacation vac : mVacations) {
-            List<CustomAdapter.CalendarDayModel> dlist = new ArrayList<>();
+            List<CalendarDayModel> dlist = new ArrayList<>();
             HashSet<CalendarDay> dates = vac.getDates();
             Iterator it = dates.iterator();
 
             while(it.hasNext()) {
                 CalendarDay cd = (CalendarDay) it.next();
-                dlist.add(new CustomAdapter.CalendarDayModel(cd.getDay(), cd.getMonth(), cd.getYear()));
+                dlist.add(new CalendarDayModel(cd.getDay(), cd.getMonth(), cd.getYear()));
             }
 
-            CustomAdapter.VacationModel vm = new CustomAdapter.VacationModel(vac.getName(), vac.getType(), vac.getPeriod(), vac.getColor(), dlist);
+            VacationModel vm = new VacationModel(vac.getName(), vac.getType(), vac.getPeriod(), vac.getColor(), dlist);
             models.add(vm);
         }
         Gson gson = new Gson();
@@ -276,11 +276,11 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
             String json = stringBuilder.toString();
 
             Gson gson = new Gson();
-            List<CustomAdapter.VacationModel> models = gson.fromJson(json, new TypeToken<List<CustomAdapter.VacationModel>>(){}.getType());
-            for (CustomAdapter.VacationModel vm : models) {
-                List<CustomAdapter.CalendarDayModel> dlist = vm.getDates();
+            List<VacationModel> models = gson.fromJson(json, new TypeToken<List<VacationModel>>(){}.getType());
+            for (VacationModel vm : models) {
+                List<CalendarDayModel> dlist = vm.getDates();
                 ArrayList<CalendarDay> dates = new ArrayList<>();
-                for (CustomAdapter.CalendarDayModel cd : dlist) {
+                for (CalendarDayModel cd : dlist) {
                     dates.add(CalendarDay.from(cd.getYear(), cd.getMonth(), cd.getDay()));
                 }
 
@@ -291,102 +291,6 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
         }
         catch(IOException e) {
             Toast.makeText(mContext, "알 수 없는 오류", Toast.LENGTH_LONG).show();
-        }
-    }
-
-    class VacationModel {
-
-        String name;
-        String type;
-        int period;
-        int color;
-        List<CustomAdapter.CalendarDayModel> dates;
-
-        public VacationModel(String name, String type, int period, int color, List<CustomAdapter.CalendarDayModel> dates) {
-            this.name = name;
-            this.type = type;
-            this.period = period;
-            this.color = color;
-            this.dates = dates;
-        }
-
-        public String getName() {
-            return name;
-        }
-
-        public void setName(String name) {
-            this.name = name;
-        }
-
-        public String getType() {
-            return type;
-        }
-
-        public void setType(String type) {
-            this.type = type;
-        }
-
-        public int getPeriod() {
-            return period;
-        }
-
-        public void setPeriod(int period) {
-            this.period = period;
-        }
-
-        public int getColor() {
-            return color;
-        }
-
-        public void setColor(int color) {
-            this.color = color;
-        }
-
-        public List<CustomAdapter.CalendarDayModel> getDates() {
-            return dates;
-        }
-
-        public void setDates(List<CustomAdapter.CalendarDayModel> dates) {
-            this.dates = dates;
-        }
-
-
-    }
-
-    class CalendarDayModel {
-
-        int day;
-        int month;
-        int year;
-
-        public CalendarDayModel(int day, int month, int year) {
-            this.day = day;
-            this.month = month;
-            this.year = year;
-        }
-
-        public int getDay() {
-            return day;
-        }
-
-        public void setDay(int day) {
-            this.day = day;
-        }
-
-        public int getMonth() {
-            return month;
-        }
-
-        public void setMonth(int month) {
-            this.month = month;
-        }
-
-        public int getYear() {
-            return year;
-        }
-
-        public void setYear(int year) {
-            this.year = year;
         }
     }
 
