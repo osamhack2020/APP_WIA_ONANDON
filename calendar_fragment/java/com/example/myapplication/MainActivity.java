@@ -359,6 +359,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
             VacationModel vm = new VacationModel(vac.getName(), vac.getType(), vac.getPeriod(), vac.getColor(), dlist);
+            models.add(vm);
         }
         Gson gson = new Gson();
         String json = gson.toJson(models);
