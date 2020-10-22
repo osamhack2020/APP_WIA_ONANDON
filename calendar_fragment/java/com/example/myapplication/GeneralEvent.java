@@ -28,6 +28,14 @@ public class GeneralEvent {
         return decorator;
     }
 
+    public int getColor() {
+        return color;
+    }
+
+    public void setColor(int color) {
+        this.color = color;
+    }
+
     public GeneralEvent(String name, Collection<CalendarDay> dates, int color) {
         this.name = name;
         this.dates = new HashSet<>(dates);

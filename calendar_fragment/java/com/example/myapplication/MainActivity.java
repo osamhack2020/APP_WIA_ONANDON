@@ -15,10 +15,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 import com.prolificinteractive.materialcalendarview.CalendarMode;
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
@@ -27,6 +27,8 @@ import com.prolificinteractive.materialcalendarview.OnDateLongClickListener;
 import org.threeten.bp.DayOfWeek;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -343,5 +345,119 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    public void saveFile() {
+        ArrayList<VacationModel> models = new ArrayList<>();
+        for(Vacation vac : mVacations) {
+            ArrayList<CalendarDayModel> dlist = new ArrayList<>();
+            HashSet<CalendarDay> dates = vac.getDates();
+            Iterator it = dates.iterator();
+
+            while(it.hasNext()) {
+                CalendarDay cd = (CalendarDay) it.next();
+                dlist.add(new CalendarDayModel(cd.getDay(), cd.getMonth(), cd.getYear()));
+            }
+
+            VacationModel vm = new VacationModel(vac.getName(), vac.getType(), vac.getPeriod(), vac.getColor(), dlist);
+        }
+        Gson gson = new Gson();
+        String json = gson.toJson(models);
+        Toast.makeText(getApplicationContext(), json, Toast.LENGTH_LONG).show();
+    }
+
+    class VacationModel {
+
+        String name;
+        String type;
+        int period;
+        int color;
+        ArrayList<CalendarDayModel> dates;
+
+        public VacationModel(String name, String type, int period, int color, ArrayList<CalendarDayModel> dates) {
+            this.name = name;
+            this.type = type;
+            this.period = period;
+            this.color = color;
+            this.dates = dates;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public String getType() {
+            return type;
+        }
+
+        public void setType(String type) {
+            this.type = type;
+        }
+
+        public int getPeriod() {
+            return period;
+        }
+
+        public void setPeriod(int period) {
+            this.period = period;
+        }
+
+        public int getColor() {
+            return color;
+        }
+
+        public void setColor(int color) {
+            this.color = color;
+        }
+
+        public ArrayList<CalendarDayModel> getDates() {
+            return dates;
+        }
+
+        public void setDates(ArrayList<CalendarDayModel> dates) {
+            this.dates = dates;
+        }
+
+
+    }
+
+    class CalendarDayModel {
+
+        int day;
+        int month;
+        int year;
+
+        public CalendarDayModel(int day, int month, int year) {
+            this.day = day;
+            this.month = month;
+            this.year = year;
+        }
+
+        public int getDay() {
+            return day;
+        }
+
+        public void setDay(int day) {
+            this.day = day;
+        }
+
+        public int getMonth() {
+            return month;
+        }
+
+        public void setMonth(int month) {
+            this.month = month;
+        }
+
+        public int getYear() {
+            return year;
+        }
+
+        public void setYear(int year) {
+            this.year = year;
+        }
+    }
 
 }
