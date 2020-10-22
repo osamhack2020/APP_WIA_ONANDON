@@ -168,6 +168,7 @@ public class MainActivity extends AppCompatActivity {
                                             mCalendarView.invalidateDecorators();
                                             mCalendarView.clearSelection();
                                             mAdapter.notifyDataSetChanged();
+                                            saveFile();
                                         }
                                     });
                             builder.show();
@@ -392,10 +393,8 @@ public class MainActivity extends AppCompatActivity {
     public void readFile() {
         try {
             File file = new File(getApplicationContext().getFilesDir(), "Vacations.json");
-            if(!file.exists()) {
-                Toast.makeText(getApplicationContext(), "이전 정보가 존재하지 않습니다", Toast.LENGTH_LONG).show();
+            if(!file.exists())
                 return;
-            }
             FileReader fileReader = new FileReader(file);
             BufferedReader bufferedReader = new BufferedReader(fileReader);
             StringBuilder stringBuilder = new StringBuilder();

@@ -18,10 +18,20 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 
 public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomViewHolder> {
@@ -101,6 +111,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
                                     mVacations.get(apos).setType(strType);
                                     mVacations.get(apos).setPeriod(strPeriod);
                                     notifyItemChanged(apos);
+                                    saveFile();
                                 }
                                 else {
                                     Toast.makeText(mContext, "0일 이하는 등록이 불가능합니다", Toast.LENGTH_LONG).show();
@@ -124,6 +135,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
                         notifyItemRemoved(getAdapterPosition());
                         notifyItemRangeChanged(getAdapterPosition(), mVacations.size());
                         mCalendarView.invalidateDecorators();
+                        saveFile();
 
                         break;
 
@@ -153,6 +165,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
 
                             mCalendarView.invalidateDecorators();
                             mCalendarView.clearSelection();
+                            saveFile();
                         }
                         else {
                             if(dupFlag) {
@@ -212,6 +225,169 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
     @Override
     public int getItemCount() {
         return (null != mVacations ? mVacations.size() : 0);
+    }
+
+
+    public void saveFile() {
+        List<CustomAdapter.VacationModel> models = new ArrayList<>();
+        for(Vacation vac : mVacations) {
+            List<CustomAdapter.CalendarDayModel> dlist = new ArrayList<>();
+            HashSet<CalendarDay> dates = vac.getDates();
+            Iterator it = dates.iterator();
+
+            while(it.hasNext()) {
+                CalendarDay cd = (CalendarDay) it.next();
+                dlist.add(new CustomAdapter.CalendarDayModel(cd.getDay(), cd.getMonth(), cd.getYear()));
+            }
+
+            CustomAdapter.VacationModel vm = new CustomAdapter.VacationModel(vac.getName(), vac.getType(), vac.getPeriod(), vac.getColor(), dlist);
+            models.add(vm);
+        }
+        Gson gson = new Gson();
+        String json = gson.toJson(models);
+
+        try {
+            File file = new File(mContext.getFilesDir(), "Vacations.json");
+            FileWriter fileWriter = new FileWriter(file);
+            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+            bufferedWriter.write(json);
+            bufferedWriter.close();
+        }
+        catch(IOException e) {
+            Toast.makeText(mContext, "알 수 없는 오류", Toast.LENGTH_LONG).show();
+        }
+    }
+
+    public void readFile() {
+        try {
+            File file = new File(mContext.getFilesDir(), "Vacations.json");
+            if(!file.exists())
+                return;
+            FileReader fileReader = new FileReader(file);
+            BufferedReader bufferedReader = new BufferedReader(fileReader);
+            StringBuilder stringBuilder = new StringBuilder();
+            String line = bufferedReader.readLine();
+            while (line != null) {
+                stringBuilder.append(line).append("\n");
+                line = bufferedReader.readLine();
+            }
+            bufferedReader.close();
+
+            String json = stringBuilder.toString();
+
+            Gson gson = new Gson();
+            List<CustomAdapter.VacationModel> models = gson.fromJson(json, new TypeToken<List<CustomAdapter.VacationModel>>(){}.getType());
+            for (CustomAdapter.VacationModel vm : models) {
+                List<CustomAdapter.CalendarDayModel> dlist = vm.getDates();
+                ArrayList<CalendarDay> dates = new ArrayList<>();
+                for (CustomAdapter.CalendarDayModel cd : dlist) {
+                    dates.add(CalendarDay.from(cd.getYear(), cd.getMonth(), cd.getDay()));
+                }
+
+                Vacation vac = new Vacation(vm.getType(), vm.getName(), vm.getPeriod(), vm.getColor(), dates);
+                mVacations.add(vac);
+                mCalendarView.addDecorator(vac.getDecorator());
+            }
+        }
+        catch(IOException e) {
+            Toast.makeText(mContext, "알 수 없는 오류", Toast.LENGTH_LONG).show();
+        }
+    }
+
+    class VacationModel {
+
+        String name;
+        String type;
+        int period;
+        int color;
+        List<CustomAdapter.CalendarDayModel> dates;
+
+        public VacationModel(String name, String type, int period, int color, List<CustomAdapter.CalendarDayModel> dates) {
+            this.name = name;
+            this.type = type;
+            this.period = period;
+            this.color = color;
+            this.dates = dates;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public String getType() {
+            return type;
+        }
+
+        public void setType(String type) {
+            this.type = type;
+        }
+
+        public int getPeriod() {
+            return period;
+        }
+
+        public void setPeriod(int period) {
+            this.period = period;
+        }
+
+        public int getColor() {
+            return color;
+        }
+
+        public void setColor(int color) {
+            this.color = color;
+        }
+
+        public List<CustomAdapter.CalendarDayModel> getDates() {
+            return dates;
+        }
+
+        public void setDates(List<CustomAdapter.CalendarDayModel> dates) {
+            this.dates = dates;
+        }
+
+
+    }
+
+    class CalendarDayModel {
+
+        int day;
+        int month;
+        int year;
+
+        public CalendarDayModel(int day, int month, int year) {
+            this.day = day;
+            this.month = month;
+            this.year = year;
+        }
+
+        public int getDay() {
+            return day;
+        }
+
+        public void setDay(int day) {
+            this.day = day;
+        }
+
+        public int getMonth() {
+            return month;
+        }
+
+        public void setMonth(int month) {
+            this.month = month;
+        }
+
+        public int getYear() {
+            return year;
+        }
+
+        public void setYear(int year) {
+            this.year = year;
+        }
     }
 
 }
