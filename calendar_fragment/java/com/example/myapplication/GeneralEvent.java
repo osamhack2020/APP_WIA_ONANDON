@@ -32,10 +32,6 @@ public class GeneralEvent {
         return color;
     }
 
-    public void setColor(int color) {
-        this.color = color;
-    }
-
     public GeneralEvent(String name, Collection<CalendarDay> dates, int color) {
         this.name = name;
         this.dates = new HashSet<>(dates);
@@ -46,6 +42,6 @@ public class GeneralEvent {
             this.color = ((int)(Math.random()*16777215)) | (0xFF << 24);
         else
             this.color = color;
-        decorator = new EventDecorator(color, this.dates);
+        decorator = new EventDecorator(this.color, this.dates);
     }
 }
