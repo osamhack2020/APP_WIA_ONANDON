@@ -29,6 +29,12 @@ import com.prolificinteractive.materialcalendarview.OnDateLongClickListener;
 
 import org.threeten.bp.DayOfWeek;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -65,10 +71,13 @@ public class MainActivity extends AppCompatActivity {
         mVacations = new ArrayList<>();
         // 더미 데이터 초기화
         // 이 부분은 나중에 DB로 대체
+        /*
         for(Vacation vac : userVacationData) {
             mVacations.add(0, vac);
             mCalendarView.addDecorator(vac.getDecorator());
         }
+         */
+        readFile();
 
         // 이벤트 리스트 초기화 (사용하지 않음)
         mEvents = new ArrayList<>();
@@ -298,7 +307,6 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                saveFile();
                 AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
 
                 View view = LayoutInflater.from(MainActivity.this)
@@ -334,6 +342,7 @@ public class MainActivity extends AppCompatActivity {
                             mCalendarView.addDecorator(vac.getDecorator());
                             mVacations.add(0, vac);
                             mAdapter.notifyItemInserted(0);
+                            saveFile();
                             //mAdapter.notifyDataSetChanged();
                         }
                         else {
@@ -367,21 +376,54 @@ public class MainActivity extends AppCompatActivity {
         }
         Gson gson = new Gson();
         String json = gson.toJson(models);
+
+        try {
+            File file = new File(getApplicationContext().getFilesDir(), "Vacations.json");
+            FileWriter fileWriter = new FileWriter(file);
+            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+            bufferedWriter.write(json);
+            bufferedWriter.close();
+        }
+        catch(IOException e) {
+            Toast.makeText(getApplicationContext(), "알 수 없는 오류", Toast.LENGTH_LONG).show();
+        }
     }
 
-    public void readFile(String json) {
-        Gson gson = new Gson();
-        List<VacationModel> models = gson.fromJson(json, new TypeToken<List<VacationModel>>(){}.getType());
-        for (VacationModel vm : models) {
-            List<CalendarDayModel> dlist = vm.getDates();
-            ArrayList<CalendarDay> dates = new ArrayList<>();
-            for (CalendarDayModel cd : dlist) {
-                dates.add(CalendarDay.from(cd.getYear(), cd.getMonth(), cd.getDay()));
+    public void readFile() {
+        try {
+            File file = new File(getApplicationContext().getFilesDir(), "Vacations.json");
+            if(!file.exists()) {
+                Toast.makeText(getApplicationContext(), "이전 정보가 존재하지 않습니다", Toast.LENGTH_LONG).show();
+                return;
             }
+            FileReader fileReader = new FileReader(file);
+            BufferedReader bufferedReader = new BufferedReader(fileReader);
+            StringBuilder stringBuilder = new StringBuilder();
+            String line = bufferedReader.readLine();
+            while (line != null) {
+                stringBuilder.append(line).append("\n");
+                line = bufferedReader.readLine();
+            }
+            bufferedReader.close();
 
-            Vacation vac = new Vacation(vm.getType(), vm.getName(), vm.getPeriod(), vm.getColor(), dates);
-            mVacations.add(vac);
-            mCalendarView.addDecorator(vac.getDecorator());
+            String json = stringBuilder.toString();
+
+            Gson gson = new Gson();
+            List<VacationModel> models = gson.fromJson(json, new TypeToken<List<VacationModel>>(){}.getType());
+            for (VacationModel vm : models) {
+                List<CalendarDayModel> dlist = vm.getDates();
+                ArrayList<CalendarDay> dates = new ArrayList<>();
+                for (CalendarDayModel cd : dlist) {
+                    dates.add(CalendarDay.from(cd.getYear(), cd.getMonth(), cd.getDay()));
+                }
+
+                Vacation vac = new Vacation(vm.getType(), vm.getName(), vm.getPeriod(), vm.getColor(), dates);
+                mVacations.add(vac);
+                mCalendarView.addDecorator(vac.getDecorator());
+            }
+        }
+        catch(IOException e) {
+            Toast.makeText(getApplicationContext(), "알 수 없는 오류", Toast.LENGTH_LONG).show();
         }
     }
 
