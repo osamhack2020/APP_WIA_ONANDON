@@ -2,6 +2,7 @@ package com.example.myapplication;
 
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 
+import java.util.Collection;
 import java.util.HashSet;
 
 public class Vacation extends GeneralEvent {
@@ -29,6 +30,12 @@ public class Vacation extends GeneralEvent {
 
     public Vacation(String type, String name, int period, int color) {
         super(name, new HashSet<CalendarDay>(), color);
+        this.type = type;
+        this.period = period;
+    }
+
+    public Vacation(String type, String name, int period, int color, Collection<CalendarDay> dates) {
+        super(name, dates, color);
         this.type = type;
         this.period = period;
     }

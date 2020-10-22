@@ -19,6 +19,7 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 import com.prolificinteractive.materialcalendarview.CalendarMode;
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
@@ -364,7 +365,25 @@ public class MainActivity extends AppCompatActivity {
         }
         Gson gson = new Gson();
         String json = gson.toJson(models);
-        Toast.makeText(getApplicationContext(), json, Toast.LENGTH_LONG).show();
+        readFile(json);
+        Toast.makeText(getApplicationContext(), mVacations.size(), Toast.LENGTH_LONG).show();
+    }
+
+    public void readFile(String json) {
+        Gson gson = new Gson();
+        ArrayList<VacationModel> models = gson.fromJson(json, new TypeToken<ArrayList<VacationModel>>(){}.getType());
+
+        for(VacationModel vm : models) {
+            ArrayList<CalendarDayModel> dlist = vm.getDates();
+            ArrayList<CalendarDay> dates = new ArrayList<>();
+            for(CalendarDayModel cd : dlist) {
+                dates.add(CalendarDay.from(cd.getYear(), cd.getMonth(), cd.getDay()));
+            }
+
+            Vacation vac = new Vacation(vm.getType(), vm.getName(), vm.getPeriod(), vm.getColor(), dates);
+            mVacations.add(vac);
+            mCalendarView.addDecorator(vac.getDecorator());
+        }
     }
 
     class VacationModel {
