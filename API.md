@@ -334,12 +334,14 @@ TagDTO 객체에는 게시물에 달린 모든 해시태그 정보가 저장됩�
 ```java
 public class DietDTO {
     public long postDay=0; // 식단표에 해당하는 날짜
-    public ArrayList<String> breakfast = new ArrayList<>(); // 아침 메뉴
-    public ArrayList<String> lunch = new ArrayList<>(); // 점심 메뉴
-    public ArrayList<String> dinner = new ArrayList<>(); // 저녁 메뉴
+    public ArrayList<String> breakfast = new ArrayList<>(); // 조식 메뉴
+    public ArrayList<String> lunch = new ArrayList<>(); // 중식 메뉴
+    public ArrayList<String> dinner = new ArrayList<>(); // 석식 메뉴
 }
 ```
 
+DietDTO 객체에는 각 부대의 식단 정보가 저장됩니다. postDay 변수에는 식단표에 해당하는 날짜가 저장되며,
+나머지 3개의 ArrayList에는 조식, 중식, 석식 메뉴가 String 배열로 저장됩니다.
 
 ---
 
