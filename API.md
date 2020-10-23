@@ -158,6 +158,7 @@ MyGoalContentDTO.java  | '나의 도전 이야기'게시판의 게시물 정보�
 PostDTO.java  | 일반 게시판의 게시물 정보가 담기는 객체
 CommentDTO.java  | 댓글 정보가 담기는 객체
 TagDTO.java  | 각 글의 해시태그 정보가 담기는 객체
+DietDTO.java | 각 부대의 식단표 정보가 담기는 
 
 .
 
@@ -328,6 +329,17 @@ public class TagDTO {
 ```
 TagDTO 객체에는 게시물에 달린 모든 해시태그 정보가 저장됩니다. WIA는 게시물에 달린 해시태그를 활용하여,
 원하는 게시물을 검색할 수 있는 기능을 제공하고 있는 데, tag 변수에 저장된 해시 태그 배열은 이러한 검색 과정에서 활용됩니다.
+
+#### DietDTO.java
+```java
+public class DietDTO {
+    public long postDay=0; // 식단표에 해당하는 날짜
+    public ArrayList<String> breakfast = new ArrayList<>(); // 아침 메뉴
+    public ArrayList<String> lunch = new ArrayList<>(); // 점심 메뉴
+    public ArrayList<String> dinner = new ArrayList<>(); // 저녁 메뉴
+}
+```
+
 
 ---
 
