@@ -158,7 +158,7 @@ MyGoalContentDTO.java  | '나의 도전 이야기'게시판의 게시물 정보�
 PostDTO.java  | 일반 게시판의 게시물 정보가 담기는 객체
 CommentDTO.java  | 댓글 정보가 담기는 객체
 TagDTO.java  | 각 글의 해시태그 정보가 담기는 객체
-DietDTO.java | 각 부대의 식단표 정보가 담기는 
+DietDTO.java | 각 부대의 식단표 정보가 담기는 객체
 
 .
 
