@@ -5,6 +5,8 @@ import java.util.List;
 
 public class VacationModel {
 
+    // 필요한 정보만 JSON 파일로 변환하기 위해 만든 모델
+
     String name;
     String type;
     int period;
