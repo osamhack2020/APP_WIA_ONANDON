@@ -1,14 +1,43 @@
-package com.example.myapplication.BottomNavigation;
+package com.example.myapplication;
 
+import android.content.DialogInterface;
+import android.graphics.Color;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.Toast;
 
-import com.example.myapplication.R;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import com.prolificinteractive.materialcalendarview.CalendarDay;
+import com.prolificinteractive.materialcalendarview.CalendarMode;
+import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
+import com.prolificinteractive.materialcalendarview.OnDateLongClickListener;
+
+import org.threeten.bp.DayOfWeek;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
 
 public class PlanFragment extends Fragment {
 
@@ -31,9 +60,9 @@ public class PlanFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_calendar, container, false);
         
-        mCalendarView = (MaterialCalendarView) findViewById(R.id.calendarView);
+        mCalendarView = (MaterialCalendarView) view.findViewById(R.id.calendarView);
 
-        RecyclerView mRecyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+        RecyclerView mRecyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
         LinearLayoutManager mLinearLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(mLinearLayoutManager);
 
@@ -154,7 +183,7 @@ public class PlanFragment extends Fragment {
         mRecyclerView.addItemDecoration(dividerItemDecoration);
 
         // 휴가 추가 버튼
-        Button buttonInsert = (Button)findViewById(R.id.button_insert);
+        Button buttonInsert = (Button) view.findViewById(R.id.button_insert);
         buttonInsert.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -212,4 +241,74 @@ public class PlanFragment extends Fragment {
         return view;
     }
 
+    public void saveFile() {
+        // 객체 리스트를 객체의 모델 리스트로 변환
+        List<VacationModel> models = new ArrayList<>();
+        for(Vacation vac : mVacations) {
+            List<CalendarDayModel> dlist = new ArrayList<>();
+            HashSet<CalendarDay> dates = vac.getDates();
+            Iterator it = dates.iterator();
+
+            while(it.hasNext()) {
+                CalendarDay cd = (CalendarDay) it.next();
+                dlist.add(new CalendarDayModel(cd.getDay(), cd.getMonth(), cd.getYear()));
+            }
+
+            VacationModel vm = new VacationModel(vac.getName(), vac.getType(), vac.getPeriod(), vac.getColor(), dlist);
+            models.add(vm);
+        }
+        // Gson 라이브러리를 이용해 Json 형식으로 변환
+        Gson gson = new Gson();
+        String json = gson.toJson(models);
+
+        // Json 파일 저장
+        try {
+            File file = new File(getActivity().getFilesDir(), "Vacations.json");
+            FileWriter fileWriter = new FileWriter(file);
+            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+            bufferedWriter.write(json);
+            bufferedWriter.close();
+        }
+        catch(IOException e) {
+            Toast.makeText(getActivity(), "알 수 없는 오류", Toast.LENGTH_LONG).show();
+        }
+    }
+
+    public void readFile() {
+        try {
+            // Json 파일 읽어오기
+            File file = new File(getActivity().getFilesDir(), "Vacations.json");
+            if(!file.exists())
+                return;
+            FileReader fileReader = new FileReader(file);
+            BufferedReader bufferedReader = new BufferedReader(fileReader);
+            StringBuilder stringBuilder = new StringBuilder();
+            String line = bufferedReader.readLine();
+            while (line != null) {
+                stringBuilder.append(line).append("\n");
+                line = bufferedReader.readLine();
+            }
+            bufferedReader.close();
+
+            String json = stringBuilder.toString();
+
+            // 객체의 모델 리스트를 객체로 변환
+            Gson gson = new Gson();
+            List<VacationModel> models = gson.fromJson(json, new TypeToken<List<VacationModel>>(){}.getType());
+            for (VacationModel vm : models) {
+                List<CalendarDayModel> dlist = vm.getDates();
+                ArrayList<CalendarDay> dates = new ArrayList<>();
+                for (CalendarDayModel cd : dlist) {
+                    dates.add(CalendarDay.from(cd.getYear(), cd.getMonth(), cd.getDay()));
+                }
+
+                Vacation vac = new Vacation(vm.getType(), vm.getName(), vm.getPeriod(), vm.getColor(), dates);
+                mVacations.add(vac);
+                mCalendarView.addDecorator(vac.getDecorator());
+            }
+        }
+        catch(IOException e) {
+            Toast.makeText(getActivity(), "알 수 없는 오류", Toast.LENGTH_LONG).show();
+        }
+    }
 }
