@@ -2,6 +2,7 @@
 <androidx.core.widget.NestedScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true">
@@ -32,7 +33,7 @@
                 android:textSize="20sp" />
 
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
@@ -55,7 +56,39 @@
                     android:text="로딩 중..."
                     android:textColor="#a0a0a0"
                     android:textSize="12sp" />
+            </LinearLayout>
 
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+            <LinearLayout
+                android:id="@+id/scrap_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="end"
+                android:layout_marginEnd="15dp"
+                android:background="@drawable/empty_round_shape"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:text="스크랩"
+                    android:textColor="#a0a0a0"
+                    android:textSize="12sp" />
+
+                <ImageView
+                    android:id="@+id/scrap"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginEnd="10dp"
+                    app:srcCompat="@drawable/empty_star" />
             </LinearLayout>
 
         </LinearLayout>
@@ -67,8 +100,9 @@
             android:layout_marginStart="15dp"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="15dp"
+            android:textStyle="bold"
             android:text="로딩 중..."
-            android:textColor="@color/theme"
+            android:textColor="@color/common_google_signin_btn_text_light_pressed"
             android:textSize="20sp" />
 
         <TextView
@@ -78,20 +112,13 @@
             android:layout_marginStart="15dp"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="15dp"
-            android:layout_marginBottom="15dp"
+            android:layout_marginBottom="10dp"
             android:gravity="start"
             android:text="로딩 중..." />
-
-        <ImageView
-            android:id="@+id/photo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:visibility="invisible" />
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
             android:layout_marginStart="5dp">
 
             <TextView
@@ -142,7 +169,8 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp">
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="5dp">
 
             <ImageView
                 android:id="@+id/heart"
@@ -160,26 +188,22 @@
                 android:text="로딩 중..."
                 android:textColor="@color/common_google_signin_btn_text_light_pressed"
                 android:textSize="18sp" />
-
         </RelativeLayout>
 
-        <TextView
+        <ImageView
+            android:id="@+id/photo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
-            android:layout_marginTop="10dp"
             android:layout_marginEnd="15dp"
-            android:gravity="start"
-            android:text="Comments"
-            android:textColor="@color/theme"
-            android:textSize="18sp" />
+            android:background="@drawable/none_field_round_shape"
+            android:visibility="invisible"/>
 
         <FrameLayout
             android:id="@+id/comment_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"/>
-
     </LinearLayout>
 
 </androidx.core.widget.NestedScrollView>

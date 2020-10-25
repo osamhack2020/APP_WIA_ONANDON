@@ -10,35 +10,11 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <LinearLayout
-            android:id="@+id/myGoal_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_marginStart="50dp"
-            android:clickable="true">
-
-            <ImageView
-                android:layout_width="17dp"
-                android:layout_height="34dp"
-                app:srcCompat="@drawable/challenge" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginStart="5dp"
-                android:text="나의 도전 이야기"
-                android:textColor="@color/theme"
-                android:textSize="14sp" />
-
-        </LinearLayout>
-
-
         <androidx.viewpager.widget.ViewPager
             android:id="@+id/pager"
             android:layout_width="match_parent"
             android:layout_height="170dp"
+            android:layout_marginTop="20dp"
             android:clickable="true"/>
 
         <LinearLayout
@@ -61,9 +37,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
+                    android:textStyle="bold"
                     android:text="부대게시판"
                     android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                    android:textColor="@color/theme"
+                    android:textColor="@color/common_google_signin_btn_text_dark_focused"
                     android:textSize="18sp" />
 
                 <View
@@ -78,7 +55,7 @@
                     android:layout_marginEnd="20dp"
                     android:text="더 보기"
                     android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                    android:textColor="#a0a0a0"
+                    android:textColor="@color/theme"
                     android:textSize="13sp" />
 
             </LinearLayout>
@@ -96,7 +73,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
                     android:text="동아리 게시판"
-                    android:textColor="@color/theme"
+                    android:textColor="@color/common_google_signin_btn_text_light_pressed"
                     android:textSize="14sp" />
 
                 <View
@@ -112,40 +89,170 @@
                     android:layout_marginStart="30dp"
                     android:layout_marginEnd="20dp"
                     android:layout_toEndOf="@id/name"
+                    android:layout_toStartOf="@id/new_post"
                     android:singleLine="true"
                     android:ellipsize="end"
                     android:text="로딩 중..."
                     android:textSize="14sp" />
+
+                <ImageView
+                    android:id="@+id/new_post"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    app:srcCompat="@drawable/label" />
 
             </RelativeLayout>
 
             <FrameLayout
                 android:id="@+id/budae_content"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-            <TextView
-                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="30dp"
-                android:layout_marginBottom="10dp"
-                android:text="게시판을 추가해 주세요."
-                android:textColor="#a0a0a0" />
-
-            <ImageView
-                android:id="@+id/add_budae"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:clickable="true"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginBottom="30dp"
-                app:srcCompat="@android:drawable/ic_menu_add" />
+                android:layout_marginBottom="10dp"/>
         </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="20dp"
+            android:orientation="vertical"
+            android:background="@drawable/round_shape">
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="20dp">
 
+                <TextView
+                    android:id="@+id/TotalPost"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:textStyle="bold"
+                    android:text="전체게시판"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                    android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                    android:textSize="18sp" />
 
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|end"
+                    android:layout_marginEnd="20dp"
+                    android:text="더 보기"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                    android:textColor="@color/theme"
+                    android:textSize="13sp" />
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:id="@+id/activity_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="15dp">
+
+                <TextView
+                    android:id="@+id/activity_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:text="군내 활동 게시판"
+                    android:textColor="@color/common_google_signin_btn_text_light_pressed"
+                    android:textSize="14sp" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
+
+                <TextView
+                    android:id="@+id/activity_preview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_toEndOf="@id/activity_name"
+                    android:layout_toStartOf="@id/activity_new_post"
+                    android:singleLine="true"
+                    android:ellipsize="end"
+                    android:text="로딩 중..."
+                    android:textSize="14sp" />
+
+                <ImageView
+                    android:id="@+id/activity_new_post"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    app:srcCompat="@drawable/label" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/market_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp">
+
+                <TextView
+                    android:id="@+id/market_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:text="구매 게시판"
+                    android:textColor="@color/common_google_signin_btn_text_light_pressed"
+                    android:textSize="14sp" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
+
+                <TextView
+                    android:id="@+id/market_preview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_toEndOf="@id/market_name"
+                    android:layout_toStartOf="@id/market_new_post"
+                    android:singleLine="true"
+                    android:ellipsize="end"
+                    android:text="로딩 중..."
+                    android:textSize="14sp" />
+
+                <ImageView
+                    android:id="@+id/market_new_post"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    app:srcCompat="@drawable/label" />
+            </RelativeLayout>
+
+            <FrameLayout
+                android:id="@+id/total_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"/>
+        </LinearLayout>
 
     </LinearLayout>
 

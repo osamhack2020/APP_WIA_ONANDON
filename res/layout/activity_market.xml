@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".Club.ClubActivity">
+    android:orientation="vertical">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -23,7 +22,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginStart="10dp"
-                android:text="동아리 게시판"
+                android:text="장터 게시판"
                 android:textColor="@color/common_google_signin_btn_text_light_pressed"
                 android:textSize="16sp" />
 

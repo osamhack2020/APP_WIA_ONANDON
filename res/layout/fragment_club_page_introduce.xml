@@ -93,7 +93,7 @@
                     android:layout_marginTop="15dp"
                     android:layout_marginEnd="15dp"
                     android:layout_marginBottom="20dp"
-                    android:background="@drawable/field_orange_round_shape"
+                    android:background="@drawable/field_green_round_shape"
                     android:paddingStart="10dp"
                     android:paddingTop="5dp"
                     android:paddingEnd="10dp"

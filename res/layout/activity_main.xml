@@ -8,27 +8,45 @@
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/my_toolbar"
         android:layout_width="match_parent"
-        android:layout_height="35dp"
+        android:layout_height="wrap_content"
         android:layout_alignParentTop="true">
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp">
 
-            <TextView
-                android:layout_width="91dp"
-                android:layout_height="19dp"
-                android:layout_centerInParent="true"
-                android:layout_marginStart="3dp"
-                android:layout_marginTop="3dp"
-                android:layout_marginEnd="3dp"
-                android:layout_marginBottom="3dp"
-                android:fontFamily="@font/cooperblack"
-                android:foregroundTint="#6182D6"
-                android:gravity="center_horizontal"
-                android:text="WIA"
-                android:textColor="#6182D6"
-                android:textSize="18sp" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" WIA soldier"
+                    android:textColor="@color/theme"
+                    android:textSize="12dp" />
+
+                <TextView
+                    android:id="@+id/title_info"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="공군 교육사"
+                    android:textColor="@color/common_google_signin_btn_text_light_pressed"
+                    android:textSize="22sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="20dp"
+                app:srcCompat="@drawable/user" />
+
 
         </RelativeLayout>
 
@@ -48,6 +66,15 @@
         android:layout_height="match_parent"
         android:layout_above="@id/nav_view"
         android:layout_below="@id/toolbar_division"/>
+
+    <ImageView
+        android:layout_width="38dp"
+        android:layout_height="46dp"
+        android:layout_above="@id/nav_division"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="5dp"
+        android:layout_marginEnd="50dp"
+        app:srcCompat="@drawable/like" />
 
     <LinearLayout
         android:id="@+id/nav_division"

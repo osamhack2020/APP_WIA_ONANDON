@@ -23,7 +23,7 @@
                 android:id="@+id/diet"
                 android:layout_width="43dp"
                 android:layout_height="80dp"
-                app:srcCompat="@drawable/star" />
+                app:srcCompat="@drawable/diet" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -37,17 +37,17 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="15dp"
-                    android:text="나의 도전 이야기"
-                    android:textColor="#529014"
+                    android:text="오늘의 식단표"
+                    android:textColor="@color/orange"
                     android:textSize="20sp" />
 
                 <TextView
-                    android:id="@+id/user"
+                    android:id="@+id/date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="15dp"
                     android:layout_marginTop="1dp"
-                    android:text="공군 교육사 이승준님의 도전이야기"
+                    android:text="10월 11일"
                     android:textColor="#a0a0a0"
                     android:textSize="12sp" />
             </LinearLayout>
@@ -58,30 +58,20 @@
             android:layout_height="0dp"
             android:layout_weight="1" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:layout_marginStart="40dp"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/go_post"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingStart="10dp"
-                android:paddingTop="5dp"
-                android:paddingEnd="10dp"
-                android:background="@drawable/field_green_round_shape"
-                android:textColor="#ffffff"
-                android:paddingBottom="5dp"
-                android:textSize="12sp"
-                android:layout_gravity="end"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="50dp"
-                android:layout_marginBottom="30dp"
-                android:text="바로가기" />
-        </LinearLayout>
+            android:paddingStart="10dp"
+            android:paddingTop="5dp"
+            android:paddingEnd="10dp"
+            android:background="@drawable/field_orange_round_shape"
+            android:textColor="#ffffff"
+            android:paddingBottom="5dp"
+            android:layout_gravity="bottom|end"
+            android:layout_marginEnd="50dp"
+            android:layout_marginBottom="30dp"
+            android:textSize="12sp"
+            android:text="바로가기" />
 
     </LinearLayout>
 
