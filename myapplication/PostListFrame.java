@@ -7,18 +7,24 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.myapplication.MyGoalPost.MyGoalSearch;
 import com.example.myapplication.MyGoalPost.NewPost;
+import com.example.myapplication.model.UserDTO;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
@@ -38,6 +44,8 @@ public class PostListFrame extends AppCompatActivity {
     TextView explain;
     TextView open;
     TextView noPost;
+    TextView update;
+    ImageView isManager;
 
     String name;
     String explainIntent;
@@ -60,6 +68,8 @@ public class PostListFrame extends AppCompatActivity {
         noPost = (TextView)findViewById(R.id.no_post);
         open = (TextView)findViewById(R.id.open);
         postContent = (FrameLayout)findViewById(R.id.post_content);
+        isManager = (ImageView)findViewById(R.id.is_manager);
+        update = (TextView)findViewById(R.id.update);
 
         firestore = FirebaseFirestore.getInstance();
         auth = FirebaseAuth.getInstance();
@@ -73,7 +83,23 @@ public class PostListFrame extends AppCompatActivity {
         toolbarTitle.setText(name);
         explain.setText(explainIntent);
         explain.setVisibility(View.GONE);
+        isManager.setVisibility(View.GONE);
+        update.setVisibility(View.GONE);
 
+        if(auth.getCurrentUser().getUid().equals(manager)){
+            isManager.setVisibility(View.VISIBLE);
+            update.setVisibility(View.VISIBLE);
+
+            update.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                }
+            });
+        }
+
+        // 펼쳐보기 버튼을 누르면 게시판의 설명이 펼쳐지면서 사용자에게 노출된다.
+        // 숨기기 버튼을 누르면 게시판의 설명이 숨겨진다.
         open.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -89,10 +115,13 @@ public class PostListFrame extends AppCompatActivity {
             }
         });
 
+
+        // 게시물 리스트를 recyclerview로 보여주는 PostList.class를 FrameLayout에 실행시킨다.
         PostList postList = new PostList();
-        Bundle bundle = new Bundle(2);
+        Bundle bundle = new Bundle(3);
         bundle.putString("documentUid", documentUid);
         bundle.putString("manager", manager);
+        bundle.putString("name", name);
         postList.setArguments(bundle);
 
         FragmentManager manager = getSupportFragmentManager();
@@ -100,6 +129,7 @@ public class PostListFrame extends AppCompatActivity {
         tran.replace(R.id.post_content, postList);
         tran.commit();
 
+        // 띄울려는 게시판에 게시물 수가 0개이면 '게시물이 없습니다.' 표시가 뜨게 한다.
         firestore.collection(documentUid).limit(1)
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
                     @Override
@@ -116,6 +146,19 @@ public class PostListFrame extends AppCompatActivity {
                 });
     }
 
+    // 백버튼을 누르면 게시판을 떠난 시간이 SharedPreferences 변수에 저장된다.
+    // 새로운 게시물이 업로드 될 때마다, 게시판의 미리보기에 'new' 표시가 뜨게 되는데, 이 기능 구현하기 위해
+    // SharedPreferences 변수에 적절한 시간 변수를 저장해 준다.
+    @Override
+    public void onBackPressed() {
+        SharedPreferences sharedPreferences = getSharedPreferences("new", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor= sharedPreferences.edit();
+        editor.putLong(documentUid, System.currentTimeMillis());
+        editor.apply();
+
+        finish();
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -129,13 +172,28 @@ public class PostListFrame extends AppCompatActivity {
 
         switch(id){
             case R.id.search:
-                Intent intent = new Intent(this, MyGoalSearch.class);
+                Intent intent = new Intent(this, PostSearch.class);
+                intent.putExtra("documentUid", documentUid);
+                intent.putExtra("name", name);
+                intent.putExtra("manager", manager);
                 startActivity(intent);
                 break;
             case R.id.newpost:
-                Intent intentPost = new Intent(this, NewPostPublic.class);
-                intentPost.putExtra("documentUid", documentUid);
-                startActivity(intentPost);
+                firestore.collection("UserInfo").document(auth.getCurrentUser().getUid()).get()
+                        .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                            @Override
+                            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                                UserDTO userDTO = documentSnapshot.toObject(UserDTO.class);
+
+                                Intent intentPost = new Intent(PostListFrame.this, NewPostPublic.class);
+                                intentPost.putExtra("army", userDTO.army);
+                                intentPost.putExtra("budae", userDTO.budae);
+                                intentPost.putExtra("rank", userDTO.rank);
+                                intentPost.putExtra("documentUid", documentUid);
+                                intentPost.putExtra("name", name);
+                                startActivity(intentPost);
+                            }
+                        });
                 break;
         }
 

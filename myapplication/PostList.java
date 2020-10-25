@@ -1,6 +1,8 @@
 package com.example.myapplication;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -41,6 +43,10 @@ public class PostList extends Fragment {
 
     String documentUid;
     String manager;
+    String name;
+
+    int isSearch;
+    String search;
 
     public PostList(){
         user = FirebaseAuth.getInstance().getCurrentUser();
@@ -55,6 +61,9 @@ public class PostList extends Fragment {
 
         documentUid = getArguments().getString("documentUid");
         manager = getArguments().getString("manager");
+        name = getArguments().getString("name");
+
+        isSearch = getArguments().getInt("isSearch", 0);
 
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.post_list_recyclerview);
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
@@ -83,8 +92,18 @@ public class PostList extends Fragment {
                             if(value == null) return;
                             for(QueryDocumentSnapshot doc : value){
                                 PostDTO item = doc.toObject(PostDTO.class);
-                                contentDTOs.add(item);
-                                contentUidList.add(doc.getId());
+
+                                if(isSearch == 1){
+                                    search = getArguments().getString("search");
+                                    if(item.kind.containsValue(search)){
+                                        contentDTOs.add(item);
+                                        contentUidList.add(doc.getId());
+                                    }
+                                }
+                                else{
+                                    contentDTOs.add(item);
+                                    contentUidList.add(doc.getId());
+                                }
                             }
 
                             notifyDataSetChanged();
@@ -168,6 +187,12 @@ public class PostList extends Fragment {
                 binding.favoriteShow.setImageResource(R.drawable.empty_heart);
             }
 
+            if(contentDTOs.get(position).scrap.containsKey(user.getUid())){
+                binding.scrap.setImageResource(R.drawable.scrap);
+            }else{
+                binding.scrap.setImageResource(R.drawable.empty_star);
+            }
+
             if(contentDTOs.get(position).isPhoto == 1){
                 binding.isPhoto.setVisibility(View.VISIBLE);
             }
@@ -181,6 +206,7 @@ public class PostList extends Fragment {
                     intent.putExtra("manager", manager);
                     intent.putExtra("intentUid", contentDTOs.get(position).uid);
                     intent.putExtra("annonymous", contentDTOs.get(position).annonymous);
+                    intent.putExtra("name", name);
                     startActivity(intent);
                 }
             });

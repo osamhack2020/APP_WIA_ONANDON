@@ -17,11 +17,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.myapplication.Club.NewClubPost;
+import com.example.myapplication.model.MyPostDTO;
 import com.example.myapplication.model.PostDTO;
 import com.example.myapplication.model.TagDTO;
+import com.example.myapplication.model.UserDTO;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
@@ -49,6 +51,10 @@ public class NewPostPublic extends AppCompatActivity {
     FirebaseStorage storage;
 
     String documentUid;
+    String name;
+    String army;
+    String budae;
+    String rank;
 
     EditText postTitle;
     EditText postExplain;
@@ -89,6 +95,10 @@ public class NewPostPublic extends AppCompatActivity {
 
         Intent intent = getIntent();
         documentUid = intent.getStringExtra("documentUid");
+        name = intent.getStringExtra("name");
+        army = intent.getStringExtra("army");
+        budae = intent.getStringExtra("budae");
+        rank = intent.getStringExtra("rank");
 
         addPhoto.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -149,6 +159,10 @@ public class NewPostPublic extends AppCompatActivity {
                                 postDTO.annonymous = 1;
                             }
 
+                            postDTO.kind.put("army", "#"+army);
+                            postDTO.kind.put("budae", "#"+budae);
+                            postDTO.kind.put("rank", "#"+rank);
+
                             storePost(postDTO);
                             Toast.makeText(NewPostPublic.this, "업로드 성공", Toast.LENGTH_SHORT).show();
                             finish();
@@ -173,6 +187,10 @@ public class NewPostPublic extends AppCompatActivity {
                     if(checkBox.isChecked()){
                         postDTO.annonymous = 1;
                     }
+
+                    postDTO.kind.put("army", "#"+army);
+                    postDTO.kind.put("budae", "#"+budae);
+                    postDTO.kind.put("rank", "#"+rank);
 
                     storePost(postDTO);
                     Toast.makeText(NewPostPublic.this, "업로드 성공", Toast.LENGTH_SHORT).show();
@@ -209,7 +227,7 @@ public class NewPostPublic extends AppCompatActivity {
     }
 
     public void storePost(final PostDTO postDTO){
-        firestore.collection(documentUid).document().set(postDTO);
+        firestore.collection(documentUid).document(postDTO.timestamp+"_"+postDTO.uid).set(postDTO);
 
         final DocumentReference docRef = firestore.collection(documentUid+"_tag").document("tag");
         firestore.runTransaction(new Transaction.Function<Void>() {
@@ -239,6 +257,15 @@ public class NewPostPublic extends AppCompatActivity {
                             tagDTO.tag.add(third);
                         }
                     }
+                    if(!tagDTO.tag.contains("#"+army)){
+                        tagDTO.tag.add("#"+army);
+                    }
+                    if(!tagDTO.tag.contains("#"+budae)){
+                        tagDTO.tag.add("#"+budae);
+                    }
+                    if(!tagDTO.tag.contains("#"+rank)){
+                        tagDTO.tag.add("#"+rank);
+                    }
                     transaction.set(docRef, tagDTO);
                 }
                 else{
@@ -255,10 +282,26 @@ public class NewPostPublic extends AppCompatActivity {
                         String third = postDTO.kind.get("third");
                         tagDTO.tag.add(third);
                     }
+                    if(!tagDTO.tag.contains("#"+army)){
+                        tagDTO.tag.add("#"+army);
+                    }
+                    if(!tagDTO.tag.contains("#"+budae)){
+                        tagDTO.tag.add("#"+budae);
+                    }
+                    if(!tagDTO.tag.contains("#"+rank)){
+                        tagDTO.tag.add("#"+rank);
+                    }
                     transaction.set(docRef, tagDTO);
                 }
                 return null;
             }
         });
+
+        MyPostDTO myPost = new MyPostDTO();
+        myPost.documentUid = documentUid;
+        myPost.postUid=postDTO.timestamp+"_"+postDTO.uid;
+        myPost.timestamp=postDTO.timestamp;
+        myPost.name = name;
+        firestore.collection(auth.getCurrentUser().getUid()+"_MyPost").document().set(myPost);
     }
 }

@@ -10,6 +10,7 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.myapplication.BottomNavigation.DashboardFragment;
@@ -17,8 +18,11 @@ import com.example.myapplication.BottomNavigation.HomeFragment;
 import com.example.myapplication.BottomNavigation.NotificationFragment;
 import com.example.myapplication.BottomNavigation.PlanFragment;
 import com.example.myapplication.model.MyToken;
+import com.example.myapplication.model.UserDTO;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.iid.FirebaseInstanceId;
 
@@ -27,6 +31,11 @@ public class MainActivity extends AppCompatActivity {
     private long backKeyPressedTime = 0;
     private Toast toast;
 
+    FirebaseAuth auth;
+    FirebaseFirestore firestore;
+
+    TextView titleInfo;
+
     // 사용자가 앱을 통해 앨범에 접근할 수 있도록 권한 설정
     String permission_list [] = {Manifest.permission.READ_EXTERNAL_STORAGE};
 
@@ -34,6 +43,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        auth = FirebaseAuth.getInstance();
+        firestore = FirebaseFirestore.getInstance();
+
+        titleInfo = (TextView)findViewById(R.id.title_info);
 
         BottomNavigationView navView = findViewById(R.id.nav_view);
         navView.setSelectedItemId(R.id.navigation_home);
@@ -46,6 +60,15 @@ public class MainActivity extends AppCompatActivity {
 
         // 푸시알림을 위해 사용자의 토큰을 서버에 저장
         registerPushToken();
+
+        firestore.collection("UserInfo").document(auth.getCurrentUser().getUid()).get()
+                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        UserDTO userDTO = documentSnapshot.toObject(UserDTO.class);
+                        titleInfo.setText(userDTO.army+" "+userDTO.budae);
+                    }
+                });
 
         // 처음 MainActivity로 이동했을 때, HomeFragment가 보이게 한다.
         HomeFragment homeFragment = new HomeFragment();

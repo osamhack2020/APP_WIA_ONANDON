@@ -21,9 +21,12 @@ import android.widget.Toast;
 import com.example.myapplication.Club.ClubPostItemMore;
 import com.example.myapplication.MyGoalPost.MyGoalPostIngMore;
 import com.example.myapplication.MyGoalPost.ScrollMygoalMore;
+import com.example.myapplication.model.AlarmDTO;
 import com.example.myapplication.model.CommentDTO;
 import com.example.myapplication.model.MyGoalContentDTO;
+import com.example.myapplication.model.MyPostDTO;
 import com.example.myapplication.model.PostDTO;
+import com.example.myapplication.model.UserDTO;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
@@ -59,7 +62,10 @@ public class PostMore extends AppCompatActivity {
     String postUid;
     String intentUid;
     String manager;
+    String name;
     int annonymous;
+
+    FcmPush fcmPush;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +75,7 @@ public class PostMore extends AppCompatActivity {
         firestore = FirebaseFirestore.getInstance();
         auth = FirebaseAuth.getInstance();
         storage = FirebaseStorage.getInstance();
+        fcmPush = new FcmPush();
 
         imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
 
@@ -83,6 +90,7 @@ public class PostMore extends AppCompatActivity {
         intentUid = intent.getStringExtra("intentUid");
         manager = intent.getStringExtra("manager");
         annonymous = intent.getIntExtra("annonymous", 0);
+        name = intent.getStringExtra("name");
 
         backPressed = (ImageView)findViewById(R.id.back_pressed);
         backPressed.setOnClickListener(new View.OnClickListener() {
@@ -94,17 +102,18 @@ public class PostMore extends AppCompatActivity {
 
         // 게시물 fragment에 게시물 고유 번호 정보를 보낸다.
         ScrollPostMore fragment = new ScrollPostMore();
-        Bundle bundle = new Bundle(5);
+        Bundle bundle = new Bundle(6);
         bundle.putString("documentUid", documentUid);
         bundle.putString("postUid", postUid);
         bundle.putString("intentUid", intentUid);
         bundle.putString("manager", manager);
         bundle.putInt("annonymous", annonymous);
+        bundle.putString("name", name);
         fragment.setArguments(bundle);
 
         // 게시물 fragment를 연다.
-        FragmentManager manager = getSupportFragmentManager();
-        FragmentTransaction tran = manager.beginTransaction();
+        FragmentManager managerF = getSupportFragmentManager();
+        FragmentTransaction tran = managerF.beginTransaction();
         tran.replace(R.id.goal_ing_content, fragment);
         tran.commit();
 
@@ -144,6 +153,34 @@ public class PostMore extends AppCompatActivity {
                         return null;
                     }
                 });
+
+                firestore.collection("UserInfo").document(auth.getCurrentUser().getUid()).get()
+                        .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                            @Override
+                            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                                UserDTO userDTO = documentSnapshot.toObject(UserDTO.class);
+                                String message = userDTO.army+" "+userDTO.budae+" "+userDTO.rank+" "+userDTO.name;
+                                fcmPush.sendMessage(intentUid, "댓글 알림 메세지 입니다.", message+"님이 댓글을 달았습니다.");
+                            }
+                        });
+
+                AlarmDTO alarmDTO = new AlarmDTO();
+                alarmDTO.doUid = auth.getCurrentUser().getUid();
+                alarmDTO.documentUid = documentUid;
+                alarmDTO.postUid = postUid;
+                alarmDTO.manager = manager;
+                alarmDTO.annonymous = annonymous;
+                alarmDTO.key=1;
+                alarmDTO.name = name;
+                alarmDTO.timestamp = System.currentTimeMillis();
+                firestore.collection(intentUid+"_Alarm").document().set(alarmDTO);
+
+                MyPostDTO myPostDTO = new MyPostDTO();
+                myPostDTO.name = name;
+                myPostDTO.documentUid = documentUid;
+                myPostDTO.postUid = postUid;
+                myPostDTO.timestamp = alarmDTO.timestamp;
+                firestore.collection(auth.getCurrentUser().getUid()+"_MyComment").document().set(myPostDTO);
             }
         });
     }

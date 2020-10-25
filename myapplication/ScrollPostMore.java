@@ -13,10 +13,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.myapplication.model.AlarmDTO;
 import com.example.myapplication.model.MyGoalContentDTO;
+import com.example.myapplication.model.MyPostDTO;
 import com.example.myapplication.model.PostDTO;
 import com.example.myapplication.model.UserDTO;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -25,15 +29,19 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.firestore.Transaction;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
 public class ScrollPostMore extends Fragment {
 
     FirebaseFirestore firestore;
+    FirebaseAuth auth;
 
     TextView explainMore;
     TextView dueDateMore;
@@ -48,6 +56,9 @@ public class ScrollPostMore extends Fragment {
 
     ImageView favorite;
     ImageView photo;
+    ImageView scrap;
+
+    LinearLayout scrapLayout;
 
     FcmPush fcmPush;
 
@@ -58,7 +69,11 @@ public class ScrollPostMore extends Fragment {
     String postUid;
     String intentUid;
     String manager;
+    String name;
     int annonymous;
+
+    // update
+    int scrapClick=0;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -67,6 +82,7 @@ public class ScrollPostMore extends Fragment {
         View view = inflater.inflate(R.layout.fragment_scroll_post_more, container, false);
 
         firestore = FirebaseFirestore.getInstance();
+        auth = FirebaseAuth.getInstance();
 
         explainMore = (TextView)view.findViewById(R.id.explain_more);
         dueDateMore = (TextView)view.findViewById(R.id.due_date_more);
@@ -76,6 +92,9 @@ public class ScrollPostMore extends Fragment {
         favoriteCount = (TextView)view.findViewById(R.id.favorite_count);
         favorite = (ImageView)view.findViewById(R.id.heart);
         photo = (ImageView)view.findViewById(R.id.photo);
+        scrapLayout = (LinearLayout)view.findViewById(R.id.scrap_layout);
+        scrap = (ImageView)view.findViewById(R.id.scrap);
+
 
         kindFirst = (TextView)view.findViewById(R.id.kind_first);
         kindSecond = (TextView)view.findViewById(R.id.kind_second);
@@ -88,6 +107,7 @@ public class ScrollPostMore extends Fragment {
         intentUid = getArguments().getString("intentUid");
         manager = getArguments().getString("manager");
         annonymous = getArguments().getInt("annonymous");
+        name = getArguments().getString("name");
 
         // 게시물 정보를 서버에서 불러와 각 항목에 바인딩 시킨다.
         firestore.collection(documentUid).document(postUid).get()
@@ -140,6 +160,14 @@ public class ScrollPostMore extends Fragment {
                         if(postDTO.annonymous == 1){
                             userInfo.setText("익명");
                         }
+
+                        if(postDTO.scrap.containsKey(auth.getCurrentUser().getUid())){
+                            scrapClick=1;
+                            scrap.setImageResource(R.drawable.scrap);
+                        }else{
+                            scrapClick=0;
+                            scrap.setImageResource(R.drawable.empty_star);
+                        }
                     }
                 });
 
@@ -153,6 +181,65 @@ public class ScrollPostMore extends Fragment {
                         }
                     });
         }
+
+        scrapLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(scrapClick == 1){
+                    scrapClick=0;
+                    scrap.setImageResource(R.drawable.empty_star);
+                }else{
+                    scrapClick=1;
+                    scrap.setImageResource(R.drawable.scrap);
+                    Toast.makeText(getActivity(), "스크랩 되었습니다.", Toast.LENGTH_SHORT).show();
+                }
+
+                final DocumentReference docRef = firestore.collection(documentUid).document(postUid);
+                firestore.runTransaction(new Transaction.Function<Void>() {
+                    @Nullable
+                    @Override
+                    public Void apply(@NonNull Transaction transaction) throws FirebaseFirestoreException {
+                        DocumentSnapshot snapshot = transaction.get(docRef);
+                        final PostDTO postDTO = snapshot.toObject(PostDTO.class);
+
+                        String uidF = auth.getCurrentUser().getUid();
+
+                        if(postDTO == null){
+                            return null;
+                        }else if(postDTO.scrap.containsKey(auth.getCurrentUser().getUid())){
+                            postDTO.scrap.remove(uidF);
+                        }else{
+                            postDTO.scrap.put(uidF, true);
+
+                            firestore.collection(auth.getCurrentUser().getUid()+"_Scrap")
+                                    .whereEqualTo("timestamp", postDTO.timestamp)
+                                    .get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                                @Override
+                                public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                                    if(queryDocumentSnapshots.size() == 0){
+                                        MyPostDTO myPost = new MyPostDTO();
+                                        myPost.documentUid = documentUid;
+                                        myPost.postUid=postUid;
+                                        myPost.timestamp=postDTO.timestamp;
+                                        myPost.name = name;
+                                        firestore.collection(auth.getCurrentUser().getUid()+"_Scrap").document().set(myPost);
+                                    }
+                                }
+                            });
+                        }
+
+                        transaction.set(docRef, postDTO);
+                        return null;
+                    }
+                });
+
+                if(scrapClick == 1){
+                    Toast.makeText(getActivity(), "스크랩 되었습니다.", Toast.LENGTH_SHORT).show();
+                }else{
+                    Toast.makeText(getActivity(), "스크랩이 해제되었습니다.", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
 
         // 좋아요 클릭 이벤트
         favorite.setOnClickListener(new View.OnClickListener() {
@@ -199,6 +286,17 @@ public class ScrollPostMore extends Fragment {
                                             fcmPush.sendMessage(intentUid, "좋아요 알림 메세지 입니다.", message+"님이 좋아요를 눌렀습니다.");
                                         }
                                     });
+
+                            AlarmDTO alarmDTO = new AlarmDTO();
+                            alarmDTO.doUid = auth.getCurrentUser().getUid();
+                            alarmDTO.documentUid = documentUid;
+                            alarmDTO.postUid = postUid;
+                            alarmDTO.manager = manager;
+                            alarmDTO.annonymous = annonymous;
+                            alarmDTO.key=0;
+                            alarmDTO.timestamp = System.currentTimeMillis();
+                            alarmDTO.name =name;
+                            firestore.collection(intentUid+"_Alarm").document().set(alarmDTO);
                         }
 
                         transaction.set(docRef, postDTO);

@@ -197,9 +197,10 @@ public class UpdatePost extends AppCompatActivity {
                         postDTO.annonymous = 0;
                     }
 
-                    /*
-                    수정 필요
-                     */
+                    if(wasPhoto == 1 && change != 1){
+                        postDTO.imageUri = imageUri;
+                        postDTO.isPhoto = 1;
+                    }
 
                     postDTO.uid = auth.getCurrentUser().getUid();
                     postDTO.commentCount = commentCount;
