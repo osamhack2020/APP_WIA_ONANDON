@@ -380,7 +380,9 @@ public class MyPostDTO {
 
 MyPostDTO.java 객체에는 '내가 쓴 게시물', '내가 댓글 단 게시물', '스크랩한 게시물' 정보가 저장됩니다.
 name 변수에는 게시판 이름 정보가 저장됩니다. 예를 들어, A라는 글을 스크랩 했다면, name 변수에는 A 게시물이
-업로드된 게시판의 이름이 저장됩니다. timestamp는 객체가 저장된 시간이 저장됩니다. MyPostDTO 객체는 이벤트가
+업로드된 게시판의 이름이 저장됩니다. 
+
+timestamp는 객체가 저장된 시간이 저장됩니다. MyPostDTO 객체는 이벤트가
 발생하는 즉시 저장되므로, timestamp변수에는 댓글을 단 시간 혹은 게시물을 스크랩한 시간 등, 이벤트가 발생한
 시간이 저장됩니다.
 
@@ -534,6 +536,20 @@ collection | document | field
 각 동아리 페이지에는 동아리의 활동 내용과 홍보글을 올릴 수 있는 동아리 전용 게시판이 있습니다. '*(부대이름)* 동아리게시판' 으로
 이름이 지정된 DB는 각 동아리 페이지의 전용 페이지에 업로드 되는 게시물의 데이터를 저장합니다. 이 DB는 각 게시물의 고유 ID로 지정된
 하위 document로 구성되어 있으며, 각 document는 게시물 정보를 가지고 있는 객체 데이터 postDTO와 연결되어 있습니다. 
+
+---
+
+#### 알림 DB '*(사용자의 고유 ID)* _Alarm'
+
+collection | document | field
+------------ | ------------- | -------------
+|gah0PGV0jmgq536SboVip6vURu92_Alarm| 0qHjLRZgaKTU3qOizAeB   | AlarmDTO.java|
+|└| 6TenHBbCbFSPqjwE4MNr  | AlarmDTO.java|
+|└| PX9PJoPvGtCGMUemF4vw  | AlarmDTO.java|
+
+사용자에게 댓글 알림, 좋아요 알림이 발생하면 알림 객체 정보가 서버에 저장되는데, 이때 '*(사용자의 고유 ID)* _Alarm'로 지정된
+collectiohn에 알림 객체 정보가 저장됩니다. collection은 알림의 고유 ID로 지정된 하위 document로 구성되어 있으며,
+이 하위 document는 AlarmDTO.java 객체와 연결되어 있습니다.
 
 ---
 
