@@ -860,6 +860,55 @@ delete() 함수를 사용하여 이미지 파일을 삭제합니다.
    
 ![MainActivity](https://raw.githubusercontent.com/osamhack2020/APP_WIA_ONANDON/master/API_image/MainActivity.jpg)
 
+MainActivity는 앱의 가장 큰 클이자, 기본적인 구성을 담당하며, bottomnavigation view로 이벤트를 받아서, 화면 대부분을 차지하고 있는 'main_content' framelayout에
+프래그먼트를 교체해 주는 작업을 해줍니다. 위 사진에서 볼 수 있듯이, 하단에는 4개의 bottomnavigation 버튼이 있으며, 버튼을 누를 때마다 위의 framelayout에 적절한
+프래그먼트를 교체해 줍니다. 첫 번째 버튼은 HomeFragment, 두 번째 버튼은 PlanFragment, 세 번째 버튼은 DashboardFragment, 네 번째 버튼은 AlarmFragment로 교체해 줍니다.
+
+```java
+class ItemSelectedListener implements BottomNavigationView.OnNavigationItemSelectedListener{
+
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+            int id = menuItem.getItemId();
+
+            // BottomNavigationView의 하단 버튼을 누를 때 마다 화면 이동을 지정
+            switch(id){
+                case R.id.navigation_home :
+                    HomeFragment homeFragment = new HomeFragment();
+                    getSupportFragmentManager()
+                            .beginTransaction()
+                            .replace(R.id.main_content, homeFragment)
+                            .commit();
+                    return true;
+                case R.id.navigation_plan :
+                    PlanFragment planFragment = new PlanFragment();
+                    getSupportFragmentManager()
+                            .beginTransaction()
+                            .replace(R.id.main_content, planFragment)
+                            .commit();
+                    return true;
+                case R.id.navigation_dashboard :
+                    DashboardFragment dashboardFragment = new DashboardFragment();
+                    getSupportFragmentManager()
+                            .beginTransaction()
+                            .replace(R.id.main_content, dashboardFragment)
+                            .commit();
+                    return true;
+                case R.id.navigation_notifications :
+                    NotificationFragment notificationFragment = new NotificationFragment();
+                    getSupportFragmentManager()
+                            .beginTransaction()
+                            .replace(R.id.main_content, notificationFragment)
+                            .commit();
+                    return true;
+            }
+            return false;
+        }
+    }
+```
+
+위 코드는 bottomnavigation 리스너 코드이며, 버튼을 누를 떄 마다 fragment를 교체해 주는 코드입니다.
+
 </div>
 </details>
 
