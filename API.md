@@ -852,6 +852,16 @@ delete() 함수를 사용하여 이미지 파일을 삭제합니다.
 </div>
 </details>
 
+### 2) MainActivity.java
+
+<details>
+<summary>접기/펼치기 버튼</summary>
+<div markdown="1">
+
+</div>
+</details>
+
+
 
 
 
