@@ -160,7 +160,7 @@ CommentDTO.java  | 댓글 정보가 담기는 객체
 TagDTO.java  | 각 글의 해시태그 정보가 담기는 객체
 DietDTO.java | 각 부대의 식단표 정보가 담기는 객체
 AlarmDTO.java | 알림 정보가 담기는 객체
-MyPostDTO.java | 내가 쓴 게시물, 스크랩, 내가 댓글 쓴 게시물에 대한 정보가 저장됩니다.
+MyPostDTO.java | 내가 쓴 게시물, 스크랩, 내가 댓글 쓴 게시물 정보가 담기는 객체
 
 .
 
