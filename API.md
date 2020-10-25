@@ -907,7 +907,43 @@ class ItemSelectedListener implements BottomNavigationView.OnNavigationItemSelec
     }
 ```
 
-위 코드는 bottomnavigation 리스너 코드이며, 버튼을 누를 떄 마다 fragment를 교체해 주는 코드입니다.
+위 코드는 bottomnavigation 리스너 코드이며, 버튼을 누를 때 마다적젏나 fragment로 교체해 줍니다. switch 문으로 버튼의 케이스를 나누어
+클릭 이벤트를 처리하고 있습니다.
+
+MainActivity는 이것 이외에도, 사요자에게 내부 저장소에 접근할 수 있는 권한 허용을 요청하는 역할과, 사용자의 푸쉬 토큰을 서버에 저장하는 역할을 합니다.
+
+```java
+// 사용자에게 권한 허가를 받는 함수
+    public void checkPermission(){
+        if(Build.VERSION.SDK_INT < Build.VERSION_CODES.M){
+            return;
+        }
+        else{
+            for(String permission : permission_list) {
+                int chk = checkCallingOrSelfPermission(permission);
+                if (chk == PackageManager.PERMISSION_DENIED) {
+                    requestPermissions(permission_list, 0);
+                }
+            }
+        }
+    }
+```
+
+안드로이드 버전이 마쉬멜로우 이상이면 내부저장소에 접근할 수 있는 권한을 사용자로부터 허가 받습니다. 이미 권한이 허용된 상태이면,
+권한을 묻지 않고, 함수를 종료시킵니다.
+
+```java
+// 푸시알림을 위해 사용자의 토큰을 서버에 저장
+    public void registerPushToken(){
+        String pushToken = FirebaseInstanceId.getInstance().getToken();
+        String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        MyToken myToken = new MyToken();
+        myToken.pushtoken=pushToken;
+        FirebaseFirestore.getInstance().collection("pushtokens").document(uid).set(myToken);
+    }
+```
+
+사용자의 푸쉬 토큰을 발급받아, 'pushtokens'로 지정된 collection에 토큰 정보를 저장합니다. 저장된 푸쉬 토큰은 서버로 부터 푸쉬 알림을 받을 때 사용됩니다.
 
 </div>
 </details>
