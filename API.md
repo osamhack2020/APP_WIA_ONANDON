@@ -159,6 +159,8 @@ PostDTO.java  | 일반 게시판의 게시물 정보가 담기는 객체
 CommentDTO.java  | 댓글 정보가 담기는 객체
 TagDTO.java  | 각 글의 해시태그 정보가 담기는 객체
 DietDTO.java | 각 부대의 식단표 정보가 담기는 객체
+AlarmDTO.java | 알림 정보가 담기는 객체
+MyPostDTO.java | 내가 쓴 게시물, 스크랩, 내가 
 
 .
 
@@ -342,6 +344,44 @@ public class DietDTO {
 
 DietDTO 객체에는 각 부대의 식단 정보가 저장됩니다. postDay 변수에는 식단표에 해당하는 날짜가 저장되며,
 나머지 3개의 ArrayList에는 조식, 중식, 석식 메뉴가 String 배열로 저장됩니다.
+
+#### AlarmDTO.java
+```java
+public class AlarmDTO {
+    public String doUid=""; // 알림을 일으킨 사용자 고유 Id
+    public String documentUid=""; // 알림이 일어난 게시물의 게시판 고유 Id
+    public String postUid=""; // 알림이 일어난 게시물의 고유 Id
+    public String manager=""; // 게시판의 관리자 Id
+    public String name=""; // 게시판 이름
+    public int annonymous=0; // 익명 유무
+    public int key=0; // 0 : 좋아요 알림, 1 : 댓글 알림
+    public long timestamp=0; // 알림이 일어난 시간
+}
+```
+
+AlarmDTO.java 객체에는 사용자에게 뜨는 알림 메세지의 정보가 저장됩니다. doUid변수에는
+알림을 일으킨 사용자의 고유 Id(댓글을 남긴 사람, 좋아요를 누른 사람의 고유 ID)가 저장되며, key 변수에는
+알림 메세지의 종류가 저장됩니다. 0이 저장되면 '좋아요 알림', 1이 저장되면 '댓글 알림'이라는 의미입니다.
+
+documentUid, postUid, manager, name 변수에는 알림이 일어난 게시물의 정보가 저장됩니다. 뜬 알림을 누르면
+알림이 발생한 게시물로 이동하게 되는데, 이때 필요한 정보들입니다.
+
+#### MyPostDTO.java
+```java
+public class AlarmDTO {
+    public String doUid=""; // 알림을 일으킨 사용자 고유 Id
+    public String documentUid=""; // 알림이 일어난 게시물의 게시판 고유 Id
+    public String postUid=""; // 알림이 일어난 게시물의 고유 Id
+    public String manager=""; // 게시판의 관리자 Id
+    public String name=""; // 게시판 이름
+    public int annonymous=0; // 익명 유무
+    public int key=0; // 0 : 좋아요 알림, 1 : 댓글 알림
+    public long timestamp=0; // 알림이 일어난 시간
+}
+```
+
+MyPostDTO.java 객체에는 '내가 쓴 게시물', '내가 댓글 단 게시물', '스크랩한 게시물' 정보가 저장됩니다/
+
 
 ---
 
