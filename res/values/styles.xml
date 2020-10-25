@@ -13,4 +13,8 @@
     <style name="DialogTheme" parent="Theme.AppCompat.Light.Dialog">
         <item name="colorAccent">@color/theme</item>
     </style>
+
+    <style name="DialogThemeOrange" parent="Theme.AppCompat.Light.Dialog">
+        <item name="colorAccent">@color/orange</item>
+    </style>
 </resources>
