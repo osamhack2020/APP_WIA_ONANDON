@@ -401,7 +401,7 @@ timestamp는 객체가 저장된 시간이 저장됩니다. MyPostDTO 객체는 
 <summary>접기/펼치기 버튼</summary>
 <div markdown="1">
 
-firebase는 기본적으로 NoSQL 구조의 데이터베이스를 지원하며, WIA 또한 같은 형식의 데이터베이스로 서비스르 제공합니다.
+firebase는 기본적으로 NoSQL 구조의 데이터베이스를 지원하며, WIA 또한 같은 형식의 데이터베이스로 서비스를 제공합니다.
 
 #### 사용자 정보 DB 'UserInfo'
 
@@ -550,6 +550,28 @@ collection | document | field
 사용자에게 댓글 알림, 좋아요 알림이 발생하면 알림 객체 정보가 서버에 저장되는데, 이때 '*(사용자의 고유 ID)* _Alarm'로 지정된
 collection에 알림 객체 정보가 저장됩니다. collection은 알림의 고유 ID로 지정된 하위 document로 구성되어 있으며,
 이 하위 document는 AlarmDTO.java 객체와 연결되어 있습니다.
+
+---
+
+#### 내가 쓴 글 DB '*(사용자의 고유 ID)* _MyPost'
+
+collection | document | field
+------------ | ------------- | -------------
+|**gah0PGV0jmgq536SboVip6vURu92_Scrap**| qHum1IKZcNNJPGkeOe0K | MyPostDTO.java |
+|└| yUTEwRXfNYJG8xhpUl61  | MyPostDTO.java |
+|└| ZC5UTNefue86NfWqI5tl  | MyPostDTO.java |
+
+WIA는 사용자가 게시물을 업로드 하면, 사용자가 업로드 한 게시물만 따로 모아서 제공합니다. 이때, 사용자가 업로드한 게시물 정보가
+'*(사용자의 고유 ID)* _MyPost'로 지정된 collection에 저장됩니다. collection은 각 게시물의 고유 Id로 지정된 하위 document로 구성되며,
+각 document는 MyPostDTO 객체와 연결됩니다.
+
+이 외에도, 같은 구조로 다음과 같은 DB가 있습니다.
+
+**1)** 스크랩 DB '*(사용자의 고유 ID)* _Scrap'  
+사용자가 스크랩한 게시물 정보가 저장됩니다.
+
+**2)** 내가 댓글 쓴 게시물 DB '*(사용자의 고유 ID)* _MyMessage'
+사용자가 댓글을 단 게시물 정보가 저장됩니다.
 
 ---
 
