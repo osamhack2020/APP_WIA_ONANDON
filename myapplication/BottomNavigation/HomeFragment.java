@@ -1,6 +1,8 @@
 package com.example.myapplication.BottomNavigation;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Paint;
 import android.os.Bundle;
 
@@ -44,11 +46,9 @@ public class HomeFragment extends Fragment {
     FirebaseAuth auth;
 
     ViewPager pager;
-    LinearLayout myGoalTitle;
     RelativeLayout clubLayout;
     TextView textview;
     TextView preview;
-    ImageView addBudae;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -61,19 +61,14 @@ public class HomeFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         pager = (ViewPager)view.findViewById(R.id.pager);
-        myGoalTitle = (LinearLayout)view.findViewById(R.id.myGoal_title);
         textview = (TextView)view.findViewById(R.id.budaePost);
         clubLayout = (RelativeLayout)view.findViewById(R.id.club_layout);
         preview = (TextView)view.findViewById(R.id.preview);
-        addBudae = (ImageView)view.findViewById(R.id.add_budae);
-        
+
         firestore = FirebaseFirestore.getInstance();
         auth = FirebaseAuth.getInstance();
 
         textview.setPaintFlags(textview.getPaintFlags() | Paint.FAKE_BOLD_TEXT_FLAG);
-
-        MyGoalListener myGoalListener = new MyGoalListener();
-        myGoalTitle.setOnClickListener(myGoalListener);
 
         clubLayout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -88,39 +83,33 @@ public class HomeFragment extends Fragment {
                         });
             }
         });
-        
-        addBudae.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), MakeBoard.class);
-                startActivity(intent);
-            }
-        });
 
         firestore.collection("MyGoal").orderBy("timestamp", Query.Direction.DESCENDING)
-                .limit(5).addSnapshotListener(new EventListener<QuerySnapshot>() {
+                .limit(1).addSnapshotListener(new EventListener<QuerySnapshot>() {
             ArrayList<Fragment> frag_list;
 
             @Override
             public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
                 frag_list = new ArrayList<Fragment>();
 
+                TodayDiet todayDiet = new TodayDiet();
+                frag_list.add(todayDiet);
+
                 for(QueryDocumentSnapshot doc : value){
-                    MyGoalContentDTO item = doc.toObject(MyGoalContentDTO.class);
+                    if(value.size() != 0) {
+                        MyGoalContentDTO item = doc.toObject(MyGoalContentDTO.class);
 
-                    String intentDocument = doc.getId();
-                    String intentUid = item.uid;
-
-                    MyGoal sub = new MyGoal();
-                    Bundle bundle = new Bundle(2);
-                    bundle.putString("document", intentDocument);
-                    bundle.putString("uid", intentUid);
-                    sub.setArguments(bundle);
-                    frag_list.add(sub);
+                        String intentUid = item.uid;
+                        MyGoal sub = new MyGoal();
+                        Bundle bundle = new Bundle(1);
+                        bundle.putString("uid", intentUid);
+                        sub.setArguments(bundle);
+                        frag_list.add(sub);
+                    }
                 }
 
                 FragmentManager manager = getChildFragmentManager();
-                PagerAdapter pagerAdapter = new PagerAdapter(manager, 5);
+                PagerAdapter pagerAdapter = new PagerAdapter(manager, frag_list.size());
                 pager.setAdapter(pagerAdapter);
                 pager.setCurrentItem(0);
 
@@ -156,7 +145,7 @@ public class HomeFragment extends Fragment {
             }
 
         });
-        
+
         firestore.collection("UserInfo").document(auth.getCurrentUser().getUid()).get()
                 .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                     @Override
@@ -173,13 +162,14 @@ public class HomeFragment extends Fragment {
                                 for(QueryDocumentSnapshot doc : value) {
                                     PostDTO postDTO = doc.toObject(PostDTO.class);
                                     preview.setText(postDTO.explain);
+
                                 }
                             }
                         });
 
                         BudaePost budaePost = new BudaePost();
                         Bundle bundle = new Bundle(1);
-                        bundle.putString("budae", userDTO.budae);
+                        bundle.putString("collection", userDTO.budae+"게시판");
                         budaePost.setArguments(bundle);
 
                         FragmentManager manager = getChildFragmentManager();
@@ -189,19 +179,19 @@ public class HomeFragment extends Fragment {
                     }
                 });
 
+        BudaePost totalBudaePost = new BudaePost();
+        Bundle bundle = new Bundle(1);
+        bundle.putString("collection", "total_board");
+        totalBudaePost.setArguments(bundle);
+
+        FragmentManager manager = getChildFragmentManager();
+        FragmentTransaction tran = manager.beginTransaction();
+        tran.replace(R.id.total_content, totalBudaePost);
+        tran.commit();
+
         return view;
     }
 
-    // '나의 도전 이야기'로 이동
-    class MyGoalListener implements View.OnClickListener{
-
-        @Override
-        public void onClick(View view) {
-            Intent intent = new Intent(getActivity(), MyGoalActivity.class);
-            startActivity(intent);
-        }
-    }
-    
     public void movinClubPage(String budae){
         Intent intent = new Intent(getActivity(), ClubActivity.class);
         intent.putExtra("budae", budae);

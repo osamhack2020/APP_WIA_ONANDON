@@ -16,64 +16,58 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.myapplication.Club.ClubPostList;
 import com.example.myapplication.PostListFrame;
 import com.example.myapplication.R;
 import com.example.myapplication.databinding.BudaePostItemBinding;
-import com.example.myapplication.databinding.ClubPostListItemBinding;
+import com.example.myapplication.databinding.TotalBoardItemBinding;
+import com.example.myapplication.model.AlarmDTO;
 import com.example.myapplication.model.BoardDTO;
 import com.example.myapplication.model.PostDTO;
+import com.example.myapplication.model.UserDTO;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.firestore.Transaction;
 
 import java.util.ArrayList;
 
-/*
-[BudaePost.java]
-BudaePost 파일은 사용자가 소속된 부대의 게시판 리스트를
-리사이클러뷰로 보여주는 자바 파일입니다.
-
-1. 'R.layout.budae_post_item' 레이아웃이 하나의 게시판을 구성하며,
-레이아웃을 누르면 해당 게시판으로 이동됩니다.
-2. 게시판으로 이동할 때, SharedPreferences에 게시판으로 이동한 시간을 저장합니다.
-BudaePost.class는 각 게시판에 새로운 게시물이 업로드 될 때마다 'new' 표시로
-새로운 게시물이 업로드 되없음을 사용자에게 알려주는데, SharedPreferences에 저장된
-시간 값은 이러한 기능을 구현하는 데 사용됩니다.
- */
-
-public class BudaePost extends Fragment {
+public class TotalBudaePost extends Fragment {
 
     private FirebaseFirestore firestore;
     private FirebaseUser user;
 
     String collection;
+    ArrayList<Integer> click;
 
-    public BudaePost(){
+    public TotalBudaePost(){
         firestore = FirebaseFirestore.getInstance();
         user = FirebaseAuth.getInstance().getCurrentUser();
+        click = new ArrayList<>();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_budae_post, container, false);
+        View view = inflater.inflate(R.layout.fragment_total_budae_post, container, false);
         collection = getArguments().getString("collection");
 
-
-        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.budae_post_recyclerview);
+        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.total_board_recyclerview);
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
         recyclerView.setAdapter(new DetailRecyclerViewAdapter());
+
         return view;
     }
 
-    private class DetailRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+    private class DetailRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
 
         private ArrayList<BoardDTO> contentDTOs;
         private ArrayList<String> contentUidList;
@@ -93,26 +87,26 @@ public class BudaePost extends Fragment {
                             if (value == null) return;
                             for (QueryDocumentSnapshot doc : value) {
                                 BoardDTO item = doc.toObject(BoardDTO.class);
-                                if(item.clip.containsKey(user.getUid())){
-                                    contentDTOs.add(item);
-                                    contentUidList.add(doc.getId());
-                                }
+                                contentDTOs.add(item);
+                                contentUidList.add(doc.getId());
                             }
 
                             notifyDataSetChanged();
                         }
                     });
+
         }
+
         @NonNull
         @Override
         public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.budae_post_item, parent, false);
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.total_board_item, parent, false);
             return new CustomViewHolder(view);
         }
 
         @Override
         public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, final int position) {
-            final BudaePostItemBinding binding = ((CustomViewHolder) holder).getBinding();
+            final TotalBoardItemBinding binding = ((CustomViewHolder) holder).getBinding();
 
             binding.name.setText(contentDTOs.get(position).name);
             binding.newPost.setVisibility(View.GONE);
@@ -123,12 +117,8 @@ public class BudaePost extends Fragment {
                 SharedPreferences sharedPreferences = getActivity().getSharedPreferences("new", Context.MODE_PRIVATE);
                 @Override
                 public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
-                    if(value.size() == 0){
-                        binding.preview.setText("게시물이 없습니다.");
-                    }
                     for(QueryDocumentSnapshot doc : value) {
                         final PostDTO postDTO = doc.toObject(PostDTO.class);
-                        binding.preview.setText(postDTO.explain);
 
                         if(postDTO.timestamp > sharedPreferences.getLong(contentUidList.get(position), 0)){
                             binding.newPost.setVisibility(View.VISIBLE);
@@ -146,17 +136,69 @@ public class BudaePost extends Fragment {
                 }
             });
 
+            if(contentDTOs.get(position).clip.containsKey(user.getUid()) && click.size()== position){
+                binding.clip.setImageResource(R.drawable.clip);
+                click.add(1);
+            }
+            else if(click.size()== position){
+                binding.clip.setImageResource(R.drawable.not_clip);
+                click.add(0);
+            }
+
+            binding.clip.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if(click.get(position) == 1){
+                        binding.clip.setImageResource(R.drawable.not_clip);
+                        click.add(position, 0);
+                        final DocumentReference docRef = firestore.collection(collection)
+                                .document(contentUidList.get(position));
+
+                        firestore.runTransaction(new Transaction.Function<Void>() {
+                            @Nullable
+                            @Override
+                            public Void apply(@NonNull Transaction transaction) throws FirebaseFirestoreException {
+                                DocumentSnapshot snapshot = transaction.get(docRef);
+                                BoardDTO boardDTO = snapshot.toObject(BoardDTO.class);
+
+                                boardDTO.clip.remove(user.getUid());
+                                transaction.set(docRef, boardDTO);
+                                return null;
+                            }
+                        });
+                    }
+                    else{
+                        binding.clip.setImageResource(R.drawable.clip);
+                        click.add(position, 1);
+                        final DocumentReference docRef = firestore.collection(collection)
+                                .document(contentUidList.get(position));
+
+                        firestore.runTransaction(new Transaction.Function<Void>() {
+                            @Nullable
+                            @Override
+                            public Void apply(@NonNull Transaction transaction) throws FirebaseFirestoreException {
+                                DocumentSnapshot snapshot = transaction.get(docRef);
+                                BoardDTO boardDTO = snapshot.toObject(BoardDTO.class);
+
+                                boardDTO.clip.put(user.getUid(), true);
+                                transaction.set(docRef, boardDTO);
+                                return null;
+                            }
+                        });
+                    }
+
+                }
+            });
+
+
             binding.budaeLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-
-                    // 게시판으로 들어간 시간을 SharedPreferences에 저장
                     SharedPreferences sharedPreferences = getActivity().getSharedPreferences("new", Context.MODE_PRIVATE);
                     SharedPreferences.Editor editor= sharedPreferences.edit();
                     editor.putLong(contentUidList.get(position), System.currentTimeMillis());
                     editor.apply();
 
-                    // 해당 게시판으로 이동
                     Intent intent = new Intent(getContext(), PostListFrame.class);
                     intent.putExtra("name", contentDTOs.get(position).name);
                     intent.putExtra("explain", contentDTOs.get(position).explain);
@@ -164,8 +206,6 @@ public class BudaePost extends Fragment {
                     intent.putExtra("manager", contentDTOs.get(position).manager);
                     startActivity(intent);
 
-
-                    // 'new' 표시가 떴으면 게시판으로 들어가는 순간 숨김
                     if(binding.newPost.getVisibility() == View.VISIBLE){
                         binding.newPost.setVisibility(View.GONE);
                     }
@@ -181,7 +221,7 @@ public class BudaePost extends Fragment {
 
     private class CustomViewHolder extends RecyclerView.ViewHolder{
 
-        private BudaePostItemBinding binding;
+        private TotalBoardItemBinding binding;
 
         public CustomViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -189,9 +229,8 @@ public class BudaePost extends Fragment {
             binding = DataBindingUtil.bind(itemView);
         }
 
-        BudaePostItemBinding getBinding(){
+        TotalBoardItemBinding getBinding(){
             return binding;
         }
     }
-
 }
