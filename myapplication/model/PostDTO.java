@@ -16,6 +16,7 @@ public class PostDTO {
     public int isPhoto=0; // 게시물의 사진 업로드 유무
     public int annonymous=0; //익명 유무
     public String imageUri=""; // 게시물에 업로드 된 사진 링크
+    public Map<String, Boolean> scrap = new HashMap<>();
     public Map<String, Boolean> favorites = new HashMap<>(); // 좋아요를 누른 사용자 Uid가 저장 될 HashMap
     public Map<String, String> kind = new HashMap<>(); // 해시 태그
 }
