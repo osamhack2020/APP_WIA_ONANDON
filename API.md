@@ -364,24 +364,23 @@ AlarmDTO.java 객체에는 사용자에게 뜨는 알림 메세지의 정보가 
 알림 메세지의 종류가 저장됩니다. 0이 저장되면 '좋아요 알림', 1이 저장되면 '댓글 알림'이라는 의미입니다.
 
 documentUid, postUid, manager, name 변수에는 알림이 일어난 게시물의 정보가 저장됩니다. 뜬 알림을 누르면
-알림이 발생한 게시물로 이동하게 되는데, 이때 필요한 정보들입니다.
+알림이 발생한 게시물로 이동하게 되는데, 이때 필요한 정보들이 저장됩니다.
 
 #### MyPostDTO.java
 ```java
-public class AlarmDTO {
-    public String doUid=""; // 알림을 일으킨 사용자 고유 Id
-    public String documentUid=""; // 알림이 일어난 게시물의 게시판 고유 Id
-    public String postUid=""; // 알림이 일어난 게시물의 고유 Id
-    public String manager=""; // 게시판의 관리자 Id
+public class MyPostDTO {
     public String name=""; // 게시판 이름
-    public int annonymous=0; // 익명 유무
-    public int key=0; // 0 : 좋아요 알림, 1 : 댓글 알림
-    public long timestamp=0; // 알림이 일어난 시간
+    public String documentUid=""; // 게시판 고유 Id
+    public String postUid=""; // 게시물 고유 Id
+    public long timestamp=0; // 저장된 시간
 }
 ```
 
 MyPostDTO.java 객체에는 '내가 쓴 게시물', '내가 댓글 단 게시물', '스크랩한 게시물' 정보가 저장됩니다.
-
+name 변수에는 게시판 이름 정보가 저장됩니다. 예를 들어, A라는 글을 스크랩 했다면, name 변수에는 A 게시물이
+업로드된 게시판의 이름이 저장됩니다. timestamp는 객체가 저장된 시간이 저장됩니다. MyPostDTO 객체는 이벤트가
+발생하는 즉시 저장되므로, timestamp변수에는 댓글을 단 시간 혹은 게시물을 스크랩한 시간 등, 이벤트가 발생한
+시간이 저장됩니다.
 
 ---
 
