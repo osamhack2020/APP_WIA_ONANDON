@@ -543,12 +543,12 @@ collection | document | field
 
 collection | document | field
 ------------ | ------------- | -------------
-|gah0PGV0jmgq536SboVip6vURu92_Alarm| 0qHjLRZgaKTU3qOizAeB   | AlarmDTO.java|
+|**gah0PGV0jmgq536SboVip6vURu92_Alarm**| 0qHjLRZgaKTU3qOizAeB   | AlarmDTO.java|
 |└| 6TenHBbCbFSPqjwE4MNr  | AlarmDTO.java|
 |└| PX9PJoPvGtCGMUemF4vw  | AlarmDTO.java|
 
 사용자에게 댓글 알림, 좋아요 알림이 발생하면 알림 객체 정보가 서버에 저장되는데, 이때 '*(사용자의 고유 ID)* _Alarm'로 지정된
-collectiohn에 알림 객체 정보가 저장됩니다. collection은 알림의 고유 ID로 지정된 하위 document로 구성되어 있으며,
+collection에 알림 객체 정보가 저장됩니다. collection은 알림의 고유 ID로 지정된 하위 document로 구성되어 있으며,
 이 하위 document는 AlarmDTO.java 객체와 연결되어 있습니다.
 
 ---
