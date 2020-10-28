@@ -1044,7 +1044,7 @@ firestore에서 가장 최근 게시물 한개에 접근하여, 게시물 정보
 
 BudaePost 프래그먼트는 사용자가 즐겨찾기로 등록한 게시판 목록을 recyclerview로 표시하며, TotalBudaePost 또한 같은 구조를 취하고 있습니다.
 
-![BudaePost](https://raw.githubusercontent.com/osamhack2020/APP_WIA_ONANDON/master/API_image/HomeFragment.jpg)
+![BudaePost](https://raw.githubusercontent.com/osamhack2020/APP_WIA_ONANDON/master/API_image/BudaePost.jpg)
 
 
 
