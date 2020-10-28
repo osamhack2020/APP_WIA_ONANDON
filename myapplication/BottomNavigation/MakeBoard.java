@@ -19,7 +19,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class MakeBoard extends AppCompatActivity {
+public class
+
+
+MakeBoard extends AppCompatActivity {
 
     FirebaseAuth auth;
     FirebaseFirestore firestore;

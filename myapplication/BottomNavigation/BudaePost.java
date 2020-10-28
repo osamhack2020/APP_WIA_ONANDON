@@ -125,6 +125,7 @@ public class BudaePost extends Fragment {
                 public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
                     if(value.size() == 0){
                         binding.preview.setText("게시물이 없습니다.");
+                        binding.newPost.setVisibility(View.GONE);
                     }
                     for(QueryDocumentSnapshot doc : value) {
                         final PostDTO postDTO = doc.toObject(PostDTO.class);
@@ -132,6 +133,8 @@ public class BudaePost extends Fragment {
 
                         if(postDTO.timestamp > sharedPreferences.getLong(contentUidList.get(position), 0)){
                             binding.newPost.setVisibility(View.VISIBLE);
+                        }else{
+                            binding.newPost.setVisibility(View.GONE);
                         }
 
                         sharedPreferences.registerOnSharedPreferenceChangeListener(new SharedPreferences.OnSharedPreferenceChangeListener() {

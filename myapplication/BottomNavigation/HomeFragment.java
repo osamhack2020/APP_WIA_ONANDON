@@ -19,12 +19,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.example.myapplication.Activity.ActivityFrame;
 import com.example.myapplication.Club.ClubActivity;
 import com.example.myapplication.MyGoalPost.MyGoalActivity;
 import com.example.myapplication.R;
+import com.example.myapplication.market.MarketActivity;
+import com.example.myapplication.model.ActivityDTO;
 import com.example.myapplication.model.MyGoalContentDTO;
 import com.example.myapplication.model.PostDTO;
 import com.example.myapplication.model.UserDTO;
@@ -47,8 +51,16 @@ public class HomeFragment extends Fragment {
 
     ViewPager pager;
     RelativeLayout clubLayout;
+    RelativeLayout marketLayout;
+    RelativeLayout activityLayout;
     TextView textview;
     TextView preview;
+    TextView activityPreview;
+    TextView activityNewPost;
+    TextView marketPreview;
+    TextView marketNewPost;
+
+    ProgressBar progressBar;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -64,11 +76,21 @@ public class HomeFragment extends Fragment {
         textview = (TextView)view.findViewById(R.id.budaePost);
         clubLayout = (RelativeLayout)view.findViewById(R.id.club_layout);
         preview = (TextView)view.findViewById(R.id.preview);
+        activityPreview = (TextView)view.findViewById(R.id.activity_preview);
+        marketPreview = (TextView)view.findViewById(R.id.market_preview);
+        marketNewPost = (TextView)view.findViewById(R.id.market_new_post);
 
         firestore = FirebaseFirestore.getInstance();
         auth = FirebaseAuth.getInstance();
 
         textview.setPaintFlags(textview.getPaintFlags() | Paint.FAKE_BOLD_TEXT_FLAG);
+
+        progressBar = view.findViewById(R.id.progressBar);
+        marketLayout = view.findViewById(R.id.market_layout);
+        activityLayout = view.findViewById(R.id.activity_layout);
+        activityNewPost = view.findViewById(R.id.activity_new_post);
+        activityNewPost.setVisibility(View.GONE);
+        marketNewPost.setVisibility(View.GONE);
 
         clubLayout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,6 +103,102 @@ public class HomeFragment extends Fragment {
                                 movinClubPage(userDTO.budae);
                             }
                         });
+            }
+        });
+
+        marketLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SharedPreferences sharedPreferences = getActivity().getSharedPreferences("new", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor= sharedPreferences.edit();
+                editor.putLong("Activity", System.currentTimeMillis());
+                editor.apply();
+
+                Intent intent = new Intent(getContext(), MarketActivity.class);
+                startActivity(intent);
+
+                if(marketNewPost.getVisibility() == View.VISIBLE){
+                    marketNewPost.setVisibility(View.GONE);
+                }
+            }
+        });
+
+        firestore.collection("purchase").orderBy("timestamp", Query.Direction.DESCENDING)
+                .limit(1).addSnapshotListener(new EventListener<QuerySnapshot>() {
+            SharedPreferences sharedPreferences = getActivity().getSharedPreferences("new", Context.MODE_PRIVATE);
+            @Override
+            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                if(value.size() == 0){
+                   marketPreview.setText("게시물이 없습니다.");
+                    marketNewPost.setVisibility(View.GONE);
+                }
+                for(QueryDocumentSnapshot doc : value) {
+                    PostDTO postDTO = doc.toObject(PostDTO.class);
+                    marketPreview.setText(postDTO.explain);
+
+                    if(postDTO.timestamp > sharedPreferences.getLong("purchase", 0)){
+                        marketNewPost.setVisibility(View.VISIBLE);
+                    }else{
+                        marketNewPost.setVisibility(View.GONE);
+                    }
+
+                    sharedPreferences.registerOnSharedPreferenceChangeListener(new SharedPreferences.OnSharedPreferenceChangeListener() {
+                        @Override
+                        public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String s) {
+                            if(s.equals("purchase")){
+                                marketNewPost.setVisibility(View.GONE);
+                            }
+                        }
+                    });
+                }
+            }
+        });
+
+        activityLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SharedPreferences sharedPreferences = getActivity().getSharedPreferences("new", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor= sharedPreferences.edit();
+                editor.putLong("Activity", System.currentTimeMillis());
+                editor.apply();
+
+                Intent intent = new Intent(getContext(), ActivityFrame.class);
+                startActivity(intent);
+
+                if(activityNewPost.getVisibility() == View.VISIBLE){
+                    activityNewPost.setVisibility(View.GONE);
+                }
+            }
+        });
+
+        firestore.collection("Activity").orderBy("timestamp", Query.Direction.DESCENDING)
+                .limit(1).addSnapshotListener(new EventListener<QuerySnapshot>() {
+            SharedPreferences sharedPreferences = getActivity().getSharedPreferences("new", Context.MODE_PRIVATE);
+            @Override
+            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                if(value.size() == 0){
+                    activityPreview.setText("게시물이 없습니다.");
+                    activityNewPost.setVisibility(View.GONE);
+                }
+                for(QueryDocumentSnapshot doc : value) {
+                    ActivityDTO activityDTO = doc.toObject(ActivityDTO.class);
+                    activityPreview.setText(activityDTO.explain);
+
+                    if(activityDTO.timestamp > sharedPreferences.getLong("Activity", 0)){
+                        activityNewPost.setVisibility(View.VISIBLE);
+                    }else{
+                        activityNewPost.setVisibility(View.GONE);
+                    }
+
+                    sharedPreferences.registerOnSharedPreferenceChangeListener(new SharedPreferences.OnSharedPreferenceChangeListener() {
+                        @Override
+                        public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String s) {
+                            if(s.equals("Activity")){
+                                activityNewPost.setVisibility(View.GONE);
+                            }
+                        }
+                    });
+                }
             }
         });
 
@@ -152,6 +270,7 @@ public class HomeFragment extends Fragment {
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
                         UserDTO userDTO = documentSnapshot.toObject(UserDTO.class);
 
+                        progressBar.setVisibility(View.VISIBLE);
                         firestore.collection(userDTO.budae+"동아리게시판").orderBy("timestamp", Query.Direction.DESCENDING)
                                 .limit(1).addSnapshotListener(new EventListener<QuerySnapshot>() {
                             @Override
@@ -162,7 +281,6 @@ public class HomeFragment extends Fragment {
                                 for(QueryDocumentSnapshot doc : value) {
                                     PostDTO postDTO = doc.toObject(PostDTO.class);
                                     preview.setText(postDTO.explain);
-
                                 }
                             }
                         });
@@ -176,6 +294,7 @@ public class HomeFragment extends Fragment {
                         FragmentTransaction tran = manager.beginTransaction();
                         tran.replace(R.id.budae_content, budaePost);
                         tran.commit();
+                        progressBar.setVisibility(View.GONE);
                     }
                 });
 

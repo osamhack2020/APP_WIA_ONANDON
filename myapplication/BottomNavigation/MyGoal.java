@@ -62,14 +62,15 @@ public class MyGoal extends Fragment {
             }
         });
 
-        firestore.collection("UserInfo").document(uid).get()
-                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+        firestore.collection("UserInfo").document(uid)
+                .addSnapshotListener(new EventListener<DocumentSnapshot>() {
                     @Override
-                    public void onSuccess(DocumentSnapshot documentSnapshot) {
-                        UserDTO userDTO = documentSnapshot.toObject(UserDTO.class);
+                    public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
+                        UserDTO userDTO = value.toObject(UserDTO.class);
                         userInfo.setText(userDTO.army + " " + userDTO.budae+" "+userDTO.name+"님의 도전이야기");
                     }
                 });
+
 
 
         return view;

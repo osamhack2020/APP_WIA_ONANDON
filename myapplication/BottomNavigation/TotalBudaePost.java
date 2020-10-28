@@ -122,6 +122,8 @@ public class TotalBudaePost extends Fragment {
 
                         if(postDTO.timestamp > sharedPreferences.getLong(contentUidList.get(position), 0)){
                             binding.newPost.setVisibility(View.VISIBLE);
+                        }else{
+                            binding.newPost.setVisibility(View.GONE);
                         }
 
                         sharedPreferences.registerOnSharedPreferenceChangeListener(new SharedPreferences.OnSharedPreferenceChangeListener() {
