@@ -907,7 +907,7 @@ class ItemSelectedListener implements BottomNavigationView.OnNavigationItemSelec
     }
 ```
 
-위 코드는 bottomnavigation 리스너 코드이며, 버튼을 누를 때 마다적젏나 fragment로 교체해 줍니다. switch 문으로 버튼의 케이스를 나누어
+위 코드는 bottomnavigation 리스너 코드이며, 버튼을 누를 때 마다 해당 fragment로 교체해 줍니다. switch 문으로 버튼의 케이스를 나누어
 클릭 이벤트를 처리하고 있습니다.
 
 MainActivity는 이것 이외에도, 사요자에게 내부 저장소에 접근할 수 있는 권한 허용을 요청하는 역할과, 사용자의 푸쉬 토큰을 서버에 저장하는 역할을 합니다.
@@ -947,6 +947,23 @@ MainActivity는 이것 이외에도, 사요자에게 내부 저장소에 접근�
 
 </div>
 </details>
+
+### 3) HomeFragment.java
+
+<details>
+<summary>접기/펼치기 버튼</summary>
+<div markdown="1">
+   
+HomeFragment는 앱을 처음 작동시켰을 때 나오는 메인 화면을 담당하며, 사용자가 즐겨찾기로 등록한 게시판 목록과, WIA가 제공하는 여러 서비스 들을 시작적으로
+제시합니다. 
+
+![HomeFragment](https://raw.githubusercontent.com/osamhack2020/APP_WIA_ONANDON/master/API_image/HomeFragment.jpg)
+   
+   
+   
+</div>
+</details>
+
 
 
 
