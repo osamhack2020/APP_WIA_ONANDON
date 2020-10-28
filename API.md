@@ -1127,7 +1127,13 @@ public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int
         }
 ```
 
+onBindViewHolder는 서버로 부터 받아온 정보를 레이아웃의 각 변수에 바인딩 시켜 리사이클러뷰 내에서 직접적으로 뷰를 생성하는 함수입니다.
+각 뷰는 클릭 이벤트 리스너가 설정되어 있어, 뷰를 누를 경우 해당 게시판 화면을 담당하고 있는 PostListFrame.class로 이동되도록 구성되어 있습니다.
 
-
-
+ 이름 | 정보 | 설명
+------------ | ------------- | -------------
+|"name" | contentDTOs.get(position).name | BoardDTO.java|
+|"explain"| contentDTOs.get(position).explain  | BoardDTO.java |
+|"documentUid"| contentUidList.get(position) | BoardDTO.java |
+|"manager"| contentDTOs.get(position).manager | BoardDTO.java |
 
