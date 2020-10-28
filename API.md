@@ -994,6 +994,8 @@ firestore.collection("Activity").orderBy("timestamp", Query.Direction.DESCENDING
             @Override
             public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
                 if(value.size() == 0){
+                
+                    // 게시물이 없으면 미리보기에 '게시물이 없습니다'로 표시합니다.
                     activityPreview.setText("게시물이 없습니다.");
                     activityNewPost.setVisibility(View.GONE);
                 }
@@ -1001,6 +1003,8 @@ firestore.collection("Activity").orderBy("timestamp", Query.Direction.DESCENDING
                     ActivityDTO activityDTO = doc.toObject(ActivityDTO.class);
                     activityPreview.setText(activityDTO.explain);
 
+                    // 사용자의 폰에는 게시판에 마지막으로 접근한 시간 정보가 SharedPreferences로 저장되어 있습니다.
+                    // 이 시간 정보가 새로 올라온 게시물의 업로드 시간 보다 작으면 new 표시를 노출시킵니다.
                     if(activityDTO.timestamp > sharedPreferences.getLong("Activity", 0)){
                         activityNewPost.setVisibility(View.VISIBLE);
                     }else{
@@ -1019,6 +1023,10 @@ firestore.collection("Activity").orderBy("timestamp", Query.Direction.DESCENDING
             }
         });
 ```
+
+위 코드는 게시판 한개의 미리보기를 담당하는 코드이며, 타 게시판 또한 같은 구조로 코드가 구성되어 있습니다.
+firestore에서 가장 최근 게시물 한개에 접근하여, 게시물의 내용을 미리보기 TextView에 집어넣습니다.
+또한 게시물의 업로드 시간 정보를 
 
 ---
    
