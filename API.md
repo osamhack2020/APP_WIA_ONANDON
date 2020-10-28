@@ -1132,8 +1132,8 @@ onBindViewHolder는 서버로 부터 받아온 정보를 레이아웃의 각 변
 
  이름 | 정보 | 설명
 ------------ | ------------- | -------------
-|"name" | contentDTOs.get(position).name | BoardDTO.java|
-|"explain"| contentDTOs.get(position).explain  | BoardDTO.java |
-|"documentUid"| contentUidList.get(position) | BoardDTO.java |
-|"manager"| contentDTOs.get(position).manager | BoardDTO.java |
+|"name" | contentDTOs.get(position).name | 게시판 이름 정보입니다. |
+|"explain"| contentDTOs.get(position).explain  | 게시판에 대한 설명 정보입니다. |
+|"documentUid"| contentUidList.get(position) | 게시판의 고유 Id 정보로, 서버에서 게시판에 업로드 된 게시물 정보를 받아올 때 사용됩니다. |
+|"manager"| contentDTOs.get(position).manager | 게시판의 관리자 Id 입니다. |
 
