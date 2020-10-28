@@ -1046,6 +1046,87 @@ BudaePost 프래그먼트는 사용자가 즐겨찾기로 등록한 게시판 �
 
 ![BudaePost](https://raw.githubusercontent.com/osamhack2020/APP_WIA_ONANDON/master/API_image/BudaePost.jpg)
 
+recylerview의 각 아이템을 클릭하면 해당 게시판을 담당하는 PostListFrame.java로 이동하게 됩니다. 게시판에 따라 ClubActivity.java, ActivityFrame.java로 이동하기도 하지만
+기본적인 구조는 모두 같습니다.
+
+```java
+RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.budae_post_recyclerview);
+        recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
+        recyclerView.setAdapter(new DetailRecyclerViewAdapter());
+```
+리사이클러 뷰를 선언하는 코드입니다. DetailRecyclerViewAdapter를 어뎁더로 받고 있습니다.
+
+```java
+DetailRecyclerViewAdapter() {
+            contentDTOs = new ArrayList<>();
+            contentUidList = new ArrayList<>();
+
+            firestore.collection(collection).orderBy("timestamp", Query.Direction.ASCENDING)
+                    .addSnapshotListener(new EventListener<QuerySnapshot>() {
+                        @Override
+                        public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+
+                            contentDTOs.clear();
+                            contentUidList.clear();
+
+                            if (value == null) return;
+                            for (QueryDocumentSnapshot doc : value) {
+                                BoardDTO item = doc.toObject(BoardDTO.class);
+                                if(item.clip.containsKey(user.getUid())){
+                                    contentDTOs.add(item);
+                                    contentUidList.add(doc.getId());
+                                }
+                            }
+
+                            // 서버에 저장된 게시판 정보가 바뀔 때 마다 리스트뷰를 새롭게 그린다.
+                            notifyDataSetChanged();
+                        }
+                    });
+        }
+```
+위 코드는 리사이클러 뷰의 어뎁터 'DetailRecyclerViewAdapter'의 생산자 코드입니다. BudaePost.java는 생산자 내부에 화면에 표시할 게시판 목록 정보를
+서버로 부터 받아오는 코드를 위치시키고 있습니다. addsnapshotListener를 사용하여 수신대기를 통한 실시간 업데이트 기능을 구현하고 있으며 서버로 부터 받아온
+게시판 정보를 BoardDTO 객체인 item 변수로 받은 후, item 변수를 'contentDTOs' arraylist에 업로든 순으로 집어 넣고 있습니다.
+
+리사이클러뷰는 contentDTOs를 활용하여 화면에 뷰를 표시하게 됩니다. 'contentUidList' arraylist에는 서버에서 접근한 하위 document의 고유 Id를 저장하고 있습니다.
+
+```java
+public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.budae_post_item, parent, false);
+            return new CustomViewHolder(view);
+        }
+```
+
+리사이클러뷰에 각 뷰의 UI를 담당할 레이아웃 파일 정보를 넣어줍니다. 위 코드에서는 R.layout.budae_post_item 레이아웃 파이을 활용하여 하나의 뷰를
+표시하고 있습니다.
+
+```java
+@Override
+        public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, final int position) {
+            final BudaePostItemBinding binding = ((CustomViewHolder) holder).getBinding();
+
+            // ...
+
+            binding.budaeLayout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                
+                    // 해당 게시판으로 이동
+                    Intent intent = new Intent(getContext(), PostListFrame.class);
+                    intent.putExtra("name", contentDTOs.get(position).name);
+                    intent.putExtra("explain", contentDTOs.get(position).explain);
+                    intent.putExtra("documentUid", contentUidList.get(position));
+                    intent.putExtra("manager", contentDTOs.get(position).manager);
+                    startActivity(intent);
+                    
+                    // ...
+                    
+                    }
+                }
+            });
+        }
+```
+
 
 
 
