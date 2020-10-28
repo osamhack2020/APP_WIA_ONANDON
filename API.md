@@ -1025,8 +1025,11 @@ firestore.collection("Activity").orderBy("timestamp", Query.Direction.DESCENDING
 ```
 
 위 코드는 게시판 한개의 미리보기를 담당하는 코드이며, 타 게시판 또한 같은 구조로 코드가 구성되어 있습니다.
-firestore에서 가장 최근 게시물 한개에 접근하여, 게시물의 내용을 미리보기 TextView에 집어넣습니다.
-또한 게시물의 업로드 시간 정보를 
+firestore에서 가장 최근 게시물 한개에 접근하여, 게시물 정보를 activityDTO 객체 변수로 받습니다.
+이 객체 변수에 저된 게시물의 내용을 미리보기 TextView 'activityPreview'에 집어넣습니다.
+
+사용자의 핸드폰에는 게시판에 대한 마지막 접근 시간 정보를 SharedPreference 객체 내에 저장하고 있으며, 이 시간 정보와
+가장 최근에 올라온 게시물의 업로드 시간 정보를 비교하여 new 표시의 노출 여부를 결정합니다.
 
 ---
    
