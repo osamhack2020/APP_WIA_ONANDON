@@ -961,7 +961,7 @@ HomeFragment는 앱을 처음 작동시켰을 때 나오는 메인 화면을 담
 
 위 사진은 HomeFragment의 구성을 간략히 그림으로 정리한 것입니다.
 
-``java
+```java
 FragmentManager manager = getChildFragmentManager();
                 PagerAdapter pagerAdapter = new PagerAdapter(manager, frag_list.size());
                 pager.setAdapter(pagerAdapter);
@@ -979,6 +979,46 @@ FragmentManager manager = getChildFragmentManager();
 
 HomeFragment의 상단에는 주요게시판을 사용자에게 노출시키는 viewpager가 위치하고 있으며, 위 코드는 viewpager를 구성하는 코드입니다.
 양쪽 미리보기를 설정하여 사용자로 하여금 화면에 가려진 부분에도 뷰가 있다는 것을 직관적으로 알려주고 있습니다.
+
+viewpager 아래에는 BudaePost.java와 TotalBudaePost.java, 총 2개의 FrameLayout이 위치하고 있으며, 이 레이아웃은
+사용자가 즐겨찾기로 등록한 게시판의 목록을 recyclerview로 보여줍니다. BudaePost.java는 부대게시판으로, 사용자와 같은 부대에 소속된
+사용자들 간의 커뮤티니를 제공하며, TotalBudaePost.java가 제공하는 전체게시판은 모든 군인 장병들이 공유하는 커뮤니티를 제공합니다.
+
+Framelayout 내에 위치하고 있는 각 게시판 객체는 가장 최근에 업로드 된 게시물의 내용을 미리보기로 보여주며, 글이 새로 올라올 때마다
+new 아이콘을 노출시키면서 사용자에게 알려줍니다.
+
+```java
+firestore.collection("Activity").orderBy("timestamp", Query.Direction.DESCENDING)
+                .limit(1).addSnapshotListener(new EventListener<QuerySnapshot>() {
+            SharedPreferences sharedPreferences = getActivity().getSharedPreferences("new", Context.MODE_PRIVATE);
+            @Override
+            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                if(value.size() == 0){
+                    activityPreview.setText("게시물이 없습니다.");
+                    activityNewPost.setVisibility(View.GONE);
+                }
+                for(QueryDocumentSnapshot doc : value) {
+                    ActivityDTO activityDTO = doc.toObject(ActivityDTO.class);
+                    activityPreview.setText(activityDTO.explain);
+
+                    if(activityDTO.timestamp > sharedPreferences.getLong("Activity", 0)){
+                        activityNewPost.setVisibility(View.VISIBLE);
+                    }else{
+                        activityNewPost.setVisibility(View.GONE);
+                    }
+
+                    sharedPreferences.registerOnSharedPreferenceChangeListener(new SharedPreferences.OnSharedPreferenceChangeListener() {
+                        @Override
+                        public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String s) {
+                            if(s.equals("Activity")){
+                                activityNewPost.setVisibility(View.GONE);
+                            }
+                        }
+                    });
+                }
+            }
+        });
+```
 
 ---
    
