@@ -958,6 +958,29 @@ HomeFragment는 앱을 처음 작동시켰을 때 나오는 메인 화면을 담
 제시합니다. 
 
 ![HomeFragment](https://raw.githubusercontent.com/osamhack2020/APP_WIA_ONANDON/master/API_image/HomeFragment.jpg)
+
+위 사진은 HomeFragment의 구성을 간략히 그림으로 정리한 것입니다.
+
+``java
+FragmentManager manager = getChildFragmentManager();
+                PagerAdapter pagerAdapter = new PagerAdapter(manager, frag_list.size());
+                pager.setAdapter(pagerAdapter);
+                pager.setCurrentItem(0);
+
+                // viewpager 양쪽 미리보기 설정
+                int dpValue = 30;
+                float d = getResources().getDisplayMetrics().density;
+                int margin = (int) (dpValue * d);
+
+                pager.setClipToPadding(false);
+                pager.setPadding(margin, 0, margin, 0);
+                pager.setPageMargin(margin/2);
+```
+
+HomeFragment의 상단에는 주요게시판을 사용자에게 노출시키는 viewpager가 위치하고 있으며, 위 코드는 viewpager를 구성하는 코드입니다.
+양쪽 미리보기를 설정하여 사용자로 하여금 화면에 가려진 부분에도 뷰가 있다는 것을 직관적으로 알려주고 있습니다.
+
+---
    
    
    
