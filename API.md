@@ -1171,5 +1171,20 @@ onBindViewHolder는 서버로 부터 받아온 정보를 레이아웃의 각 변
 BudaePost는 PostListFrame으로 이동할 때 총 4개의 정보를 intent 객체에 담아 전달하며, 각 변수에 대한 설명은 위의 표에서 확인하실 수 있습니다.
 BudaePost가 표시하는 게시판 객체를 눌러, 해당 게시판 페이지로 이동할 때, 게시판의 정보도 함께 전달하여 서비스를 제공하고 있습니다.
 
+---
+
+</div>
+</details>
 
 ### 5) PostListFrame.java
+
+<details>
+<summary>접기/펼치기 버튼</summary>
+<div markdown="1">
+   
+
+   
+</div>
+</details>
+
+
