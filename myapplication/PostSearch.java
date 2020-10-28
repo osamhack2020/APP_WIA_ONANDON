@@ -14,7 +14,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.FrameLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.example.myapplication.MyGoalPost.MyGoalPostIng;
 import com.example.myapplication.MyGoalPost.MyGoalSearch;
@@ -40,6 +42,8 @@ public class PostSearch extends AppCompatActivity {
     String name;
     String manager;
 
+    FrameLayout searchContent;
+
     ArrayList<String> dataList;
     int exist = 0;
 
@@ -57,6 +61,9 @@ public class PostSearch extends AppCompatActivity {
 
         firestore = FirebaseFirestore.getInstance();
         auth = FirebaseAuth.getInstance();
+
+        searchContent = (FrameLayout)findViewById(R.id.search_content);
+        // searchContent.setVisibility(View.GONE);
 
         Intent intent = getIntent();
         documentUid = intent.getStringExtra("documentUid");
@@ -82,7 +89,8 @@ public class PostSearch extends AppCompatActivity {
                             tagList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                                 @Override
                                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                                    searchView.setQuery(dataList.get(i), false);
+                                    TextView click = (TextView)view;
+                                    searchView.setQuery(click.getText().toString(), false);
                                 }
                             });
                         }
@@ -119,8 +127,9 @@ public class PostSearch extends AppCompatActivity {
             if(dataList.size() != 0){
                 tagList.setVisibility(View.GONE);
             }
+            searchContent.setVisibility(View.VISIBLE);
             PostList postList = new PostList();
-            Bundle bundle = new Bundle(2);
+            Bundle bundle = new Bundle(5);
             bundle.putString("name", name);
             bundle.putString("documentUid", documentUid);
             bundle.putString("manager", manager);
@@ -141,6 +150,7 @@ public class PostSearch extends AppCompatActivity {
         public boolean onQueryTextChange(String newText) {
             if(dataList.size() != 0) {
                 ArrayAdapter<String> ca = (ArrayAdapter<String>) tagList.getAdapter();
+                searchContent.setVisibility(View.GONE);
 
                 //검색어의 길이가 0일 때 필터를 해제한다.
                 if (newText.length() == 0) {

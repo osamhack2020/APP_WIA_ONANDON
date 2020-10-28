@@ -32,7 +32,6 @@ public class UserPostList extends AppCompatActivity {
 
     Toolbar toolbar;
     TextView toolbarTitle;
-    TextView noPost;
 
     String name;
     String documentUid;
@@ -48,7 +47,6 @@ public class UserPostList extends AppCompatActivity {
         toolbar.setTitle("");
 
         toolbarTitle = (TextView)findViewById(R.id.toolbar_title);
-        noPost = (TextView)findViewById(R.id.no_post);
         postContent = (FrameLayout)findViewById(R.id.post_content);
 
         firestore = FirebaseFirestore.getInstance();
@@ -69,21 +67,6 @@ public class UserPostList extends AppCompatActivity {
         FragmentTransaction tran = manager.beginTransaction();
         tran.replace(R.id.post_content, userPost);
         tran.commit();
-
-        firestore.collection(documentUid).limit(1)
-                .addSnapshotListener(new EventListener<QuerySnapshot>() {
-                    @Override
-                    public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
-                        if(value.size() != 0){
-                            noPost.setVisibility(View.GONE);
-                            postContent.setVisibility(View.VISIBLE);
-                        }
-                        else{
-                            noPost.setVisibility(View.VISIBLE);
-                            postContent.setVisibility(View.GONE);
-                        }
-                    }
-                });
     }
 
     @Override
@@ -98,20 +81,5 @@ public class UserPostList extends AppCompatActivity {
         FragmentTransaction tran = manager.beginTransaction();
         tran.replace(R.id.post_content, userPost);
         tran.commit();
-
-        firestore.collection(documentUid).limit(1)
-                .addSnapshotListener(new EventListener<QuerySnapshot>() {
-                    @Override
-                    public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
-                        if(value.size() != 0){
-                            noPost.setVisibility(View.GONE);
-                            postContent.setVisibility(View.VISIBLE);
-                        }
-                        else{
-                            noPost.setVisibility(View.VISIBLE);
-                            postContent.setVisibility(View.GONE);
-                        }
-                    }
-                });
     }
 }

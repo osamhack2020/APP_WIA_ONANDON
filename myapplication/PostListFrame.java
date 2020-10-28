@@ -43,9 +43,9 @@ public class PostListFrame extends AppCompatActivity {
     TextView toolbarTitle;
     TextView explain;
     TextView open;
-    TextView noPost;
     TextView update;
-    ImageView isManager;
+    TextView change;
+    TextView isManager;
 
     String name;
     String explainIntent;
@@ -65,11 +65,11 @@ public class PostListFrame extends AppCompatActivity {
 
         toolbarTitle = (TextView)findViewById(R.id.toolbar_title);
         explain = (TextView)findViewById(R.id.explain);
-        noPost = (TextView)findViewById(R.id.no_post);
         open = (TextView)findViewById(R.id.open);
         postContent = (FrameLayout)findViewById(R.id.post_content);
-        isManager = (ImageView)findViewById(R.id.is_manager);
+        isManager = (TextView)findViewById(R.id.is_manager);
         update = (TextView)findViewById(R.id.update);
+        change = (TextView)findViewById(R.id.change);
 
         firestore = FirebaseFirestore.getInstance();
         auth = FirebaseAuth.getInstance();
@@ -85,15 +85,27 @@ public class PostListFrame extends AppCompatActivity {
         explain.setVisibility(View.GONE);
         isManager.setVisibility(View.GONE);
         update.setVisibility(View.GONE);
+        change.setVisibility(View.GONE);
 
         if(auth.getCurrentUser().getUid().equals(manager)){
             isManager.setVisibility(View.VISIBLE);
             update.setVisibility(View.VISIBLE);
+            change.setVisibility(View.VISIBLE);
 
             update.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-
+                    firestore.collection("UserInfo").document(auth.getCurrentUser().getUid()).get()
+                            .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                                @Override
+                                public void onSuccess(DocumentSnapshot documentSnapshot) {
+                                    UserDTO userDTO = documentSnapshot.toObject(UserDTO.class);
+                                    Intent intent = new Intent(PostListFrame.this, UpdateBoard.class);
+                                    intent.putExtra("budae", userDTO.budae);
+                                    intent.putExtra("documentUid", documentUid);
+                                    startActivityForResult(intent, 0);
+                                }
+                            });
                 }
             });
         }
@@ -115,7 +127,6 @@ public class PostListFrame extends AppCompatActivity {
             }
         });
 
-
         // 게시물 리스트를 recyclerview로 보여주는 PostList.class를 FrameLayout에 실행시킨다.
         PostList postList = new PostList();
         Bundle bundle = new Bundle(3);
@@ -128,22 +139,6 @@ public class PostListFrame extends AppCompatActivity {
         FragmentTransaction tran = manager.beginTransaction();
         tran.replace(R.id.post_content, postList);
         tran.commit();
-
-        // 띄울려는 게시판에 게시물 수가 0개이면 '게시물이 없습니다.' 표시가 뜨게 한다.
-        firestore.collection(documentUid).limit(1)
-                .addSnapshotListener(new EventListener<QuerySnapshot>() {
-                    @Override
-                    public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
-                        if(value.size() != 0){
-                            noPost.setVisibility(View.GONE);
-                            postContent.setVisibility(View.VISIBLE);
-                        }
-                        else{
-                            noPost.setVisibility(View.VISIBLE);
-                            postContent.setVisibility(View.GONE);
-                        }
-                    }
-                });
     }
 
     // 백버튼을 누르면 게시판을 떠난 시간이 SharedPreferences 변수에 저장된다.
@@ -164,6 +159,14 @@ public class PostListFrame extends AppCompatActivity {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.mygoal_menu, menu);
         return true;
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode == RESULT_OK){
+            finish();
+        }
     }
 
     @Override

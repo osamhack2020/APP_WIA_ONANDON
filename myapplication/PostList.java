@@ -15,9 +15,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.example.myapplication.Club.ClubPostList;
 import com.example.myapplication.databinding.ClubPostListItemBinding;
+import com.example.myapplication.market.MarketActivity;
 import com.example.myapplication.model.PostDTO;
 import com.example.myapplication.model.UserDTO;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -48,6 +50,8 @@ public class PostList extends Fragment {
     int isSearch;
     String search;
 
+    TextView noPost;
+
     public PostList(){
         user = FirebaseAuth.getInstance().getCurrentUser();
         firestore = FirebaseFirestore.getInstance();
@@ -58,6 +62,8 @@ public class PostList extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_post_list, container, false);
+
+        noPost = view.findViewById(R.id.no_post);
 
         documentUid = getArguments().getString("documentUid");
         manager = getArguments().getString("manager");
@@ -104,6 +110,13 @@ public class PostList extends Fragment {
                                     contentDTOs.add(item);
                                     contentUidList.add(doc.getId());
                                 }
+                            }
+
+                            if(contentDTOs.size() == 0){
+                                noPost.setVisibility(View.VISIBLE);
+                            }
+                            else{
+                                noPost.setVisibility(View.GONE);
                             }
 
                             notifyDataSetChanged();

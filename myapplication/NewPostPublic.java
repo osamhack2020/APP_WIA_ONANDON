@@ -10,10 +10,13 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,6 +28,7 @@ import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -69,6 +73,7 @@ public class NewPostPublic extends AppCompatActivity {
     ImageView photoPreview;
 
     CheckBox checkBox;
+    ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,6 +85,9 @@ public class NewPostPublic extends AppCompatActivity {
         kindFirst = (EditText)findViewById(R.id.kind_first);
         kindSecond = (EditText)findViewById(R.id.kind_second);
         kindThird = (EditText)findViewById(R.id.kind_third);
+        kindFirst.setText("#");
+        kindSecond.setText("#");
+        kindThird.setText("#");
 
         complete = (TextView)findViewById(R.id.complete);
         cancel = (ImageView)findViewById(R.id.cancel);
@@ -88,6 +96,8 @@ public class NewPostPublic extends AppCompatActivity {
         photoPreview = (ImageView)findViewById(R.id.photo_preview);
 
         checkBox = (CheckBox)findViewById(R.id.check);
+        progressBar = (ProgressBar)findViewById(R.id.progress);
+        progressBar.setVisibility(View.GONE);
 
         auth = FirebaseAuth.getInstance();
         firestore = FirebaseFirestore.getInstance();
@@ -113,10 +123,18 @@ public class NewPostPublic extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (postTitle.getText().toString().isEmpty() || postTitle.getText().toString().isEmpty()
-                        || (kindFirst.getText().toString().isEmpty() && kindSecond.getText().toString().isEmpty()
-                        && kindThird.getText().toString().isEmpty())) {
+                        || ((kindFirst.getText().toString().isEmpty() ||  kindFirst.getText().toString().equals("#"))
+                        && (kindSecond.getText().toString().isEmpty() || kindSecond.getText().toString().equals("#"))
+                        && (kindThird.getText().toString().isEmpty() || kindThird.getText().toString().equals("#")))) {
                     Toast.makeText(NewPostPublic.this, "항목을 모두 작성해 주세요.", Toast.LENGTH_SHORT).show();
-                } else if (isPhoto == 1) {
+                }
+                else if((!kindFirst.getText().toString().isEmpty() && kindFirst.getText().toString().charAt(0) != '#')
+                        || (!kindSecond.getText().toString().isEmpty() && kindSecond.getText().toString().charAt(0) != '#')
+                        || (!kindThird.getText().toString().isEmpty() && kindThird.getText().toString().charAt(0) != '#')){
+                    Toast.makeText(NewPostPublic.this, "태그는 반드시 앞에 '#'이 붙어야 합니다.", Toast.LENGTH_SHORT).show();
+                }
+                else if (isPhoto == 1) {
+                    progressBar.setVisibility(View.VISIBLE);
                     Toast.makeText(NewPostPublic.this, "잠시만 기다려 주세요.", Toast.LENGTH_SHORT).show();
                     File file = new File(photoUrl);
                     Uri contentUri = Uri.fromFile(file);
@@ -143,13 +161,13 @@ public class NewPostPublic extends AppCompatActivity {
                             postDTO.explain = postExplain.getText().toString();
                             postDTO.title = postTitle.getText().toString();
                             postDTO.isPhoto = 1;
-                            if (!kindFirst.getText().toString().isEmpty()) {
+                            if (!kindFirst.getText().toString().isEmpty() && !kindFirst.getText().toString().equals("#")) {
                                 postDTO.kind.put("first", kindFirst.getText().toString());
                             }
-                            if (!kindSecond.getText().toString().isEmpty()) {
+                            if (!kindSecond.getText().toString().isEmpty() && !kindSecond.getText().toString().equals("#")) {
                                 postDTO.kind.put("second", kindSecond.getText().toString());
                             }
-                            if (!kindThird.getText().toString().isEmpty()) {
+                            if (!kindThird.getText().toString().isEmpty() && !kindThird.getText().toString().equals("#")) {
                                 postDTO.kind.put("third", kindThird.getText().toString());
                             }
                             postDTO.imageUri = uri.toString();
@@ -164,6 +182,7 @@ public class NewPostPublic extends AppCompatActivity {
                             postDTO.kind.put("rank", "#"+rank);
 
                             storePost(postDTO);
+                            progressBar.setVisibility(View.GONE);
                             Toast.makeText(NewPostPublic.this, "업로드 성공", Toast.LENGTH_SHORT).show();
                             finish();
                         }
@@ -173,13 +192,13 @@ public class NewPostPublic extends AppCompatActivity {
                     PostDTO postDTO = new PostDTO();
                     postDTO.explain = postExplain.getText().toString();
                     postDTO.title = postTitle.getText().toString();
-                    if (!kindFirst.getText().toString().isEmpty()) {
+                    if (!kindFirst.getText().toString().isEmpty() && !kindFirst.getText().toString().equals("#")) {
                         postDTO.kind.put("first", kindFirst.getText().toString());
                     }
-                    if (!kindSecond.getText().toString().isEmpty()) {
+                    if (!kindSecond.getText().toString().isEmpty() && !kindSecond.getText().toString().equals("#")) {
                         postDTO.kind.put("second", kindSecond.getText().toString());
                     }
-                    if (!kindThird.getText().toString().isEmpty()) {
+                    if (!kindThird.getText().toString().isEmpty() && !kindThird.getText().toString().equals("#")) {
                         postDTO.kind.put("third", kindThird.getText().toString());
                     }
                     postDTO.uid = auth.getCurrentUser().getUid();

@@ -1,15 +1,21 @@
 package com.example.myapplication;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.Manifest;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.media.MediaDrm;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,13 +23,18 @@ import com.example.myapplication.BottomNavigation.DashboardFragment;
 import com.example.myapplication.BottomNavigation.HomeFragment;
 import com.example.myapplication.BottomNavigation.NotificationFragment;
 import com.example.myapplication.BottomNavigation.PlanFragment;
+import com.example.myapplication.model.AlarmDTO;
 import com.example.myapplication.model.MyToken;
 import com.example.myapplication.model.UserDTO;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.iid.FirebaseInstanceId;
 
 public class MainActivity extends AppCompatActivity {
@@ -35,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
     FirebaseFirestore firestore;
 
     TextView titleInfo;
+    ImageView alarm;
 
     // 사용자가 앱을 통해 앨범에 접근할 수 있도록 권한 설정
     String permission_list [] = {Manifest.permission.READ_EXTERNAL_STORAGE};
@@ -48,6 +60,7 @@ public class MainActivity extends AppCompatActivity {
         firestore = FirebaseFirestore.getInstance();
 
         titleInfo = (TextView)findViewById(R.id.title_info);
+        alarm = (ImageView)findViewById(R.id.alarm);
 
         BottomNavigationView navView = findViewById(R.id.nav_view);
         navView.setSelectedItemId(R.id.navigation_home);

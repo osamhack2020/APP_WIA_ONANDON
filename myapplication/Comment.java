@@ -1,9 +1,11 @@
 package com.example.myapplication;
 
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -123,12 +125,14 @@ public class Comment extends Fragment {
             if(commentDTOs.size() == 0){
                 // 달린 댓글이 없을 경우
                 binding.commentUser.setText("댓글이 없습니다. 댓글을 달아주세요.");
+                binding.commentUser.setTextColor(Color.parseColor("#a0a0a0"));
                 binding.commentDate.setText("");
                 binding.commentExplain.setText("");
                 binding.deleteComment.setVisibility(View.INVISIBLE);
             }
             else {
                 binding.commentExplain.setText(commentDTOs.get(position).comment);
+                binding.commentUser.setTextColor(Color.parseColor("#9B0000"));
 
                 // 현 사용자가 게시판의 관리자인 경우, 댓글 칸에 '관리자' 표시가 뜨도록 설정.
                 if(manager != null && commentDTOs.get(position).uid.equals(manager)){
@@ -142,6 +146,7 @@ public class Comment extends Fragment {
                                 public void onSuccess(DocumentSnapshot documentSnapshot) {
                                     UserDTO userDTO = documentSnapshot.toObject(UserDTO.class);
                                     binding.commentUser.setText(userDTO.army + " " + userDTO.budae + " " + userDTO.rank + " " + userDTO.name);
+                                    binding.commentUser.setTextColor(ContextCompat.getColor(getContext(), R.color.common_google_signin_btn_text_light_pressed));
                                 }
                             });
                 }

@@ -1,6 +1,8 @@
 package com.example.myapplication;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -14,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -55,10 +58,12 @@ public class ScrollPostMore extends Fragment {
     TextView kindThird;
 
     ImageView favorite;
-    ImageView photo;
+    RoundImageView photo;
     ImageView scrap;
 
     LinearLayout scrapLayout;
+    LinearLayout heartLayout;
+    ProgressBar progressBar;
 
     FcmPush fcmPush;
 
@@ -91,10 +96,12 @@ public class ScrollPostMore extends Fragment {
         userInfo = (TextView)view.findViewById(R.id.user_info_more);
         favoriteCount = (TextView)view.findViewById(R.id.favorite_count);
         favorite = (ImageView)view.findViewById(R.id.heart);
-        photo = (ImageView)view.findViewById(R.id.photo);
+        heartLayout = (LinearLayout)view.findViewById(R.id.heart_layout);
+
+        photo = (RoundImageView)view.findViewById(R.id.photo);
         scrapLayout = (LinearLayout)view.findViewById(R.id.scrap_layout);
         scrap = (ImageView)view.findViewById(R.id.scrap);
-
+        progressBar = (ProgressBar)view.findViewById(R.id.progressBar);
 
         kindFirst = (TextView)view.findViewById(R.id.kind_first);
         kindSecond = (TextView)view.findViewById(R.id.kind_second);
@@ -108,6 +115,8 @@ public class ScrollPostMore extends Fragment {
         manager = getArguments().getString("manager");
         annonymous = getArguments().getInt("annonymous");
         name = getArguments().getString("name");
+
+        photo.setRectRadius(40f);
 
         // 게시물 정보를 서버에서 불러와 각 항목에 바인딩 시킨다.
         firestore.collection(documentUid).document(postUid).get()
@@ -135,9 +144,14 @@ public class ScrollPostMore extends Fragment {
                         }
 
                         if(postDTO.isPhoto == 1) {
+                            progressBar.setVisibility(View.VISIBLE);
                             photo.setVisibility(View.VISIBLE);
                             Glide.with(getContext()).load(postDTO.imageUri)
                                     .into(photo);
+                            progressBar.setVisibility(View.GONE);
+                        }
+                        else{
+                            progressBar.setVisibility(View.GONE);
                         }
 
                         kindFirst.setVisibility(View.GONE);
@@ -191,7 +205,6 @@ public class ScrollPostMore extends Fragment {
                 }else{
                     scrapClick=1;
                     scrap.setImageResource(R.drawable.scrap);
-                    Toast.makeText(getActivity(), "스크랩 되었습니다.", Toast.LENGTH_SHORT).show();
                 }
 
                 final DocumentReference docRef = firestore.collection(documentUid).document(postUid);
@@ -242,7 +255,7 @@ public class ScrollPostMore extends Fragment {
         });
 
         // 좋아요 클릭 이벤트
-        favorite.setOnClickListener(new View.OnClickListener() {
+        heartLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if(click == 0){
