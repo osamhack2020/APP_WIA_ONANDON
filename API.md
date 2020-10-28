@@ -137,6 +137,35 @@ implementation 'androidx.recyclerview:recyclerview:1.1.0'
 </div>
 </details>
 
+#### 라이브러리 이외 gradle에 추가된 것들
+
+<details>
+<summary>접기/펼치기 버튼</summary>
+<div markdown="1">
+
+```gradle
+//build.gradle(:app)
+buildFeatures{
+        dataBinding = true
+    }
+```
+
+dataBinding을 사용하기 위해 추가되었습니다.
+
+```gradle
+//build.gradle(My Application)
+dependencies {
+        // ...
+        classpath 'com.google.gms:google-services:4.3.4'
+
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+    }
+```
+</div>
+</details>
+
+파이어베이스 서버와의 통신을 위해 추가되었습니다.
 
 ## 2. 데이터 모델
 이 항목은 WIA가 firestore에 데이터를 저장하고 읽어오면서 사용하는 객체 데이터 모델에 대해 다루고 있습니다.
