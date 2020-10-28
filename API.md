@@ -1181,6 +1181,10 @@ BudaePost가 표시하는 게시판 객체를 눌러, 해당 게시판 페이지
 <details>
 <summary>접기/펼치기 버튼</summary>
 <div markdown="1">
+
+PostListFrame은 게시판의 틀을 담당하며, PostList.java가 위치할 Framelayout이 PostListFrame의 대부분을 차지하고 있습니다.
+   
+![PostListFrame](https://raw.githubusercontent.com/osamhack2020/APP_WIA_ONANDON/master/API_image/PostListFrame.jpg)
    
 
    
