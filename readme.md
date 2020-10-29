@@ -8,7 +8,7 @@
 # Smaple Logo
 
 
-## **What is WIA**
+# What is WIA
 
 ## 팀소개 및 프로잭트 설명 동영상
 [![Watch the video](https://img.youtube.com/vi/LjX3eVQdIyk/0.jpg)](https://www.youtube.com/watch?time_continue=117&v=LjX3eVQdIyk)
