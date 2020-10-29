@@ -50,7 +50,7 @@ SNS 만큼의 자유로움을 제공할 수 없습니다.
 
 <img src="./API_image/gloomy.PNG" width="900">
 
-![논문 링크](https://www.jkpmhn.org/upload/pdf/jkapmhn-20-81.pdf)
+▶ ![논문 링크](https://www.jkpmhn.org/upload/pdf/jkapmhn-20-81.pdf)
 
 
 
