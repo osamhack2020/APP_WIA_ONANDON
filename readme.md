@@ -1,6 +1,7 @@
 
 # 팀 로고
 
+<img src="./API_image/logo.png" width="300" height="200">
 
 
 # What is WIA
