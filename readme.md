@@ -48,7 +48,7 @@ SNS 만큼의 자유로움을 제공할 수 없습니다.
 
 ### 군인에게 소통은 중요해요.
 
-<img src="./API_image/gloomy.png" width="500">
+<img src="./API_image/gloomy.png" width="500" height="150">
 
 
 
