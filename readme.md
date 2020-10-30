@@ -153,6 +153,10 @@ WIA의 가장 큰 특징 중 하나는 사용자들이 직접 자신들이 원�
  - XML
  - 기타 사용한 라이브러리
 
+WIA 개발에 관한 기술 스택은 다음 링크에서 자세히 확인하실 수 있습니다.
+
+▶ [WIA API 개발 문서](https://github.com/osamhack2020/APP_WIA_ONANDON/blob/master/API.md)
+
 ## 설치 안내 (Installation Process)
 ```bash
 $ git clone git주소
