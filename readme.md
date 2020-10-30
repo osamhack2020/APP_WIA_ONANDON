@@ -13,8 +13,8 @@ WIA는 군에서 복무하는 장병들의 병영생활을 향상시키기 위�
 
 ## 1) 도입
 
-<img src="./API_image/대표이미지1.png" width="200"> <img src="./API_image/대표이미지2.png" width="200">
-<img src="./API_image/대표이미지3.png" width="200"> <img src="./API_image/대표이미지4.png" width="200">
+<img src="./API_image/대표이미지1.png" width="280"> <img src="./API_image/대표이미지2.png" width="280">
+<img src="./API_image/대표이미지3.png" width="280"> <img src="./API_image/대표이미지4.png" width="280">
 
 4차 산업혁명과 함께 신속한 정보전달과, 개인과 개인 사이의 네트워크는 모든 분야에 필수적인 요건으로 자리잡고 있습니다. 실제로 인스타, 페이스북을 포함한
 일상 SNS 부터, 여행객을 타겟팅한 '마이 리얼 트립', 대학생을 타겟팅한 '에브리타임' 등 특정 분야나 집단을 타겟팅한 SNS가 이미 다수 상용화 되어
