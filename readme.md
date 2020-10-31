@@ -256,7 +256,7 @@ WIA 개발에 관한 기술 스택은 다음 링크에서 자세히 확인하실
 ▶ [WIA API 개발 문서](https://github.com/osamhack2020/APP_WIA_ONANDON/blob/master/API.md)
 
 ## 설치 안내 (Installation Process)
-apk 파일은 다음 링크에서 다운 받으실 수 있습니다.
+apk 파일은 다음 링크에서 다운 받으실 수 있습니다.  
 ▶ [WIA_APK](https://drive.google.com/file/d/1Gnh0D9wMeFHjL6GYblZzgit8e7dgSiWc/view?usp=sharing)
 
 ## 프로젝트 사용법 (Getting Started)
