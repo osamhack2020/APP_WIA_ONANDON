@@ -221,6 +221,8 @@ WIA는 기본적으로 휴가 플래너 기능을 탑재하고 있습니다. 사
 
 <img src="./API_image/presentation9.png" width="850">
 
+<img src="./API_image/presentation11.png" width="850">
+
 ---
 
 ## 팀소개 및 프로잭트 설명 동영상
