@@ -1,4 +1,14 @@
 
+## 팀소개 및 프로잭트 설명 동영상
+[![WIA 발표 영상](https://img.youtube.com/vi/0RzTzXCLCsQ/0.jpg)](https://www.youtube.com/watch?v=0RzTzXCLCsQ)
+
+* 열악한 촬영 장소와 장비로 인해 매끄러운 발표를 진행하지 못한 점 양해 부탁드립니다.
+
+* 유뷰트 화질이 좋지 않아 불편함을 느끼신다면, 아래 링크에서 발표 자료를 함께 참고해주시면 감사하겠습니다.
+
+▶ [WIA_발표자료_show](https://github.com/osamhack2020/APP_WIA_ONANDON/blob/master/PPT/WIA_%EB%B0%9C%ED%91%9C.show)  
+▶ [WIA_발표자료_pdf](https://github.com/osamhack2020/APP_WIA_ONANDON/blob/master/PPT/WIA_%EB%B0%9C%ED%91%9C.pdf)
+
 # 팀 로고
 
 <img src="./API_image/app_logo.png" width="300" height="300">
@@ -12,17 +22,6 @@ WIA는 'we are'의 줄임말로, WIA 커뮤니티 내 자유로운 소통과 함
 
 WIA는 군에서 복무하는 장병들의 병영생활을 향상시키기 위해 기획된 종합 SNS 플랫폼입니다. WIA는 군인들의 커뮤니티 내 자유롭게 소통하여 서로의 지식을 나누고,
 군 내부의 소식을 신속하고 편리하게 접할 수 있는 여러 서비스를 제공합니다.
-
-
-## 팀소개 및 프로잭트 설명 동영상
-[![WIA 발표 영상](https://img.youtube.com/vi/0RzTzXCLCsQ/0.jpg)](https://www.youtube.com/watch?v=0RzTzXCLCsQ)
-
-* 열악한 촬영 장소와 장비로 인해 매끄러운 발표를 진행하지 못한 점 양해 부탁드립니다.
-
-* 유뷰트 화질이 좋지 않아 불편함을 느끼신다면, 아래 링크에서 발표 자료를 함께 참고해주시면 감사하겠습니다.
-
-▶ [WIA_발표자료_show](https://github.com/osamhack2020/APP_WIA_ONANDON/blob/master/PPT/WIA_%EB%B0%9C%ED%91%9C.show)  
-▶ [WIA_발표자료_pdf](https://github.com/osamhack2020/APP_WIA_ONANDON/blob/master/PPT/WIA_%EB%B0%9C%ED%91%9C.pdf)
 
 ## 1) 도입
 
