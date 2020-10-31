@@ -266,21 +266,29 @@ apk 파일은 다음 링크에서 다운 받으실 수 있습니다.
 저희 팀원들이 모든 부대 커뮤니티를 예시자료로 만들기에는 한계가 있어, 2개의 부대에 속한 병사들의 가상 계정을 제공해 드리는 점
 양해 부탁드립니다.
 
-#### 관리자 계정
-
-관리자 계정 | document | 
------------- | ------------- | 
-|* ID : manager@naver.com
-* pass : manager
-* 공군 15비 일병 이승준
-| * ID : manageredu@naver.com
-* pass : managerEdu
-* 공군 교육사 일병 이승준  | 
-
+#### 관리자 계정 1
 
 * ID : manager@naver.com
 * pass : manager
 * 공군 15비 일병 이승준
+
+#### 관리자 계정 2
+
+* ID : manageredu@naver.com
+* pass : managerEdu
+* 공군 교육사 일병 이승준
+
+#### 일반 계정 1
+
+* ID : user1@naver.com
+* pass : user1user1
+* 공군 15비 상병 이지훈
+
+#### 일반 계정 2
+
+* ID : user2@naver.com
+* pass : user2user2
+* 공군 교육사 병장 정진우
 
 
 
