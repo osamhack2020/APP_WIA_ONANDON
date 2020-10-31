@@ -317,7 +317,18 @@ apk 파일은 다음 링크에서 다운 받으실 수 있습니다.
 
 
 
-## 팀원 
+## 역할 분재
+
+#### 이승준(팀장)
+
+* 백엔드 개발 및 firebase로 서버, DB 구조 디자인
+* WIA 서비스 기획 및 XML 코드를 통한 UI 디자인
+* 발표자료 제작 및 시연 영상 제작
+
+#### 홍수성
+
+* planFrament.java 구현 부분 및, 휴가 플래너 개발
+* API 개발 문서 보안 및 코드 주석 처리
  
 ## 팀 정보 (Team Information)
 - 이승준 (9penguin9@naver.com), Github Id: 0nandon
