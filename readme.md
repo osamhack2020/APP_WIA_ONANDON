@@ -260,6 +260,9 @@ WIA 서비스가 도입 하나만으로 위혐요소가 되지는 않을 것입�
 
 * 유뷰트 화질이 좋지 않아 불편함을 느끼신다면, 해당 발표자료를 위 repository에 업로드 해놓았으니, 함께 참고해주시면 감사하겠습니다.
 
+▶ [WIA_발표자료_show](https://github.com/osamhack2020/APP_WIA_ONANDON/blob/master/PPT/WIA_%EB%B0%9C%ED%91%9C.show)
+▶ [WIA_발표자료_pdf](https://github.com/osamhack2020/APP_WIA_ONANDON/blob/master/PPT/WIA_%EB%B0%9C%ED%91%9C.pdf)
+
 ## 기능 설계
 
 <img src="./API_image/BudaePost.jpg" width="400"> <img src="./API_image/HomeFragment.jpg" width="400">
