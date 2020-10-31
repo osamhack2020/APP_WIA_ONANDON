@@ -210,6 +210,10 @@ WIA는 이러한 문제를 해결하고자, 전체게시판에 '군내 활동 �
 
 <img src="./API_image/presentation8.png" width="850">
 
+<img src="./API_image/presentation9.png" width="850">
+
+
+
 
 
 
