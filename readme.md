@@ -1,5 +1,7 @@
 
 ## 팀소개 및 프로잭트 설명 동영상
+
+**아래 이미지를 클릭해 주세요.**
 [![WIA 발표 영상](https://img.youtube.com/vi/0RzTzXCLCsQ/0.jpg)](https://www.youtube.com/watch?v=0RzTzXCLCsQ)
 
 * 열악한 촬영 장소와 장비로 인해 매끄러운 발표를 진행하지 못한 점 양해 부탁드립니다.
