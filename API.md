@@ -877,6 +877,61 @@ delete() 함수를 사용하여 이미지 파일을 삭제합니다.
 <details>
 <summary>접기/펼치기 버튼</summary>
 <div markdown="1">
+   
+ 로그인 및 회원 가입 기능은 Firebase의 인증시스템을 활용하여 구축하였습니다. 
+ 
+ ```java
+ public void signinEmail(View view){
+        String email = emailEdit.getText().toString();
+        String password = passwordEdit.getText().toString();
+        auth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if(task.isSuccessful()){
+                            // 로그인에 성공하면 메인 페이지로 이동한다.
+                            moveMainPage(auth.getCurrentUser());
+                        }else{
+                            // 로그인에 실패하면 에러메세지를 토스트로 띄운다.
+                            Toast.makeText(LoginActivity.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+    }
+ ```
+ 
+ 사용자가 로그인 버튼을 누르면 이 함수가 호출되어 firebase 서버와 연동을 합니다. 로그인에 성공하면 메인 화면으로 이동합니다.
+ 
+ ```java
+ @Override
+    public void onStart() {
+        super.onStart();
+        moveMainPage(auth.getCurrentUser());
+    }
+ ```
+ 
+ 위 함수는 한번 로그인을 하면 캐시 값이 삭제 되지 않는 이상 자동 로그인 기능을 구현하는 함수 입니다.
+ 
+ ```java
+ auth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener(MakeAccount.this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if(task.isSuccessful()){
+                            UserDTO userDTO = new UserDTO();
+                            
+                            //...
+
+                            moveMainPage(auth.getCurrentUser());
+                        }
+                        else{
+                            Toast.makeText(MakeAccount.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+ ```
+ 
+ 사용자가 계정을 만들때 사용되는 함수입니다. 이메일과 비밀번호를 받아 게정을 새로 생성합니다.
 
 </div>
 </details>
