@@ -215,22 +215,13 @@ WIA는 기본적으로 휴가 플래너 기능을 탑재하고 있습니다. 사
 
 ---
 
-### 알림 기능
-
-
----
-
 ### 그 외 기능들
 
 <img src="./API_image/presentation8.png" width="850">
 
 <img src="./API_image/presentation9.png" width="850">
 
-
-
-
-
-
+---
 
 ## 팀소개 및 프로잭트 설명 동영상
 [![Watch the video](https://img.youtube.com/vi/LjX3eVQdIyk/0.jpg)](https://www.youtube.com/watch?time_continue=117&v=LjX3eVQdIyk)
