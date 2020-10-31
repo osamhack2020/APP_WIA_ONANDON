@@ -262,8 +262,8 @@ WIA 서비스가 도입 하나만으로 위혐요소가 되지는 않을 것입�
 
 ## 기능 설계
 
-<img src="./API_image/BudaePost.jpg" width="422"> <img src="./API_image/HomeFragment.jpg" width="422">
-<img src="./API_image/MainActivity.jpg" width="422"> <img src="./API_image/PostListFrame.jpg" width="422">
+<img src="./API_image/BudaePost.jpg" width="400"> <img src="./API_image/HomeFragment.jpg" width="400">
+<img src="./API_image/MainActivity.jpg" width="400"> <img src="./API_image/PostListFrame.jpg" width="400">
 
 ## 컴퓨터 구성 / 필수 조건 안내 (Prerequisites)
 * 안드로이드 6.0 이상
