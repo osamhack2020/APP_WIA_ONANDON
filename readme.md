@@ -207,14 +207,8 @@ WIA는 이러한 문제를 해결하고자, 전체게시판에 '군내 활동 �
 * 권장: Google Chrome 버젼 77 이상
 
 ## 기술 스택 (Technique Used) (예시)
-### Server(back-end)
- - Firebase를 활용한 DB, 서버 구현
- - 기타 자바 언어
- 
-### front-end
- - android (자바 기반)
- - XML
- - 기타 사용한 라이브러리
+
+<img src="./API_image/tool.jpg" width="850">
 
 WIA 개발에 관한 기술 스택은 다음 링크에서 자세히 확인하실 수 있습니다.
 
