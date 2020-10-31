@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/item_post"
+            android:clickable="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical"
+            android:background="@drawable/round_shape">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/club_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top"
+                    android:layout_marginStart="15dp"
+                    android:text="로딩 중..."
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/post_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top"
+                    android:layout_marginStart="10dp"
+                    android:text="로딩 중..."
+                    android:textColor="#a0a0a0"
+                    android:textSize="12sp" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"/>
+
+                <ImageView
+                    android:id="@+id/scrap"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_gravity="end"
+                    android:layout_marginEnd="15dp"
+                    app:srcCompat="@drawable/empty_star" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginEnd="15dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:id="@+id/title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:text="로딩 중..."
+                    android:textColor="@color/common_google_signin_btn_text_light_pressed"
+                    android:textSize="20sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="5dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="15dp">
+
+                <TextView
+                    android:id="@+id/explain"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:gravity="start"
+                    android:singleLine="true"
+                    android:text="로딩 중..."
+                    android:textSize="12sp" />
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:id="@+id/kind_first"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:background="@drawable/field_tag_round_shape"
+                    android:maxWidth="65dp"
+                    android:maxHeight="45dp"
+                    android:paddingStart="10dp"
+                    android:paddingTop="5dp"
+                    android:paddingEnd="10dp"
+                    android:paddingBottom="5dp"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:text="로딩 중..."
+                    android:textColor="#ffffff"
+                    android:textSize="12sp"
+                    android:layout_marginBottom="10dp"/>
+
+                <TextView
+                    android:id="@+id/kind_second"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:background="@drawable/field_tag_round_shape"
+                    android:layout_toEndOf="@id/kind_first"
+                    android:maxWidth="65dp"
+                    android:maxHeight="45dp"
+                    android:paddingStart="10dp"
+                    android:paddingTop="5dp"
+                    android:paddingEnd="10dp"
+                    android:paddingBottom="5dp"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:text="로딩 중..."
+                    android:textColor="#ffffff"
+                    android:textSize="12sp"
+                    android:layout_marginBottom="10dp"/>
+
+                <TextView
+                    android:id="@+id/kind_third"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:background="@drawable/field_tag_round_shape"
+                    android:layout_toEndOf="@id/kind_second"
+                    android:maxWidth="65dp"
+                    android:maxHeight="45dp"
+                    android:paddingStart="10dp"
+                    android:paddingTop="5dp"
+                    android:paddingEnd="10dp"
+                    android:paddingBottom="5dp"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:text="로딩 중..."
+                    android:textColor="#ffffff"
+                    android:textSize="12sp"
+                    android:layout_marginBottom="10dp"/>
+
+                <TextView
+                    android:id="@+id/more"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_toEndOf="@id/kind_third"
+                    android:layout_gravity="top"
+                    android:text="..."
+                    android:textColor="#ced4da"
+                    android:textSize="24sp" />
+
+                <ImageView
+                    android:id="@+id/is_photo"
+                    android:layout_width="35dp"
+                    android:layout_height="17dp"
+                    android:layout_marginStart="2dp"
+                    android:layout_marginTop="7dp"
+                    android:layout_marginEnd="2dp"
+                    android:layout_marginBottom="12dp"
+                    android:layout_toStartOf="@id/comment_show"
+                    android:visibility="visible"
+                    app:srcCompat="@drawable/photo" />
+
+                <ImageView
+                    android:id="@+id/comment_show"
+                    android:layout_width="35dp"
+                    android:layout_height="17dp"
+                    android:layout_marginTop="7dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_toStartOf="@id/comment_count_show"
+                    app:srcCompat="@drawable/comment" />
+
+                <TextView
+                    android:id="@+id/comment_count_show"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_toStartOf="@id/favorite_show"
+                    android:text="10"
+                    android:textColor="@color/common_google_signin_btn_text_light_pressed" />
+
+                <ImageView
+                    android:id="@+id/favorite_show"
+                    android:layout_width="30dp"
+                    android:layout_height="15dp"
+                    android:layout_marginTop="7dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_toStartOf="@id/favorite_count_show"
+                    app:srcCompat="@drawable/empty_heart" />
+
+                <TextView
+                    android:id="@+id/favorite_count_show"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="10dp"
+                    android:text="10"
+                    android:textColor="@color/common_google_signin_btn_text_light_pressed" />
+            </RelativeLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+</layout>

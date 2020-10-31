@@ -1,0 +1,490 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    tools:context=".Diet.DietPager">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/round_shape"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="20dp"
+            android:text="10/12"
+            android:textColor="#a0a0a0"
+            android:textSize="14sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="30dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_gravity="top"
+                app:srcCompat="@drawable/breakfast" />]
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+
+                <TextView
+                    android:layout_width="55dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="15dp"
+                    android:text="조식"
+                    android:textColor="@color/orange"
+                    android:textSize="18sp"
+                    app:srcCompat="@drawable/breakfast" />
+
+                <LinearLayout
+                    android:id="@+id/toolbar_division1"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginEnd="15dp"
+                    android:background="#ced4da"
+                    android:orientation="horizontal" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/breakfast1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_weight="1"
+                        android:ellipsize="marquee"
+                        android:marqueeRepeatLimit="1"
+                        android:singleLine="true"
+                        android:focusable="true"
+                        android:text="삼치순살엿장조림"
+                        android:textColor="@color/common_google_signin_btn_text_light_pressed" />
+
+                    <TextView
+                        android:id="@+id/breakfast2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="15dp"
+                        android:layout_weight="1"
+                        android:ellipsize="marquee"
+                        android:marqueeRepeatLimit="1"
+                        android:singleLine="true"
+                        android:focusable="true"
+                        android:text="미트볼데리야끼강정조림"
+                        android:textColor="@color/common_google_signin_btn_text_light_pressed" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/breakfast3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_weight="1"
+                        android:ellipsize="marquee"
+                        android:marqueeRepeatLimit="1"
+                        android:singleLine="true"
+                        android:focusable="true"
+                        android:text="삼치순살엿장조림"
+                        android:textColor="@color/common_google_signin_btn_text_light_pressed" />
+
+                    <TextView
+                        android:id="@+id/breakfast4"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="15dp"
+                        android:layout_weight="1"
+                        android:ellipsize="marquee"
+                        android:marqueeRepeatLimit="1"
+                        android:singleLine="true"
+                        android:focusable="true"
+                        android:text="미트볼데리야끼강정조림"
+                        android:textColor="@color/common_google_signin_btn_text_light_pressed" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/breakfast5"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_weight="1"
+                        android:ellipsize="marquee"
+                        android:marqueeRepeatLimit="1"
+                        android:singleLine="true"
+                        android:focusable="true"
+                        android:text="삼치순살엿장조림"
+                        android:textColor="@color/common_google_signin_btn_text_light_pressed" />
+
+                    <TextView
+                        android:id="@+id/breakfast6"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="15dp"
+                        android:layout_weight="1"
+                        android:ellipsize="marquee"
+                        android:marqueeRepeatLimit="1"
+                        android:singleLine="true"
+                        android:focusable="true"
+                        android:text="미트볼데리야끼강정조림"
+                        android:textColor="@color/common_google_signin_btn_text_light_pressed" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="30dp"
+            android:layout_gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_gravity="top"
+                app:srcCompat="@drawable/lunch" />]
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+
+                <TextView
+                    android:layout_width="55dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="15dp"
+                    android:text="중식"
+                    android:textColor="@color/orange"
+                    android:textSize="18sp"
+                    app:srcCompat="@drawable/breakfast" />
+
+                <LinearLayout
+                    android:id="@+id/toolbar_division2"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginEnd="15dp"
+                    android:background="#ced4da"
+                    android:orientation="horizontal" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/lunch1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_weight="1"
+                        android:ellipsize="marquee"
+                        android:marqueeRepeatLimit="1"
+                        android:singleLine="true"
+                        android:focusable="true"
+                        android:text="삼치순살엿장조림"
+                        android:textColor="@color/common_google_signin_btn_text_light_pressed" />
+
+                    <TextView
+                        android:id="@+id/lunch2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="15dp"
+                        android:layout_weight="1"
+                        android:ellipsize="marquee"
+                        android:marqueeRepeatLimit="1"
+                        android:singleLine="true"
+                        android:focusable="true"
+                        android:text="미트볼데리야끼강정조림"
+                        android:textColor="@color/common_google_signin_btn_text_light_pressed" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/lunch3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_weight="1"
+                        android:ellipsize="marquee"
+                        android:marqueeRepeatLimit="1"
+                        android:singleLine="true"
+                        android:focusable="true"
+                        android:text="삼치순살엿장조림"
+                        android:textColor="@color/common_google_signin_btn_text_light_pressed" />
+
+                    <TextView
+                        android:id="@+id/lunch4"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="15dp"
+                        android:layout_weight="1"
+                        android:ellipsize="marquee"
+                        android:marqueeRepeatLimit="1"
+                        android:singleLine="true"
+                        android:focusable="true"
+                        android:text="미트볼데리야끼강정조림"
+                        android:textColor="@color/common_google_signin_btn_text_light_pressed" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/lunch5"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_weight="1"
+                        android:ellipsize="marquee"
+                        android:marqueeRepeatLimit="1"
+                        android:singleLine="true"
+                        android:focusable="true"
+                        android:text="삼치순살엿장조림"
+                        android:textColor="@color/common_google_signin_btn_text_light_pressed" />
+
+                    <TextView
+                        android:id="@+id/lunch6"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="15dp"
+                        android:layout_weight="1"
+                        android:ellipsize="marquee"
+                        android:marqueeRepeatLimit="1"
+                        android:singleLine="true"
+                        android:focusable="true"
+                        android:text="미트볼데리야끼강정조림"
+                        android:textColor="@color/common_google_signin_btn_text_light_pressed" />
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="30dp"
+            android:layout_gravity="bottom"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_gravity="top"
+                app:srcCompat="@drawable/dinner" />]
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+
+                <TextView
+                    android:layout_width="55dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="15dp"
+                    android:text="석식"
+                    android:textColor="@color/orange"
+                    android:textSize="18sp"
+                    app:srcCompat="@drawable/breakfast" />
+
+                <LinearLayout
+                    android:id="@+id/toolbar_division3"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginEnd="15dp"
+                    android:background="#ced4da"
+                    android:orientation="horizontal" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/dinner1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_weight="1"
+                        android:ellipsize="marquee"
+                        android:marqueeRepeatLimit="1"
+                        android:singleLine="true"
+                        android:focusable="true"
+                        android:text="삼치순살엿장조림"
+                        android:textColor="@color/common_google_signin_btn_text_light_pressed" />
+
+                    <TextView
+                        android:id="@+id/dinner2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="15dp"
+                        android:layout_weight="1"
+                        android:ellipsize="marquee"
+                        android:marqueeRepeatLimit="1"
+                        android:singleLine="true"
+                        android:focusable="true"
+                        android:text="미트볼데리야끼강정조림"
+                        android:textColor="@color/common_google_signin_btn_text_light_pressed" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/dinner3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_weight="1"
+                        android:ellipsize="marquee"
+                        android:marqueeRepeatLimit="1"
+                        android:singleLine="true"
+                        android:focusable="true"
+                        android:text="삼치순살엿장조림"
+                        android:textColor="@color/common_google_signin_btn_text_light_pressed" />
+
+                    <TextView
+                        android:id="@+id/dinner4"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="15dp"
+                        android:layout_weight="1"
+                        android:ellipsize="marquee"
+                        android:marqueeRepeatLimit="1"
+                        android:singleLine="true"
+                        android:focusable="true"
+                        android:text="미트볼데리야끼강정조림"
+                        android:textColor="@color/common_google_signin_btn_text_light_pressed" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/dinner5"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_weight="1"
+                        android:ellipsize="marquee"
+                        android:marqueeRepeatLimit="1"
+                        android:singleLine="true"
+                        android:focusable="true"
+                        android:text="삼치순살엿장조림"
+                        android:textColor="@color/common_google_signin_btn_text_light_pressed" />
+
+                    <TextView
+                        android:id="@+id/dinner6"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="15dp"
+                        android:layout_weight="1"
+                        android:ellipsize="marquee"
+                        android:marqueeRepeatLimit="1"
+                        android:singleLine="true"
+                        android:focusable="true"
+                        android:text="미트볼데리야끼강정조림"
+                        android:textColor="@color/common_google_signin_btn_text_light_pressed" />
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+</LinearLayout>

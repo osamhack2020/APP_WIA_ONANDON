@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        android:id="@+id/budae_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp">
+
+        <ImageView
+            android:id="@+id/clip"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="20dp"
+            app:srcCompat="@drawable/not_clip" />
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_toEndOf="@id/clip"
+            android:text="로딩 중..."
+            android:textColor="@color/common_google_signin_btn_text_light_pressed"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/new_post"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_toEndOf="@id/name"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="10dp"
+            android:layout_centerVertical="true"
+            android:background="@drawable/field_theme_round_shape"
+            android:gravity="center"
+            android:text="N"
+            android:textColor="#ffffff"
+            android:textSize="10sp"
+            android:textStyle="bold" />
+    </RelativeLayout>
+</layout>
