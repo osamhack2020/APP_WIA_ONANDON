@@ -256,7 +256,8 @@ WIA 개발에 관한 기술 스택은 다음 링크에서 자세히 확인하실
 ▶ [WIA API 개발 문서](https://github.com/osamhack2020/APP_WIA_ONANDON/blob/master/API.md)
 
 ## 설치 안내 (Installation Process)
-apk 파일은 다음 링크에서 다운 받으실 수 있습니다.  
+apk 파일은 다음 링크에서 다운 받으실 수 있습니다.
+
 ▶ [WIA_APK](https://drive.google.com/file/d/1Gnh0D9wMeFHjL6GYblZzgit8e7dgSiWc/view?usp=sharing)
 
 ## 프로젝트 사용법 (Getting Started)
@@ -266,6 +267,16 @@ apk 파일은 다음 링크에서 다운 받으실 수 있습니다.
 양해 부탁드립니다.
 
 #### 관리자 계정
+
+관리자 계정 | document | 
+------------ | ------------- | 
+|* ID : manager@naver.com
+* pass : manager
+* 공군 15비 일병 이승준
+| * ID : manageredu@naver.com
+* pass : managerEdu
+* 공군 교육사 일병 이승준  | 
+
 
 * ID : manager@naver.com
 * pass : manager
