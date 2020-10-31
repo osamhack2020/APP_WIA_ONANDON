@@ -261,8 +261,9 @@ WIA 서비스가 도입 하나만으로 위혐요소가 되지는 않을 것입�
 * 유뷰트 화질이 좋지 않아 불편함을 느끼신다면, 해당 발표자료를 위 repository에 업로드 해놓았으니, 함께 참고해주시면 감사하겠습니다.
 
 ## 기능 설계
- -  발사믹, 카카오 오븐 등 본인이 편한 목업 프레임워크를 이용하여 제작 후 링크 
- - 수기로 작성시 찍어서 올려주세요
+
+<img src="./API_image/BudaePost.jpg" width="422"> <img src="./API_image/HomeFragment.jpg" width="422">
+<img src="./API_image/MainActivity.jpg" width="422"> <img src="./API_image/PostListFrame.jpg" width="422">
 
 ## 컴퓨터 구성 / 필수 조건 안내 (Prerequisites)
 * 안드로이드 6.0 이상
