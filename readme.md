@@ -229,7 +229,7 @@ WIA는 기본적으로 휴가 플래너 기능을 탑재하고 있습니다. 사
 ### 이런건 좀 문제가 될 수 있을 것 같아요!
 
 ## 팀소개 및 프로잭트 설명 동영상
-[![WIA 발표 영상](, https://img.youtube.com/vi/0RzTzXCLCsQ/0.jpg)](https://www.youtube.com/watch?v=0RzTzXCLCsQ)
+[![WIA 발표 영상](https://img.youtube.com/vi/0RzTzXCLCsQ/0.jpg)](https://www.youtube.com/watch?v=0RzTzXCLCsQ)
 
 ## 기능 설계
  -  발사믹, 카카오 오븐 등 본인이 편한 목업 프레임워크를 이용하여 제작 후 링크 
