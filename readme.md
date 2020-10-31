@@ -284,7 +284,8 @@ WIA 개발에 관한 기술 스택은 다음 링크에서 자세히 확인하실
 
 ## 설치 안내 (Installation Process)
 apk 파일은 다음 링크에서 다운 받으실 수 있습니다.
-*모바일로 다운 받으실시, 정책으로 인해 접근이 안될 수도 있습니다. 컴퓨터 인터넷 브라우저를 통해 파일을 다운로드 헤주세요.*
+
+**모바일로 다운 받으실시, 정책으로 인해 접근이 안될 수도 있습니다. 컴퓨터 인터넷 브라우저를 통해 파일을 다운로드 헤주세요.**
 
 ▶ [WIA_APK](https://drive.google.com/file/d/1Gnh0D9wMeFHjL6GYblZzgit8e7dgSiWc/view?usp=sharing)
 
