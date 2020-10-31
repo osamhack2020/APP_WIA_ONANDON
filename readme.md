@@ -206,7 +206,9 @@ WIA는 이러한 문제를 해결하고자, 전체게시판에 '군내 활동 �
 
 이외에도 WIA는 자신의 목표, 혹은 도전 등을 남들과 공유하는 '나의 도전 게시판', 물건을 사고 팔 수 있는 장터게시판 등등 종합적인 서비스를 사용자에게 제공합니다.
 
-### 게시판을 즐겨찾기에 등록해요.
+### 그 외 기능들
+
+
 
 
 
@@ -221,7 +223,7 @@ WIA는 이러한 문제를 해결하고자, 전체게시판에 '군내 활동 �
 * ECMAScript 6 지원 브라우저 사용
 * 권장: Google Chrome 버젼 77 이상
 
-## 기술 스택 (Technique Used) (예시)
+## 기술 스택 (Technique Used)
 
 <img src="./API_image/tool.jpg" width="850">
 
@@ -239,12 +241,7 @@ $ yarn start or npm run start
 ## 프로젝트 사용법 (Getting Started)
 **마크다운 문법을 이용하여 자유롭게 기재**
 
-잘 모를 경우
-구글 검색 - 마크다운 문법
-[https://post.naver.com/viewer/postView.nhn?volumeNo=24627214&memberNo=42458017](https://post.naver.com/viewer/postView.nhn?volumeNo=24627214&memberNo=42458017)
-
- 편한 마크다운 에디터를 찾아서 사용
- 샘플 에디터 [https://stackedit.io/app#](https://stackedit.io/app#)
+## 팀원 
  
 ## 팀 정보 (Team Information)
 - 이승준 (9penguin9@naver.com), Github Id: 0nandon
