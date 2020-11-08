@@ -251,6 +251,10 @@ WIA는 사용자들이 서로 좋아요나 댓글을 남겼을 때, 서로에게
 
 <img src="./API_image/presentation11.png" width="850">
 
+|게시물 업로드|게시물 삭제|게시물 |
+|------|---|
+|<img src="./API_image/업로드.gif" height="500">|<img src="./API_image/삭제.gif" height="500">|<img src="./API_image/수정.gif" height="500">|
+
 ---
 
 ### 이런건 좀 문제가 될 수 있을 것 같아요!
