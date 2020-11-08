@@ -229,7 +229,7 @@ WIA는 기본적으로 휴가 플래너 기능을 탑재하고 있습니다. 사
 
 |휴가 추가하기|휴가 계획하기/삭제하기|
 |------|---|
-|<img src="./API_image/일정1.gif" width="850">|<img src="./API_image/일정2.gif" width="850">|
+|<img src="./API_image/일정1.gif" width="600">|<img src="./API_image/일정2.gif" width="600">|
 
 ---
 
